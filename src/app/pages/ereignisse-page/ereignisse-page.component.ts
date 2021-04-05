@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { EditEreignisComponent } from 'src/app/shared/dialogs/edit-ereignis/edit-ereignis.component';
 import { PrintReportsComponent } from 'src/app/shared/dialogs/print-reports/print-reports.component';
 import { EreignisType } from 'src/app/shared/enums/ereignis-type';
 import { Ereignis } from 'src/app/shared/models/ereignis/ereignis';
@@ -24,6 +25,11 @@ export class EreignissePageComponent implements OnInit
 
     public async openPrintReportings(ereignis: Ereignis)
     {
-        const dialog = this.dialog.open(PrintReportsComponent, { width: '500px', data: ereignis });
+        this.dialog.open(PrintReportsComponent, { width: '500px', data: ereignis });
+    }
+
+    public async openEditEreignis(ereignis: Ereignis)
+    {
+        this.dialog.open(EditEreignisComponent, { width: '500px', data: ereignis });
     }
 }
