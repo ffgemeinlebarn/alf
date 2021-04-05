@@ -90,6 +90,18 @@ export class EreignisseService
             .anyOf(personenIds)
             .toArray();
 
+        personen.sort((a, b) =>
+        {
+            if (a.vorname < b.vorname) { return -1; }
+            if (a.vorname > b.vorname) { return 1; }
+            return 0;
+        }).sort((a, b) =>
+        {
+            if (a.nachname < b.nachname) { return -1; }
+            if (a.nachname > b.nachname) { return 1; }
+            return 0;
+        });
+
         ereignis.fuellungen = await Promise.all(fuellungen.map(async fuellung => this.mapFuellung(fuellung)));
         ereignis.personen = await Promise.all(personen.map(async person => this.mapPerson(person)));
 
