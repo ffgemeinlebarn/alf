@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>in</h1>
+<div class="content" mat-dialog-content>
+    <mat-form-field appearance="fill">
+        <mat-label>Ort</mat-label>
+        <input type="text" matInput placeholder="Ort des Ereignisses" [(ngModel)]="data.ort">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Personen</mat-label>
+        <mat-select [(ngModel)]="data.personen" [compareWith]="personenService.comparePersonen" multiple>
+            <mat-option *ngFor="let person of personen" [value]="person">{{ person.vorname }} {{ person.nachname }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="close()">Abbrechen</button>
+    <button mat-button (click)="save()" cdkFocusInitial>Speichern</button>
+</div>
