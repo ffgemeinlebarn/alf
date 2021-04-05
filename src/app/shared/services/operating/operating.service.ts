@@ -169,6 +169,4 @@ export class OperatingService
         this.ereignis = null;
         this.router.navigate(['/']);
     }
-
-    private
 }
