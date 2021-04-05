@@ -1,9 +1,10 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, ElementRef, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EreignisType } from '../../enums/ereignis-type';
 import { Ereignis } from '../../models/ereignis/ereignis';
 import { EreignisseService } from '../../services/ereignisse/ereignisse.service';
 import { ViewChild } from '@angular/core';
+import { MatSelectionListChange } from '@angular/material/list';
 
 @Component({
     selector: 'ffg-print-reports',
@@ -17,8 +18,8 @@ export class PrintReportsComponent implements OnInit
 {
     @ViewChild('printContent') public printElement: ElementRef;
 
-    public ereignis: Ereignis = null;
     public EreignisType = EreignisType;
+    public printedDateTime = null;
 
     public fuellungenPerFeuerwehr = [];
     public reports = [];
@@ -26,14 +27,15 @@ export class PrintReportsComponent implements OnInit
     constructor(
         public window: Window,
         public dialog: MatDialogRef<PrintReportsComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: Ereignis,
         public ereignisse: EreignisseService
     ) { }
 
     public async ngOnInit(): Promise<void>
     {
-        this.ereignis = await this.ereignisse.getSingle(12);
+        this.printedDateTime = new Date();
 
-        this.ereignis.fuellungen.forEach((fuellung) =>
+        this.data.fuellungen.forEach((fuellung) =>
         {
             if (!this.fuellungenPerFeuerwehr.find(ff => ff.id === fuellung.flasche.feuerwehr.id))
             {
@@ -41,7 +43,7 @@ export class PrintReportsComponent implements OnInit
             }
         });
 
-        this.fuellungenPerFeuerwehr.forEach(feuerwehr => feuerwehr.fuellungen = this.ereignis.fuellungen.filter(fuellung => fuellung.flasche.feuerwehr.id === feuerwehr.id));
+        this.fuellungenPerFeuerwehr.forEach(feuerwehr => feuerwehr.fuellungen = this.data.fuellungen.filter(fuellung => fuellung.flasche.feuerwehr.id === feuerwehr.id));
 
         this.reports = [
             {
@@ -70,9 +72,15 @@ export class PrintReportsComponent implements OnInit
 
     public print()
     {
+        console.log(this.reports);
 
         this.window.document.body.innerHTML = this.printElement.nativeElement.innerHTML;
         this.window.print();
         this.window.location.reload();
+    }
+
+    public onReportPrintBoolChange(change: any)
+    {
+        console.log(change);
     }
 }

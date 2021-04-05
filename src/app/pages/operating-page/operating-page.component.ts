@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AddMangelComponent } from 'src/app/shared/dialogs/add-mangel/add-mangel.component';
 import { EditEreignisComponent } from 'src/app/shared/dialogs/edit-ereignis/edit-ereignis.component';
+import { PrintReportsComponent } from 'src/app/shared/dialogs/print-reports/print-reports.component';
 import { SearchFlascheComponent } from 'src/app/shared/dialogs/search-flasche/search-flasche.component';
 import { ReportingService } from 'src/app/shared/services/reporting/reporting.service';
 import { OperatingService } from '../../shared/services/operating/operating.service';
@@ -58,5 +59,10 @@ export class OperatingPageComponent implements OnInit
         {
             this.operating.reloadEreignis(this.operating.ereignis.id);
         });
+    }
+
+    public async openPrintReportings()
+    {
+        const dialog = this.dialog.open(PrintReportsComponent, { width: '500px', data: this.operating.ereignis });
     }
 }

@@ -1,7 +1,16 @@
 <h1 mat-dialog-title>Berichte drucken</h1>
-<p>Ereignis: {{ ereignis?.type == EreignisType.Uebung ? 'Übung' : 'Einsatz' }}{{ ereignis?.ort ? ' in '+ ereignis?.ort : '' }}</p>
+<p>Ereignis: {{ data?.type == EreignisType.Uebung ? 'Übung' : 'Einsatz' }}{{ data?.ort ? ' in '+ data?.ort : '' }}</p>
 <div class="content" mat-dialog-content>
-    Auswahl
+    <mat-list>
+        <mat-list-item *ngFor="let report of reports" matRipple>
+            <span (click)="report.print = !report.print">{{ report.name }}</span>
+            <mat-checkbox [(ngModel)]="report.print" noop></mat-checkbox>
+        </mat-list-item>
+    </mat-list>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="close()">Abbrechen</button>
+    <button mat-button (click)="print()" cdkFocusInitial>Drucken</button>
 </div>
 
 <div #printContent>
@@ -9,72 +18,74 @@
         <div class="print-content">
             <div class="report" *ngFor="let report of reports">
 
-                <!-- Header - Everywhere -->
-                <div class="header">
-                    <h1>Füllbericht <span>der Atemluftfüllstelle Gemeinlebarn</span> </h1>
-                    <p>{{ report.name }}</p>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th>Ereignis:</th>
-                                <td>{{ ereignis?.type == EreignisType.Uebung ? 'Übung' : 'Einsatz' }}{{ ereignis?.ort ? ' in '+ ereignis?.ort : '' }}</td>
-                            </tr>
-                            <tr>
-                                <th>Beginn:</th>
-                                <td>{{ ereignis?.datetimeStart | date: 'dd.MM.yyyy HH:mm' }} Uhr</td>
-                            </tr>
-                            <tr>
-                                <th>Ende:</th>
-                                <td>{{ ereignis?.datetimeEnd | date: 'dd.MM.yyyy HH:mm' }}{{ ereignis?.datetimeEnd ? ' Uhr' : 'läuft noch' }}</td>
-                            </tr>
-                            <tr>
-                                <th>Füllersonal:</th>
-                                <td>
-                                    <span *ngFor="let person of ereignis?.personen; let last = last;">{{ person.vorname }} {{ person.nachname }}{{ last ? '' : ', ' }}</span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="inner-report" *ngIf="report.print">
+
+                    <!-- Header - Everywhere -->
+                    <div class="header">
+                        <h1>Füllbericht <span>der Atemluftfüllstelle Gemeinlebarn</span> </h1>
+                        <p>{{ report.name }}</p>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>Gedruckt:</th>
+                                    <td>{{ printedDateTime | date: 'dd.MM.yyy HH:mm:ss' }} Uhr</td>
+                                </tr>
+                                <tr>
+                                    <th>Ereignis:</th>
+                                    <td>{{ data?.type == EreignisType.Uebung ? 'Übung' : 'Einsatz' }}{{ data?.ort ? ' in '+ data?.ort : '' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Beginn:</th>
+                                    <td>{{ data?.datetimeStart | date: 'dd.MM.yyyy HH:mm' }} Uhr</td>
+                                </tr>
+                                <tr>
+                                    <th>Ende:</th>
+                                    <td>{{ data?.datetimeEnd | date: 'dd.MM.yyyy HH:mm' }}{{ data?.datetimeEnd ? ' Uhr' : 'noch nicht beendet' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Füllersonal:</th>
+                                    <td>
+                                        <span *ngFor="let person of data?.personen; let last = last;">{{ person.vorname }} {{ person.nachname }}{{ last ? '' : ', ' }}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h2>Füllungen</h2>
+
+                    <div class="fuellung" *ngFor="let feuerwehr of report.data">
+                        <h3>{{ feuerwehr.prefix }} {{ feuerwehr.name }}</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Datum & Uhrzeit</th>
+                                    <th>Feuerwehr</th>
+                                    <th>LFNR</th>
+                                    <th>Barcode</th>
+                                    <th>Druck</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let fuellung of feuerwehr.fuellungen">
+                                    <td>{{ fuellung.datetime | date: 'dd.MM.yyyy HH:mm' }} Uhr</td>
+                                    <td>{{ fuellung.flasche.feuerwehr.prefix }} {{ fuellung.flasche.feuerwehr.name }}</td>
+                                    <td>{{ fuellung.flasche.laufnummer }}</td>
+                                    <td>{{ fuellung.flasche.barcode }}</td>
+                                    <td>{{ fuellung.flasche.druck }} Bar</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="unterschrift">
+                        &nbsp;
+                        <span>Unterschrift des Füllpersonals</span>
+                    </div>
+
                 </div>
 
-                <h2>Füllungen</h2>
-
-                <div class="fuellung" *ngFor="let feuerwehr of report.data">
-                    <h3>{{ feuerwehr.prefix }} {{ feuerwehr.name }}</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Datum & Uhrzeit</th>
-                                <th>Feuerwehr</th>
-                                <th>LFNR</th>
-                                <th>Barcode</th>
-                                <th>Druck</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let fuellung of feuerwehr.fuellungen">
-                                <td>{{ fuellung.datetime | date: 'dd.MM.yyyy HH:mm' }} Uhr</td>
-                                <td>{{ fuellung.flasche.feuerwehr.prefix }} {{ fuellung.flasche.feuerwehr.name }}</td>
-                                <td>{{ fuellung.flasche.laufnummer }}</td>
-                                <td>{{ fuellung.flasche.barcode }}</td>
-                                <td>{{ fuellung.flasche.druck }} Bar</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="unterschrift">
-                    &nbsp;
-                    <span>Unterschrift des Füllpersonals</span>
-                </div>
             </div>
         </div>
     </div>
-
-
-</div>
-
-<div mat-dialog-actions>
-    <button mat-button (click)="close()">Abbrechen</button>
-    <button mat-button (click)="print()" cdkFocusInitial>Drucken</button>
 </div>
