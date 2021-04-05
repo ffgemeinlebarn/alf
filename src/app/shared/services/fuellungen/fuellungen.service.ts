@@ -91,7 +91,10 @@ export class FuellungenService
             obj.flascheId,
             obj.datetime,
             obj.personId,
+            obj.typeBereich,
+            obj.typeDescription,
             obj.note,
+            obj.ereignisId,
             obj.datetimeFixed,
             obj.id
         );

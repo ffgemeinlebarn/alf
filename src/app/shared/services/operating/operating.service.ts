@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { EditEreignisComponent } from '../../components/edit-ereignis/edit-ereignis.component';
-import { SearchFlascheComponent } from '../../components/search-flasche/search-flasche.component';
+import { ConfirmFlascheWithMangelComponent } from '../../dialogs/confirm-flasche-with-mangel/confirm-flasche-with-mangel.component';
 import { Ereignis } from '../../models/ereignis/ereignis';
 import { Fuellung } from '../../models/fuellung/fuellung';
 import { DatabaseService } from '../database/database.service';
 import { EreignisseService } from '../ereignisse/ereignisse.service';
 import { FlaschenService } from '../flaschen/flaschen.service';
 import { FuellungenService } from '../fuellungen/fuellungen.service';
+import { MaengelService } from '../maengel/maengel.service';
 import { TimingService } from '../timing/timing.service';
 
 @Injectable({
@@ -29,7 +29,8 @@ export class OperatingService
         private router: Router,
         private flaschen: FlaschenService,
         private ereignisse: EreignisseService,
-        private fuellungen: FuellungenService
+        private fuellungen: FuellungenService,
+        private maengel: MaengelService
     )
     {
         document.body.addEventListener('keydown', event => this.onScannerInputEnter(event));
@@ -87,12 +88,13 @@ export class OperatingService
         return this.reloadEreignis(id);
     }
 
-    private async reloadEreignis(id: number): Promise<boolean>
+    public async reloadEreignis(id: number): Promise<boolean>
     {
         this.barcodeInputActive = true;
         this.ereignis = await this.ereignisse.getSingle(id);
         this.timing.setEreignisStartTime(this.ereignis.datetimeStart);
-        this.setereignisAnzahlFeuerwehren();
+        this.setEreignisAnzahlFeuerwehren();
+        this.setEreignisAnzahlMaengel();
         return true;
     }
 
@@ -111,17 +113,53 @@ export class OperatingService
 
     public async addFuellungById(id: number)
     {
+        const flasche = await this.flaschen.getSingle(id);
         const fuellung = new Fuellung(new Date(), id, this.ereignis.id);
-        this.fuellungen.saveOrCreate(fuellung);
 
-        await this.reloadEreignis(this.ereignis.id);
+        if (flasche.maengel.filter(m => m.datetimeFixed == null).length)
+        {
+            const dialog = this.dialog.open(ConfirmFlascheWithMangelComponent, {
+                width: '500px',
+                data: flasche
+            });
+
+            dialog.afterClosed().subscribe(async (result) =>
+            {
+                if (result.maengelBeheben)
+                {
+                    await flasche.maengel.forEach(async mangel =>
+                    {
+                        mangel.datetimeFixed = new Date();
+                        await this.maengel.saveOrCreate(mangel);
+                    })
+                }
+
+                if (result.addFlasche)
+                {
+                    await this.fuellungen.saveOrCreate(fuellung);
+                }
+
+                await this.reloadEreignis(this.ereignis.id);
+            });
+        }
+        else
+        {
+            this.fuellungen.saveOrCreate(fuellung);
+            await this.reloadEreignis(this.ereignis.id);
+        }
     }
 
-    public setereignisAnzahlFeuerwehren()
+    public setEreignisAnzahlFeuerwehren()
     {
         const ids = [];
         this.ereignis?.fuellungen.forEach((fuellung) => { if (ids.indexOf(fuellung?.flasche?.feuerwehr?.id) === -1) ids.push(fuellung?.flasche?.feuerwehr?.id); });
         this.ereignisAnzahlFeuerwehren = ids.length;
+    }
+
+    public async setEreignisAnzahlMaengel()
+    {
+        const maengel = await this.maengel.getAllByEreignisId(this.ereignis.id);
+        this.ereignisAnzahlMaengel = maengel.length;
     }
 
     public closeEreignis()
@@ -132,21 +170,5 @@ export class OperatingService
         this.router.navigate(['/']);
     }
 
-    public async openSearchFlasche()
-    {
-        this.dialog.open(SearchFlascheComponent, { width: '500px' });
-    }
-
-    public async openEditEreignis()
-    {
-        const dialog = this.dialog.open(EditEreignisComponent, {
-            width: '500px',
-            data: this.ereignis
-        });
-
-        dialog.afterClosed().toPromise().then(async () =>
-        {
-            this.reloadEreignis(this.ereignis.id);
-        });
-    }
+    private
 }

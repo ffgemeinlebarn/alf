@@ -21,12 +21,14 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FeuerwehrenService } from './services/feuerwehren/feuerwehren.service';
 import { FuellungItemComponent } from './components/fuellung-item/fuellung-item.component';
-import { EditFeuerwehrComponent } from './components/edit-feuerwehr/edit-feuerwehr.component';
+import { EditFeuerwehrComponent } from './dialogs/edit-feuerwehr/edit-feuerwehr.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { EditFlascheComponent } from './components/edit-flasche/edit-flasche.component';
-import { SearchFlascheComponent } from './components/search-flasche/search-flasche.component';
-import { PrintReportsComponent } from './components/print-reports/print-reports.component';
-import { EditEreignisComponent } from './components/edit-ereignis/edit-ereignis.component';
+import { EditFlascheComponent } from './dialogs/edit-flasche/edit-flasche.component';
+import { SearchFlascheComponent } from './dialogs/search-flasche/search-flasche.component';
+import { PrintReportsComponent } from './dialogs/print-reports/print-reports.component';
+import { EditEreignisComponent } from './dialogs/edit-ereignis/edit-ereignis.component';
+import { AddMangelComponent } from './dialogs/add-mangel/add-mangel.component';
+import { ConfirmFlascheWithMangelComponent } from './dialogs/confirm-flasche-with-mangel/confirm-flasche-with-mangel.component';
 
 @NgModule({
     imports: [
@@ -84,7 +86,9 @@ import { EditEreignisComponent } from './components/edit-ereignis/edit-ereignis.
         EditFlascheComponent,
         SearchFlascheComponent,
         PrintReportsComponent,
-        EditEreignisComponent
+        EditEreignisComponent,
+        AddMangelComponent,
+        ConfirmFlascheWithMangelComponent
     ]
 })
 export class SharedModule { }

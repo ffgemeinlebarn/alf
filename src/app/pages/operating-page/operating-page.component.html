@@ -84,12 +84,22 @@
             </mat-card>
         </div>
     </mat-grid-tile>
-    <mat-grid-tile colspan="6" rowspan="1">
+    <mat-grid-tile colspan="4" rowspan="1">
         <div class="tile-wrapper">
-            <mat-card matRipple (click)="operating.openSearchFlasche()">
+            <mat-card matRipple (click)="openSearchFlasche()">
                 <div class="card-wrapper card-wrapper--center input-method">
                     <mat-icon>manage_search</mat-icon>
                     <h1>Flasche manuell hinzufügen</h1>
+                </div>
+            </mat-card>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2" rowspan="1">
+        <div class="tile-wrapper">
+            <mat-card matRipple (click)="openAddMangel()">
+                <div class="card-wrapper card-wrapper--center input-method">
+                    <mat-icon>report</mat-icon>
+                    <h1>Mangel erfassen</h1>
                 </div>
             </mat-card>
         </div>
@@ -104,7 +114,7 @@
                     <p>Personal: <strong><span *ngFor="let person of operating.ereignis?.personen; let last = last;">{{ person.vorname }} {{ person.nachname }}{{ last ? '' : ', ' }}</span></strong></p>
 
                     <mat-card-actions class="bearbeiten-button">
-                        <button mat-fab color="basic" (click)="operating.openEditEreignis()">
+                        <button mat-fab color="basic" (click)="openEditEreignis()">
                             <mat-icon>settings</mat-icon>
                         </button>
                     </mat-card-actions>
