@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { EreignisType } from '../../enums/ereignis-type';
 import { Ereignis } from '../../models/ereignis/ereignis';
 import { Person } from '../../models/person/person';
 import { EreignisseService } from '../../services/ereignisse/ereignisse.service';
@@ -12,6 +13,7 @@ import { PersonenService } from '../../services/personen/personen.service';
 })
 export class EditEreignisComponent
 {
+    public EreignisType = EreignisType;
     public personen: Array<Person> = [];
 
     constructor(
