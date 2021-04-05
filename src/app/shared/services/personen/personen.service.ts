@@ -35,6 +35,19 @@ export class PersonenService
     public async getAll(): Promise<Array<Person>>
     {
         const personen = await this.database.personen?.toArray();
+
+        personen.sort((a, b) =>
+        {
+            if (a.vorname < b.vorname) { return -1; }
+            if (a.vorname > b.vorname) { return 1; }
+            return 0;
+        }).sort((a, b) =>
+        {
+            if (a.nachname < b.nachname) { return -1; }
+            if (a.nachname > b.nachname) { return 1; }
+            return 0;
+        });
+
         return await Promise.all(personen.map(async person => this.map(person)));
     }
 
