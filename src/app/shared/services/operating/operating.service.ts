@@ -118,10 +118,7 @@ export class OperatingService
 
         if (flasche.maengel.filter(m => m.datetimeFixed == null).length)
         {
-            const dialog = this.dialog.open(ConfirmFlascheWithMangelComponent, {
-                width: '500px',
-                data: flasche
-            });
+            const dialog = this.dialog.open(ConfirmFlascheWithMangelComponent, { width: '500px', data: flasche });
 
             dialog.afterClosed().subscribe(async (result) =>
             {
