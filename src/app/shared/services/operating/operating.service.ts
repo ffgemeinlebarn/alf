@@ -17,6 +17,7 @@ import { TimingService } from '../timing/timing.service';
 })
 export class OperatingService
 {
+    private minBarcodeZeichen = 5;
     public barcodeInputBuffer = '';
     public barcodeInputActive = true;
     // public barcodeInputStart = false;
@@ -45,21 +46,29 @@ export class OperatingService
         if (this.barcodeInputActive)
         {
             // Number Input
-            if (event.key !== 'Enter')
+            if (event.key !== 'Enter' && this.isDigit(event.key))
             {
                 this.barcodeInputBuffer += event.key;
             }
 
             // Enter
-            if (event.key === 'Enter')
+            if (event.key === 'Enter' && this.barcodeInputBuffer.length >= this.minBarcodeZeichen)
             {
                 const barcode: number = +this.barcodeInputBuffer;
-                const result = this.addFuellungByBarcode(barcode);
+                this.addFuellungByBarcode(barcode);
 
+                this.barcodeInputBuffer = '';
+            }
+
+            // Reset Buffer on no Digit or Enter
+            if (!this.isDigit(event.key) && event.key !== 'Enter')
+            {
                 this.barcodeInputBuffer = '';
             }
         }
     }
+
+    private isDigit = (val) => /^\d+$/.test(val);
 
     public async tryStartOpenEreignis(): Promise<boolean>
     {
