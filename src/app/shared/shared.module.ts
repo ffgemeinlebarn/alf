@@ -16,6 +16,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRippleModule } from '@angular/material/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -53,7 +54,8 @@ import { ConfirmFlascheWithMangelComponent } from './dialogs/confirm-flasche-wit
         MatChipsModule,
         MatRippleModule,
         MatExpansionModule,
-        MatSlideToggleModule
+        MatSlideToggleModule,
+        MatCheckboxModule
     ],
     exports: [
         MatButtonModule,
@@ -75,7 +77,8 @@ import { ConfirmFlascheWithMangelComponent } from './dialogs/confirm-flasche-wit
         MatRippleModule,
         MatExpansionModule,
         FuellungItemComponent,
-        MatSlideToggleModule
+        MatSlideToggleModule,
+        MatCheckboxModule
     ],
     providers: [
         FeuerwehrenService

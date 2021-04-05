@@ -8,6 +8,7 @@ import { IFlasche } from '../../interfaces/i-flasche';
 import { IFuellung } from '../../interfaces/i-fuellung';
 import { IMangel } from '../../interfaces/i-mangel';
 import { IPerson } from '../../interfaces/i-person';
+import { SettingsService } from '../settings/settings.service';
 @Injectable({
     providedIn: 'root'
 })
@@ -21,11 +22,11 @@ export class DatabaseService extends Dexie
     public fuellungen: Dexie.Table<IFuellung, number> | undefined;
     public ereignissePersonen: Dexie.Table<IEreignissePersonen, number> | undefined;
 
-    constructor()
+    constructor(private settings: SettingsService)
     {
-        super(environment.database.name);
+        super(environment.database.name + (settings.testMode ? '_test' : ''));
 
-        this.version(24).stores({
+        this.version(1).stores({
             feuerwehren: 'id, name',
             flaschen: '++id, feuerwehrId, &barcode, laufnummer, druck',
             maengel: '++id, flascheId, datetime, personId, ereignisId, datetimeFixed',

@@ -49,6 +49,7 @@ h1.page-title {
 
 
 .print {
+    font-family: 'Cascadia Code', monospace, sans-serif;
 
     #print-content {
         width: 100%;
@@ -143,6 +144,7 @@ h1.page-title {
         }
 
         .fuellung {
+            page-break-inside: avoid;
             margin-bottom: 10mm;
 
             table {
