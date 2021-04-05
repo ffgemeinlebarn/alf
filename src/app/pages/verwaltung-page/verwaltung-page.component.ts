@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, of, from } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { EditFeuerwehrComponent } from 'src/app/shared/dialogs/edit-feuerwehr/edit-feuerwehr.component';
 import { Feuerwehr } from 'src/app/shared/models/feuerwehr/feuerwehr';

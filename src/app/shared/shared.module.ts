@@ -30,6 +30,7 @@ import { PrintReportsComponent } from './dialogs/print-reports/print-reports.com
 import { EditEreignisComponent } from './dialogs/edit-ereignis/edit-ereignis.component';
 import { AddMangelComponent } from './dialogs/add-mangel/add-mangel.component';
 import { ConfirmFlascheWithMangelComponent } from './dialogs/confirm-flasche-with-mangel/confirm-flasche-with-mangel.component';
+import { EditPersonComponent } from './dialogs/edit-person/edit-person.component';
 
 @NgModule({
     imports: [
@@ -91,7 +92,8 @@ import { ConfirmFlascheWithMangelComponent } from './dialogs/confirm-flasche-wit
         PrintReportsComponent,
         EditEreignisComponent,
         AddMangelComponent,
-        ConfirmFlascheWithMangelComponent
+        ConfirmFlascheWithMangelComponent,
+        EditPersonComponent
     ]
 })
 export class SharedModule { }
