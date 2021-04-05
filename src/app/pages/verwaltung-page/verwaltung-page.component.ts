@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of, from } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { EditFeuerwehrComponent } from 'src/app/shared/components/edit-feuerwehr/edit-feuerwehr.component';
+import { EditFeuerwehrComponent } from 'src/app/shared/dialogs/edit-feuerwehr/edit-feuerwehr.component';
 import { Feuerwehr } from 'src/app/shared/models/feuerwehr/feuerwehr';
 import { FeuerwehrenService } from 'src/app/shared/services/feuerwehren/feuerwehren.service';
 import { Flasche } from 'src/app/shared/models/flasche/flasche';
-import { EditFlascheComponent } from 'src/app/shared/components/edit-flasche/edit-flasche.component';
+import { EditFlascheComponent } from 'src/app/shared/dialogs/edit-flasche/edit-flasche.component';
 
 @Component({
     selector: 'ffg-verwaltung-page',

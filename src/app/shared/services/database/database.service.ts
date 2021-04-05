@@ -25,10 +25,10 @@ export class DatabaseService extends Dexie
     {
         super(environment.database.name);
 
-        this.version(22).stores({
+        this.version(24).stores({
             feuerwehren: 'id, name',
             flaschen: '++id, feuerwehrId, &barcode, laufnummer, druck',
-            maengel: '++id, flascheId, datetime, personId, note, datetimeFixed',
+            maengel: '++id, flascheId, datetime, personId, ereignisId, datetimeFixed',
             personen: '++id, vorname, nachname',
             ereignisse: '++id, type, datetimeStart, datetimeEnd, ort',
             fuellungen: '++id, datetimeStart, datetimeEnd, flascheId, ereignisId',

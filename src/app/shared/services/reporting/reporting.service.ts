@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { PrintReportsComponent } from '../../components/print-reports/print-reports.component';
+import { PrintReportsComponent } from '../../dialogs/print-reports/print-reports.component';
 
 @Injectable({
     providedIn: 'root'

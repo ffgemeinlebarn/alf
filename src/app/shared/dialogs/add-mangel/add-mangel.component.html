@@ -1,0 +1,38 @@
+<h1 mat-dialog-title>Mangel hinzufügen</h1>
+<div class="content" mat-dialog-content>
+    <h2>Flasche</h2>
+    <mat-form-field appearance="fill">
+        <mat-label>Feuerwehr</mat-label>
+        <mat-select [(ngModel)]="selectedFeuerwehr" (ngModelChange)="feuerwehrChanged()">
+            <mat-option *ngFor="let feuerwehr of feuerwehren" [value]="feuerwehr">{{ feuerwehr.prefix }} {{ feuerwehr.name }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Flasche</mat-label>
+        <mat-select [(ngModel)]="selectedflascheId">
+            <mat-option *ngFor="let flasche of selectedFeuerwehr?.flaschen" [value]="flasche.id">Nr. {{ flasche.laufnummer }} ({{ flasche.druck}} Bar, Barcode: {{ flasche.barcode }})</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <h2>Mangel</h2>
+    <mat-form-field appearance="fill">
+        <mat-label>Typ des Mangels</mat-label>
+        <mat-select [(ngModel)]="selectedMangelType">
+            <mat-option *ngFor="let type of mangelTypes" [value]="type">{{ type.bereich}}: {{ type.title }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Zusätzliche Informationen</mat-label>
+        <textarea matInput [(ngModel)]="selectedMangelNote"></textarea>
+    </mat-form-field>
+    <h2>Festgestellt von</h2>
+    <mat-form-field appearance="fill">
+        <mat-label>Person</mat-label>
+        <mat-select [(ngModel)]="selectedPerson">
+            <mat-option *ngFor="let person of personen" [value]="person">{{ person.vorname}} {{ person.nachname }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="close()">Abbrechen</button>
+    <button mat-button (click)="add()" cdkFocusInitial>Hinzufügen</button>
+</div>

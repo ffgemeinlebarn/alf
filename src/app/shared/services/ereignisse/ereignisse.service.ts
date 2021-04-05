@@ -146,7 +146,10 @@ export class EreignisseService
             obj.flascheId,
             obj.datetime,
             obj.personId,
+            obj.typeBereich,
+            obj.typeDescription,
             obj.note,
+            obj.ereignisId,
             obj.datetimeFixed,
             obj.id
         );
