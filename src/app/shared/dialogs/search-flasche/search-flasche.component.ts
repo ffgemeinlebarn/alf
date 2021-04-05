@@ -24,8 +24,6 @@ export class SearchFlascheComponent implements OnInit
     {
         this.feuerwehrenService.getAll().then(feuerwehren =>
         {
-            console.log('feuerwehren');
-
             this.feuerwehren = feuerwehren;
             this.selectedFeuerwehr = this.feuerwehren[0];
             this.feuerwehreChanged();
