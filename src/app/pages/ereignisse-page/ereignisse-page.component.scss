@@ -1,1 +1,68 @@
+:host {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    overflow: auto;
+}
 
+mat-expansion-panel {
+    width: 100%;
+    margin-bottom: 20px;
+
+    mat-expansion-panel-header {
+        height: 60px;
+
+        mat-panel-title {
+            width: 30%;
+            align-items: center;
+        }
+
+        mat-panel-description {
+            align-items: center;
+            width: 70%;
+        }
+    }
+
+    .content {
+        display: flex;
+        flex-direction: row;
+
+        .stammdaten {
+            width: 30%;
+
+            .actions {
+                margin-bottom: 40px;
+
+                button {
+                    margin-right: 20px;
+                }
+            }
+
+            table {
+                border-collapse: collapse;
+
+                tr {
+                    th {
+                        text-align: left;
+                        padding: 10px 0px;
+                        padding-right: 20px;
+                    }
+
+                    td {
+                        text-align: left;
+                        padding: 10px 0px;
+                    }
+                }
+            }
+        }
+
+        .fuellungen {
+            width: 70%;
+
+            mat-list {
+                margin-bottom: 20px;
+            }
+        }
+    }
+}

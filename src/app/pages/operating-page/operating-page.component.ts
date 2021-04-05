@@ -63,6 +63,6 @@ export class OperatingPageComponent implements OnInit
 
     public async openPrintReportings()
     {
-        const dialog = this.dialog.open(PrintReportsComponent, { width: '500px', data: this.operating.ereignis });
+        this.dialog.open(PrintReportsComponent, { width: '500px', data: this.operating.ereignis });
     }
 }
