@@ -9,6 +9,7 @@ import { EreignisseService } from '../ereignisse/ereignisse.service';
 import { FlaschenService } from '../flaschen/flaschen.service';
 import { FuellungenService } from '../fuellungen/fuellungen.service';
 import { MaengelService } from '../maengel/maengel.service';
+import { SettingsService } from '../settings/settings.service';
 import { TimingService } from '../timing/timing.service';
 
 @Injectable({
@@ -16,8 +17,11 @@ import { TimingService } from '../timing/timing.service';
 })
 export class OperatingService
 {
+    private minBarcodeZeichen = 5;
     public barcodeInputBuffer = '';
     public barcodeInputActive = true;
+    // public barcodeInputStart = false;
+
     public ereignis: Ereignis = null;
     public ereignisAnzahlFeuerwehren = 0;
     public ereignisAnzahlMaengel = 0;
@@ -30,7 +34,8 @@ export class OperatingService
         private flaschen: FlaschenService,
         private ereignisse: EreignisseService,
         private fuellungen: FuellungenService,
-        private maengel: MaengelService
+        private maengel: MaengelService,
+        private settings: SettingsService
     )
     {
         document.body.addEventListener('keydown', event => this.onScannerInputEnter(event));
@@ -41,21 +46,29 @@ export class OperatingService
         if (this.barcodeInputActive)
         {
             // Number Input
-            if (event.key !== 'Enter')
+            if (event.key !== 'Enter' && this.isDigit(event.key))
             {
                 this.barcodeInputBuffer += event.key;
             }
 
             // Enter
-            if (event.key === 'Enter')
+            if (event.key === 'Enter' && this.barcodeInputBuffer.length >= this.minBarcodeZeichen)
             {
                 const barcode: number = +this.barcodeInputBuffer;
-                const result = this.addFuellungByBarcode(barcode);
+                this.addFuellungByBarcode(barcode);
 
+                this.barcodeInputBuffer = '';
+            }
+
+            // Reset Buffer on no Digit or Enter
+            if (!this.isDigit(event.key) && event.key !== 'Enter')
+            {
                 this.barcodeInputBuffer = '';
             }
         }
     }
+
+    private isDigit = (val) => /^\d+$/.test(val);
 
     public async tryStartOpenEreignis(): Promise<boolean>
     {
@@ -128,7 +141,7 @@ export class OperatingService
                     {
                         mangel.datetimeFixed = new Date();
                         await this.maengel.saveOrCreate(mangel);
-                    })
+                    });
                 }
 
                 if (result.addFlasche)

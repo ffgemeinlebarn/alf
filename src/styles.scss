@@ -86,7 +86,6 @@ h1.page-title {
     table {
         width: 100%;
         border-collapse: collapse;
-        page-break-inside: avoid;
 
         tr {
             border-top: 1px solid #000;
@@ -106,17 +105,20 @@ h1.page-title {
 
     .report {
         page-break-after: always;
-        //page-break-inside: avoid;
         position: relative;
 
         * {
-
             position: relative;
+        }
+
+        .inner-report {
+            page-break-inside: avoid;
         }
 
         .header {
             padding-top: 4mm;
             padding-bottom: 4mm;
+            page-break-inside: avoid;
 
             h1 {
                 margin-bottom: 3mm;
