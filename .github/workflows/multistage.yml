@@ -32,7 +32,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm build --prod
+        run: ng build --prod
         
       - name: Zip
         shell: pwsh
