@@ -36,16 +36,12 @@ jobs:
 
       - name: Build
         run: ng build --prod
-        
-      - name: Zip
-        shell: pwsh
-        run: Compress-Archive ./dist/ffgfuea/* ./ffgfuea.zip
       
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
           name: FFGFUEA
-          path: ./ffgfuea.zip
+          path: ./dist/ffgfuea/*
 
   deploy:
     name: Deploy via FTP
@@ -53,13 +49,14 @@ jobs:
     needs: [build]
     
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
       - uses: actions/download-artifact@v2
         with:
           name: FFGFUEA
           path: ./
+          
+      - name: Unzip
+        shell: pwsh
+        run: Expand-Archive -Path FFGFUEA.zip -DestinationPath ./upload
       
       - name: Deploy in Stage 'Production' via FTP
         uses: JakobVesely/ftp-action-delete-and-upload@master
@@ -67,5 +64,5 @@ jobs:
           host: ${{ secrets.FTP_DEPLOY_HOST }}
           user: ${{ secrets.FTP_DEPLOY_USERNAME }}
           password: ${{ secrets.FTP_DEPLOY_PASSWORD }}
-          localDir: "."
+          localDir: "./upload"
           remoteDir: "."
