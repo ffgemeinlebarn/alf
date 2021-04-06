@@ -5,7 +5,6 @@
 export const environment = {
     production: false,
     database: {
-        version: 6,
         name: 'ffgfuea'
     }
 };
