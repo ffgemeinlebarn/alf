@@ -36,7 +36,7 @@ jobs:
         
       - name: Zip
         shell: pwsh
-        run: ./dist/ffgfuea/* ./ffgfuea.zip
+        run: Compress-Archive ./dist/ffgfuea/* ./ffgfuea.zip
       
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
