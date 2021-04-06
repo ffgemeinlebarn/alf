@@ -1,0 +1,21 @@
+<h1 class="page-title">
+    <span>Einstellungen</span>
+    <button mat-raised-button (click)="settings.saveAll()">Speichern</button>
+</h1>
+
+<mat-card>
+    <mat-slide-toggle [(ngModel)]="settings.testMode">
+        <label>Test Modus aktiviert</label>
+    </mat-slide-toggle>
+</mat-card>
+
+<!-- <mat-card>
+    <mat-form-field>
+        <input matInput placeholder="Barcode Scanner Start Sequenz" [(ngModel)]="settings.barcodeScannerStartSequenz">
+    </mat-form-field>
+</mat-card> -->
+
+<mat-card>
+    <h2>Füllpersonal <button mat-raised-button (click)="addPerson()" color="primary">hinzufügen</button></h2>
+    <mat-card *ngFor="let person of personen" (click)="editPerson(person)" matRipple>{{ person.vorname }} {{ person.nachname }}</mat-card>
+</mat-card>

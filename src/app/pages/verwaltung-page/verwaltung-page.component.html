@@ -1,0 +1,31 @@
+<div class="list">
+    <h1 class="page-title">Feuerwehren</h1>
+    <button class="new-button" mat-raised-button (click)="newFeuerwehr()">Neue Feuerwehr hinzufügen</button>
+
+    <div class="feuerwehr" matRipple *ngFor="let feuerwehr of feuerwehren" (click)="selectFeuerwehr(feuerwehr)">
+        <mat-card>
+            <h3>{{feuerwehr.prefix}} {{feuerwehr.name}}</h3>
+            <p>{{feuerwehr.id}}</p>
+        </mat-card>
+    </div>
+</div>
+<div class="detail">
+    <h1 class="page-title">Flaschen</h1>
+    <button class="new-button" [hidden]="!selectedFeuerwehr" mat-raised-button (click)="newFlasche(selectedFeuerwehr)">Neue Flasche für FF {{ selectedFeuerwehr?.name }}</button>
+
+    <mat-grid-list [hidden]="!selectedFeuerwehr?.flaschen.length" cols="4" rowHeight="200px" gutterSize="40px">
+        <mat-grid-tile *ngFor="let flasche of selectedFeuerwehr?.flaschen" [ngClass]="{'not-fixed-mangel': flasche.hasNotFixedMangel}">
+            <mat-card matRipple (click)="editFlasche(flasche)">
+                <h3>Nr. {{ flasche.laufnummer }}</h3>
+                <p>Barcode: {{ flasche.barcode }}</p>
+                <p>Druck: {{ flasche.druck }} Bar</p>
+                <div class="mangel-warning" [hidden]="!flasche.hasNotFixedMangel">Flasche hat nicht behobenen Mangel</div>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+    <div class="message" [hidden]="selectedFeuerwehr?.flaschen?.length">
+        <h2 *ngIf="selectedFeuerwehr == null">Keine Feuerwehr ausgewählt!</h2>
+        <h2 *ngIf="selectedFeuerwehr">FF {{ selectedFeuerwehr?.name}} hat keine Flaschen!</h2>
+    </div>
+</div>

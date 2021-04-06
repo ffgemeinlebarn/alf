@@ -1,0 +1,64 @@
+:host {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+
+    h2 {
+        color: #fff;
+        margin-bottom: 40px;
+    }
+
+    .stepper {
+        display: flex;
+        flex-direction: row;
+        height: 200px;
+        margin-bottom: 100px;
+
+        .divider,
+        .step {
+            padding: 20px;
+        }
+
+        .step {
+            width: 300px;
+            height: auto;
+            padding: 3em 2em;
+
+            mat-card-content {
+                margin: 0px 16px;
+
+                mat-form-field {
+                    width: 100%;
+                }
+            }
+
+            .start-button-wrapper {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+            }
+        }
+    }
+}
+
+.start {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button {
+        text-transform: uppercase;
+        font-size: 1.5em;
+        padding: 10px 30px;
+    }
+}
