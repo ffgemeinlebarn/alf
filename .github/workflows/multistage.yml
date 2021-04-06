@@ -53,10 +53,6 @@ jobs:
         with:
           name: FFGFUEA
           path: ./
-          
-      - name: Unzip
-        shell: pwsh
-        run: Expand-Archive -Path FFGFUEA.zip -DestinationPath ./upload
       
       - name: Deploy in Stage 'Production' via FTP
         uses: JakobVesely/ftp-action-delete-and-upload@master
@@ -64,5 +60,5 @@ jobs:
           host: ${{ secrets.FTP_DEPLOY_HOST }}
           user: ${{ secrets.FTP_DEPLOY_USERNAME }}
           password: ${{ secrets.FTP_DEPLOY_PASSWORD }}
-          localDir: "./upload"
+          localDir: "."
           remoteDir: "."
