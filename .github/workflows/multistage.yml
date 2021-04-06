@@ -33,12 +33,16 @@ jobs:
 
       - name: Build
         run: npm build --prod
+        
+      - name: Zip
+        shell: pwsh
+        run: ./dist/ffgfuea/* ./ffgfuea.zip
       
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
           name: FFGFUEA
-          path: ./dist/ffgfuea
+          path: ./ffgfuea.zip
 
   deploy:
     name: Deploy via FTP
@@ -60,5 +64,5 @@ jobs:
           host: ${{ secrets.FTP_DEPLOY_HOST }}
           user: ${{ secrets.FTP_DEPLOY_USERNAME }}
           password: ${{ secrets.FTP_DEPLOY_PASSWORD }}
-          localDir: "./ffgfuea"
+          localDir: "."
           remoteDir: "."
