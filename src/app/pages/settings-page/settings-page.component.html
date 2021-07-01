@@ -4,9 +4,21 @@
 </h1>
 
 <mat-card>
+    <h2>Test Modus</h2>
+    <p>Um in Schulungen nicht mit den originalen Daten zu arbeiten und den Datenbestand nicht zu verunreinigen, kann hier der Testmodus aktiviert werden. Wurde dieser Modus aktiviert kann man sich gefahrlos "spielen"!</p>
     <mat-slide-toggle [(ngModel)]="settings.testMode">
-        <label>Test Modus aktiviert</label>
+        <label>Testmodus</label>
     </mat-slide-toggle>
+</mat-card>
+
+<mat-card>
+    <h2>MAT Synchronisierung</h2>
+    <p>FFGFUEA verfügt über die Möglichkeit der Synchronisierung mit der offiziellen Software der ZAW (NÖLFV) von der Firma Menzl. Diese Anwendung "MAT" muss auf den PC installiert und eingerichtet sein! Beim Start dieser Software prüft sie, ob neue Flaschendaten verfügbar sind und aktualisiert diese automatisch. Es empfiehlt sich daher diese Anwendung gelegentlich neu zu starten, um immer die neuesten Daten zu haben. MAT verwendet eine simple und etwas inkosistente Access-Datenbank, die man auch manuell auslesen kann. Genau das macht FFGFUA über einen Workaround mit einen simplen lokalen node.js Proxy Server (express.js), der mittels ADBDB-Driver die Access-Datenbank auslest und als JSON-Result über HTTP zurückliefert. Hierfür gibt es den Endpint /sync/:FwNr. Damit kann die Anwendung die Flaschendaten per Feuerwehrnummer auslesen. Damit dies bei jedem Start von FFGUEA geschehen kann, ist es notwendig, dass der Node-Server als Deamon (P2) einrichtet wird und automatisch beim Systemstart startet.</p>
+    <div>
+        <mat-form-field>
+            <input matInput placeholder="URL zum Sync-Service" [(ngModel)]="settings.syncUrl">
+        </mat-form-field>
+    </div>
 </mat-card>
 
 <!-- <mat-card>
