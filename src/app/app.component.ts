@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { OperatingService } from './shared/services/operating/operating.service';
+import { SettingsService } from './shared/services/settings/settings.service';
 
 @Component({
     selector: 'ffg-root',
@@ -9,5 +10,5 @@ import { OperatingService } from './shared/services/operating/operating.service'
 })
 export class AppComponent
 {
-    constructor() { }
+    constructor(public settings: SettingsService) { }
 }
