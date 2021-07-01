@@ -4,6 +4,6 @@ describe('MangelType', () =>
 {
     it('should create an instance', () =>
     {
-        expect(new MangelType('')).toBeTruthy();
+        expect(new MangelType('', '')).toBeTruthy();
     });
 });
