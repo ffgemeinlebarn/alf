@@ -1,4 +1,6 @@
 import { EreignisType } from '../../enums/ereignis-type';
+import { IFuellung } from '../../interfaces/i-fuellung';
+import { IPerson } from '../../interfaces/i-person';
 import { Fuellung } from '../fuellung/fuellung';
 import { Person } from '../person/person';
 
@@ -9,8 +11,8 @@ export class Ereignis
     public datetimeStart: Date;
     public datetimeEnd: Date;
     public ort: string;
-    public personen?: Array<Person> = [];
-    public fuellungen?: Array<Fuellung> = [];
+    public personen?: Array<IPerson> = [];
+    public fuellungen?: Array<IFuellung> = [];
 
     constructor(type: EreignisType = EreignisType.Uebung, datetimeStart: Date = null, ort: string = '', datetimeEnd: Date = null, id?: number)
     {

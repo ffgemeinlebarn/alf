@@ -4,7 +4,7 @@
     <mat-form-field appearance="fill">
         <mat-label>Feuerwehr</mat-label>
         <mat-select [(ngModel)]="selectedFeuerwehr" (ngModelChange)="feuerwehrChanged()">
-            <mat-option *ngFor="let feuerwehr of feuerwehren" [value]="feuerwehr">{{ feuerwehr.prefix }} {{ feuerwehr.name }}</mat-option>
+            <mat-option *ngFor="let feuerwehr of feuerwehren" [value]="feuerwehr">{{ feuerwehr.name }}</mat-option>
         </mat-select>
     </mat-form-field>
     <mat-form-field appearance="fill">

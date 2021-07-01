@@ -7,13 +7,13 @@ export class Flasche
     public id?: number;
     public feuerwehrId: number;
     public feuerwehr?: Feuerwehr;
-    public barcode: number;
+    public barcode: string;
     public laufnummer: number;
     public druck: number;
     public maengel: Array<Mangel | MangelOfFlasche> = [];
     public notes?: string;
 
-    constructor(feuerwehrId: number, barcode: number = null, laufnummer: number = null, druck: number = 200, notes: string = '', id?: number)
+    constructor(feuerwehrId: number, barcode: string = null, laufnummer: number = null, druck: number = 200, notes: string = '', id?: number)
     {
         this.feuerwehrId = feuerwehrId;
         this.barcode = barcode;

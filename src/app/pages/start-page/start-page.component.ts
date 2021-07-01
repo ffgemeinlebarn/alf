@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { EreignisType } from 'src/app/shared/enums/ereignis-type';
+import { IEreignis } from 'src/app/shared/interfaces/i-ereignis';
 import { Ereignis } from 'src/app/shared/models/ereignis/ereignis';
 import { Person } from 'src/app/shared/models/person/person';
 import { EreignisseService } from 'src/app/shared/services/ereignisse/ereignisse.service';
@@ -16,7 +17,7 @@ export class StartPageComponent implements OnInit
 {
     public newEreignis: Ereignis = null;
     public selectedEreignisId: number = null;
-    public allEreignisse: Array<Ereignis> = [];
+    public allEreignisse: Array<IEreignis> = [];
     public allPersonen: Array<Person> = [];
 
     constructor(private router: Router, private ereignisse: EreignisseService, public operating: OperatingService, public personen: PersonenService) { }
@@ -34,7 +35,7 @@ export class StartPageComponent implements OnInit
         }
     }
 
-    public async createEreignis(ereignis: Ereignis)
+    public async createEreignis(ereignis: IEreignis)
     {
         this.newEreignis.datetimeStart = new Date(this.newEreignis.datetimeStart);
         const id = await this.ereignisse.saveOrCreate(ereignis);

@@ -5,78 +5,29 @@
     box-sizing: border-box;
 }
 
-.list,
-.detail {
+::ng-deep .mat-expansion-panel-content {
+    overflow: auto !important;
+    height: 100%;
+}
+
+.maengel,
+.feuerwehren {
     position: relative;
-    display: flex;
-    flex-direction: row;
+    display: block;
     padding: 20px;
     box-sizing: border-box;
     height: 100%;
     overflow: auto;
-
-    mat-card {
-        box-sizing: border-box;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .new-button {
-        position: absolute;
-        right: 20px;
-        top: 20px;
-    }
 }
 
-.list {
+.maengel {
     width: 30%;
-    display: block;
-
-    .feuerwehr {
-        margin-bottom: 20px;
-
-        h3 {
-            margin-bottom: 0px;
-        }
-
-        p {
-            color: #aaa;
-        }
-    }
-
-    .feuerwehren {
-        display: flex;
-        flex-direction: column;
-        padding-bottom: 100px;
-        height: 100%;
-    }
 }
 
-.detail {
+.feuerwehren {
     width: 70%;
-    flex-direction: column;
 
-    mat-grid-tile {
-        box-sizing: border-box;
-
-        &.not-fixed-mangel mat-card {
-            background-color: red !important;
-        }
-
-        mat-card {
-            height: 100%;
-        }
-    }
-
-    .message {
-        display: flex;
-        flex: 1;
-        justify-content: center;
-        align-items: center;
-
-        h2 {
-            color: #fff;
-        }
+    mat-expansion-panel {
+        margin-bottom: 20px;
     }
 }

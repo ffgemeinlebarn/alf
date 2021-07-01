@@ -5,9 +5,9 @@ import { Feuerwehr } from '../../models/feuerwehr/feuerwehr';
 import { MangelType } from '../../models/mangel-type/mangel-type';
 import { Mangel } from '../../models/mangel/mangel';
 import { Person } from '../../models/person/person';
-import { FeuerwehrenService } from '../../services/feuerwehren/feuerwehren.service';
 import { MaengelService } from '../../services/maengel/maengel.service';
 import { PersonenService } from '../../services/personen/personen.service';
+import { StammdatenService } from '../../services/stammdaten/stammdaten.service';
 
 @Component({
     selector: 'ffg-add-mangel',
@@ -23,13 +23,13 @@ export class AddMangelComponent implements OnInit
     public selectedFeuerwehr: Feuerwehr;
     public selectedflascheId: number;
     public selectedMangelType: MangelType;
-    public selectedMangelNote: string = '';
+    public selectedMangelNote = '';
     public selectedPerson: Person;
 
     constructor(
         public dialog: MatDialogRef<AddMangelComponent>,
         @Inject(MAT_DIALOG_DATA) public data: Ereignis,
-        public feuerwehrenService: FeuerwehrenService,
+        public stammdaten: StammdatenService,
         private maengelService: MaengelService,
         private personenService: PersonenService
     ) { }
@@ -37,13 +37,6 @@ export class AddMangelComponent implements OnInit
     public ngOnInit(): void
     {
         this.mangelTypes = this.maengelService.mangelTyps;
-        this.personenService.getAll().then(personen => this.personen = personen);
-        this.feuerwehrenService.getAll().then(feuerwehren =>
-        {
-            this.feuerwehren = feuerwehren;
-            this.selectedFeuerwehr = this.feuerwehren[0];
-            this.feuerwehrChanged();
-        });
     }
 
     public feuerwehrChanged()
@@ -59,7 +52,7 @@ export class AddMangelComponent implements OnInit
     public async add(): Promise<void>
     {
         const mangel = new Mangel(this.selectedflascheId, new Date(), this.selectedPerson.id, this.selectedMangelType.bereich, this.selectedMangelType.title, this.selectedMangelNote, this.data.id);
-        this.maengelService.saveOrCreate(mangel)
+        this.maengelService.saveOrCreate(mangel);
         this.dialog.close();
     }
 }

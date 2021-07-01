@@ -1,31 +1,47 @@
-<div class="list">
-    <h1 class="page-title">Feuerwehren</h1>
-    <button class="new-button" mat-raised-button (click)="newFeuerwehr()">Neue Feuerwehr hinzufügen</button>
-
-    <div class="feuerwehr" matRipple *ngFor="let feuerwehr of feuerwehren" (click)="selectFeuerwehr(feuerwehr)">
-        <mat-card>
-            <h3>{{feuerwehr.prefix}} {{feuerwehr.name}}</h3>
-            <p>{{feuerwehr.id}}</p>
-        </mat-card>
-    </div>
+<div class="maengel">
+    <h1 class="page-title">Offene Mängel</h1>
 </div>
-<div class="detail">
-    <h1 class="page-title">Flaschen</h1>
-    <button class="new-button" [hidden]="!selectedFeuerwehr" mat-raised-button (click)="newFlasche(selectedFeuerwehr)">Neue Flasche für FF {{ selectedFeuerwehr?.name }}</button>
+<div class="feuerwehren">
+    <h1 class="page-title">Synchronisierte Feuerwehren & Flaschen</h1>
 
-    <mat-grid-list [hidden]="!selectedFeuerwehr?.flaschen.length" cols="4" rowHeight="200px" gutterSize="40px">
-        <mat-grid-tile *ngFor="let flasche of selectedFeuerwehr?.flaschen" [ngClass]="{'not-fixed-mangel': flasche.hasNotFixedMangel}">
-            <mat-card matRipple (click)="editFlasche(flasche)">
-                <h3>Nr. {{ flasche.laufnummer }}</h3>
-                <p>Barcode: {{ flasche.barcode }}</p>
-                <p>Druck: {{ flasche.druck }} Bar</p>
-                <div class="mangel-warning" [hidden]="!flasche.hasNotFixedMangel">Flasche hat nicht behobenen Mangel</div>
-            </mat-card>
-        </mat-grid-tile>
-    </mat-grid-list>
+    <input type="number" [(ngModel)]="feuerwehrNummerToSync">
+    <button mat-raised-button (click)="sync.syncFlaschenOfFeuerwehr(feuerwehrNummerToSync)">Synchroniserung</button>
 
-    <div class="message" [hidden]="selectedFeuerwehr?.flaschen?.length">
-        <h2 *ngIf="selectedFeuerwehr == null">Keine Feuerwehr ausgewählt!</h2>
-        <h2 *ngIf="selectedFeuerwehr">FF {{ selectedFeuerwehr?.name}} hat keine Flaschen!</h2>
-    </div>
+    <mat-expansion-panel *ngFor="let feuerwehr of stammdaten.feuerwehren">
+        <mat-expansion-panel-header>
+            <mat-panel-title>{{feuerwehr.feuerwehrNummer}} - {{feuerwehr.name}}</mat-panel-title>
+            <mat-panel-description>{{ feuerwehr.flaschen.length }} Flaschen</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <table mat-table [dataSource]="feuerwehr?.flaschen">s
+            <ng-container matColumnDef="karteiNr">
+                <th mat-header-cell *matHeaderCellDef>Nr.</th>
+                <td mat-cell *matCellDef="let flasche">{{ flasche.karteiNr }}</td>
+            </ng-container>
+            <ng-container matColumnDef="geraeteNr">
+                <th mat-header-cell *matHeaderCellDef>Geräte Nr.</th>
+                <td mat-cell *matCellDef="let flasche">{{ flasche.geraeteNr }}</td>
+            </ng-container>
+            <ng-container matColumnDef="flaschennummer">
+                <th mat-header-cell *matHeaderCellDef>Flaschen Nr.</th>
+                <td mat-cell *matCellDef="let flasche">{{ flasche.flaschennummer }}</td>
+            </ng-container>
+            <ng-container matColumnDef="barcode">
+                <th mat-header-cell *matHeaderCellDef>Barcode</th>
+                <td mat-cell *matCellDef="let flasche">{{ flasche.barcode }}</td>
+            </ng-container>
+            <ng-container matColumnDef="typenBezeichnung">
+                <th mat-header-cell *matHeaderCellDef>Typen Bezeichnung</th>
+                <td mat-cell *matCellDef="let flasche">{{ flasche.typenBezeichnung }}</td>
+            </ng-container>
+            <ng-container matColumnDef="typenInformation">
+                <th mat-header-cell *matHeaderCellDef>Typen Information</th>
+                <td mat-cell *matCellDef="let flasche">{{ flasche.typenInfo1 }} {{ flasche.typenInfo2 }} {{ flasche.typenInfo3 }}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <p>&nbsp;</p>
+    </mat-expansion-panel>
 </div>

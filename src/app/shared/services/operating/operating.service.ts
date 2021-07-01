@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ConfirmFlascheWithMangelComponent } from '../../dialogs/confirm-flasche-with-mangel/confirm-flasche-with-mangel.component';
+import { IEreignis } from '../../interfaces/i-ereignis';
+import { IFlasche } from '../../interfaces/i-flasche';
+import { IFuellung } from '../../interfaces/i-fuellung';
 import { Ereignis } from '../../models/ereignis/ereignis';
-import { Fuellung } from '../../models/fuellung/fuellung';
 import { DatabaseService } from '../database/database.service';
 import { EreignisseService } from '../ereignisse/ereignisse.service';
-import { FlaschenService } from '../flaschen/flaschen.service';
-import { FuellungenService } from '../fuellungen/fuellungen.service';
-import { MaengelService } from '../maengel/maengel.service';
-import { SettingsService } from '../settings/settings.service';
+import { StammdatenService } from '../stammdaten/stammdaten.service';
 import { TimingService } from '../timing/timing.service';
 
 @Injectable({
@@ -20,22 +18,18 @@ export class OperatingService
     private minBarcodeZeichen = 5;
     public barcodeInputBuffer = '';
     public barcodeInputActive = true;
-    // public barcodeInputStart = false;
 
-    public ereignis: Ereignis = null;
+    public ereignis: IEreignis = null;
     public ereignisAnzahlFeuerwehren = 0;
     public ereignisAnzahlMaengel = 0;
 
     public constructor(
+        public stammdaten: StammdatenService,
         public database: DatabaseService,
         public timing: TimingService,
         public dialog: MatDialog,
         private router: Router,
-        private flaschen: FlaschenService,
-        private ereignisse: EreignisseService,
-        private fuellungen: FuellungenService,
-        private maengel: MaengelService,
-        private settings: SettingsService
+        private ereignisse: EreignisseService
     )
     {
         document.body.addEventListener('keydown', event => this.onScannerInputEnter(event));
@@ -54,8 +48,7 @@ export class OperatingService
             // Enter
             if (event.key === 'Enter' && this.barcodeInputBuffer.length >= this.minBarcodeZeichen)
             {
-                const barcode: number = +this.barcodeInputBuffer;
-                this.addFuellungByBarcode(barcode);
+                this.addFuellungByBarcode(this.barcodeInputBuffer);
 
                 this.barcodeInputBuffer = '';
             }
@@ -111,53 +104,23 @@ export class OperatingService
         return true;
     }
 
-    public async addFuellungByBarcode(barcode: number)
+    public async addFuellungByBarcode(barcode: string)
     {
-        console.log('[] [Barcode]', barcode);
-        const id = await this.flaschen.getIdForBarcode(barcode);
-
-        if (id)
-        {
-            return this.addFuellungById(id);
-        }
-
-        return false;
+        const flasche = this.stammdaten.getFlascheByBarcode(barcode);
+        await this.addFuellung(flasche);
     }
 
-    public async addFuellungById(id: number)
+    public async addFuellung(flasche: IFlasche)
     {
-        const flasche = await this.flaschen.getSingle(id);
-        const fuellung = new Fuellung(new Date(), id, this.ereignis.id);
+        const fuellung: IFuellung = {
+            datetime: new Date(),
+            flasche
+        };
 
-        if (flasche.maengel.filter(m => m.datetimeFixed == null).length)
-        {
-            const dialog = this.dialog.open(ConfirmFlascheWithMangelComponent, { width: '500px', data: flasche });
-
-            dialog.afterClosed().subscribe(async (result) =>
-            {
-                if (result.maengelBeheben)
-                {
-                    await flasche.maengel.forEach(async mangel =>
-                    {
-                        mangel.datetimeFixed = new Date();
-                        await this.maengel.saveOrCreate(mangel);
-                    });
-                }
-
-                if (result.addFlasche)
-                {
-                    await this.fuellungen.saveOrCreate(fuellung);
-                }
-
-                await this.reloadEreignis(this.ereignis.id);
-            });
-        }
-        else
-        {
-            this.fuellungen.saveOrCreate(fuellung);
-            await this.reloadEreignis(this.ereignis.id);
-        }
+        this.ereignis.fuellungen.unshift(fuellung);
+        this.saveEreignis();
     }
+
 
     public setEreignisAnzahlFeuerwehren()
     {
@@ -168,15 +131,21 @@ export class OperatingService
 
     public async setEreignisAnzahlMaengel()
     {
-        const maengel = await this.maengel.getAllByEreignisId(this.ereignis.id);
+        // const maengel = await this.maengel.getAllByEreignisId(this.ereignis.id);
+        const maengel = [];
         this.ereignisAnzahlMaengel = maengel.length;
     }
 
     public closeEreignis()
     {
         this.ereignis.datetimeEnd = new Date();
-        this.ereignisse.saveOrCreate(this.ereignis);
+        this.saveEreignis();
         this.ereignis = null;
         this.router.navigate(['/']);
+    }
+
+    public saveEreignis()
+    {
+        this.ereignisse.saveOrCreate(this.ereignis);
     }
 }

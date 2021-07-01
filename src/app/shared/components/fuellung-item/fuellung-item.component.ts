@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Fuellung } from '../../models/fuellung/fuellung';
+import { IFuellung } from '../../interfaces/i-fuellung';
 
 @Component({
     selector: 'ffg-fuellung-item',
@@ -8,7 +8,7 @@ import { Fuellung } from '../../models/fuellung/fuellung';
 })
 export class FuellungItemComponent implements OnInit
 {
-    @Input() public fuellung: Fuellung;
+    @Input() public fuellung: IFuellung;
     constructor() { }
     public ngOnInit(): void { }
 }
