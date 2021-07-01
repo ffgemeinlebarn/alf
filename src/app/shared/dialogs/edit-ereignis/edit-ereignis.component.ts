@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EreignisType } from '../../enums/ereignis-type';
-import { Ereignis } from '../../models/ereignis/ereignis';
+import { IEreignis } from '../../interfaces/i-ereignis';
 import { EreignisseService } from '../../services/ereignisse/ereignisse.service';
 import { PersonenService } from '../../services/personen/personen.service';
 import { StammdatenService } from '../../services/stammdaten/stammdaten.service';
@@ -17,7 +17,7 @@ export class EditEreignisComponent
 
     constructor(
         private dialog: MatDialogRef<EditEreignisComponent>,
-        @Inject(MAT_DIALOG_DATA) public ereignis: Ereignis,
+        @Inject(MAT_DIALOG_DATA) public ereignis: IEreignis,
         private ereignisseService: EreignisseService,
         public personenService: PersonenService,
         public stammdaten: StammdatenService

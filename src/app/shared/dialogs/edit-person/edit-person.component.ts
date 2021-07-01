@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Person } from '../../models/person/person';
+import { IPerson } from '../../interfaces/i-person';
 import { PersonenService } from '../../services/personen/personen.service';
 
 @Component({
@@ -12,7 +12,7 @@ export class EditPersonComponent
 {
     constructor(
         public dialog: MatDialogRef<EditPersonComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: Person,
+        @Inject(MAT_DIALOG_DATA) public data: IPerson,
         private personen: PersonenService
     ) { }
 

@@ -26,7 +26,6 @@ import { SearchFlascheComponent } from './dialogs/search-flasche/search-flasche.
 import { PrintReportsComponent } from './dialogs/print-reports/print-reports.component';
 import { EditEreignisComponent } from './dialogs/edit-ereignis/edit-ereignis.component';
 import { AddMangelComponent } from './dialogs/add-mangel/add-mangel.component';
-import { ConfirmFlascheWithMangelComponent } from './dialogs/confirm-flasche-with-mangel/confirm-flasche-with-mangel.component';
 import { EditPersonComponent } from './dialogs/edit-person/edit-person.component';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -87,7 +86,6 @@ import { HttpClientModule } from '@angular/common/http';
         PrintReportsComponent,
         EditEreignisComponent,
         AddMangelComponent,
-        ConfirmFlascheWithMangelComponent,
         EditPersonComponent
     ]
 })

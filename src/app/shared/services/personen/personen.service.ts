@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { IPerson } from '../../interfaces/i-person';
-import { Person } from '../../models/person/person';
 import { DatabaseService } from '../database/database.service';
 
 @Injectable({
@@ -10,29 +9,20 @@ export class PersonenService
 {
     constructor(public database: DatabaseService) { }
 
-    private interfaceOfClass(person: Person): IPerson
-    {
-        return {
-            id: person.id,
-            vorname: person.vorname,
-            nachname: person.nachname
-        };
-    }
-
-    public async saveOrCreate(person: Person)
+    public async saveOrCreate(person: IPerson)
     {
         return this.database.transaction('rw', this.database.personen, async () =>
         {
-            person.id = await this.database.personen.put(this.interfaceOfClass(person));
+            person.id = await this.database.personen.put(person);
         });
     }
 
-    public async getSingle(id: number): Promise<Person>
+    public async getSingle(id: number): Promise<IPerson>
     {
-        return this.map(await this.database.personen?.get(id));
+        return await this.database.personen?.get(id);
     }
 
-    public async getAll(): Promise<Array<Person>>
+    public async getAll(): Promise<Array<IPerson>>
     {
         const personen = await this.database.personen?.toArray();
 
@@ -48,16 +38,7 @@ export class PersonenService
             return 0;
         });
 
-        return await Promise.all(personen.map(async person => this.map(person)));
-    }
-
-    private async map(obj: IPerson): Promise<Person>
-    {
-        return new Person(
-            obj.vorname,
-            obj.nachname,
-            obj.id
-        );
+        return personen;
     }
 
     public comparePersonen(a, b)

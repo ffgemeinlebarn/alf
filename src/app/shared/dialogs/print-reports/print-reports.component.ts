@@ -1,9 +1,9 @@
 import { Component, ElementRef, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EreignisType } from '../../enums/ereignis-type';
-import { Ereignis } from '../../models/ereignis/ereignis';
 import { EreignisseService } from '../../services/ereignisse/ereignisse.service';
 import { ViewChild } from '@angular/core';
+import { IEreignis } from '../../interfaces/i-ereignis';
 
 @Component({
     selector: 'ffg-print-reports',
@@ -26,7 +26,7 @@ export class PrintReportsComponent implements OnInit
     constructor(
         public window: Window,
         public dialog: MatDialogRef<PrintReportsComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: Ereignis,
+        @Inject(MAT_DIALOG_DATA) public data: IEreignis,
         public ereignisse: EreignisseService
     ) { }
 

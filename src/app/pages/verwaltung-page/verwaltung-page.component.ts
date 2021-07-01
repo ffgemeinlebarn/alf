@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Feuerwehr } from 'src/app/shared/models/feuerwehr/feuerwehr';
-import { Flasche } from 'src/app/shared/models/flasche/flasche';
 import { SyncService } from 'src/app/shared/services/sync/sync.service';
 import { StammdatenService } from 'src/app/shared/services/stammdaten/stammdaten.service';
+import { IFeuerwehr } from 'src/app/shared/interfaces/i-feuerwehr';
+import { IFlasche } from 'src/app/shared/interfaces/i-flasche';
 
 @Component({
     selector: 'ffg-verwaltung-page',
@@ -15,8 +15,8 @@ export class VerwaltungPageComponent implements OnInit
     public displayedColumns: string[] = ['karteiNr', 'geraeteNr', 'flaschennummer', 'barcode', 'typenBezeichnung', 'typenInformation'];
     public feuerwehrNummerToSync = null;
 
-    public selectedFeuerwehr: Feuerwehr = null;
-    public selectedFlasche: Flasche = null;
+    public selectedFeuerwehr: IFeuerwehr = null;
+    public selectedFlasche: IFlasche = null;
 
     constructor(public dialog: MatDialog, public sync: SyncService, public stammdaten: StammdatenService) { }
     public async ngOnInit(): Promise<void> { }

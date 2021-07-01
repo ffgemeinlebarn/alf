@@ -4,13 +4,13 @@
     <mat-form-field appearance="fill">
         <mat-label>Feuerwehr</mat-label>
         <mat-select [(ngModel)]="selectedFeuerwehr" (ngModelChange)="feuerwehrChanged()">
-            <mat-option *ngFor="let feuerwehr of feuerwehren" [value]="feuerwehr">{{ feuerwehr.name }}</mat-option>
+            <mat-option *ngFor="let feuerwehr of stammdaten.feuerwehren" [value]="feuerwehr">{{ feuerwehr.name }}</mat-option>
         </mat-select>
     </mat-form-field>
     <mat-form-field appearance="fill">
         <mat-label>Flasche</mat-label>
-        <mat-select [(ngModel)]="selectedflascheId">
-            <mat-option *ngFor="let flasche of selectedFeuerwehr?.flaschen" [value]="flasche.id">Nr. {{ flasche.laufnummer }} ({{ flasche.druck}} Bar, Barcode: {{ flasche.barcode }})</mat-option>
+        <mat-select [(ngModel)]="selectedFlasche">
+            <mat-option *ngFor="let flasche of selectedFeuerwehr?.flaschen" [value]="flasche">Nr. {{ flasche.karteiNr }} ({{ flasche.typenBezeichnung}}, Barcode: {{ flasche.barcode }})</mat-option>
         </mat-select>
     </mat-form-field>
     <h2>Mangel</h2>
@@ -27,8 +27,8 @@
     <h2>Festgestellt von</h2>
     <mat-form-field appearance="fill">
         <mat-label>Person</mat-label>
-        <mat-select [(ngModel)]="selectedPerson">
-            <mat-option *ngFor="let person of personen" [value]="person">{{ person.vorname}} {{ person.nachname }}</mat-option>
+        <mat-select [(ngModel)]="selectedPerson" [compareWith]="personen.comparePersonen">
+            <mat-option *ngFor="let person of stammdaten.personen" [value]="person">{{ person.vorname}} {{ person.nachname }}</mat-option>
         </mat-select>
     </mat-form-field>
 </div>

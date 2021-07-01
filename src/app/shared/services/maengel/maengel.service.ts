@@ -1,14 +1,6 @@
 import { Injectable } from '@angular/core';
-import { IFeuerwehr } from '../../interfaces/i-feuerwehr';
-import { IFlasche } from '../../interfaces/i-flasche';
 import { IMangel } from '../../interfaces/i-mangel';
-import { IPerson } from '../../interfaces/i-person';
-import { Feuerwehr } from '../../models/feuerwehr/feuerwehr';
-import { Flasche } from '../../models/flasche/flasche';
-import { MangelOfFlasche } from '../../models/mangel-of-flasche/mangel-of-flasche';
 import { MangelType } from '../../models/mangel-type/mangel-type';
-import { Mangel } from '../../models/mangel/mangel';
-import { Person } from '../../models/person/person';
 import { DatabaseService } from '../database/database.service';
 
 @Injectable({
@@ -26,28 +18,13 @@ export class MaengelService
 
     constructor(public database: DatabaseService) { }
 
-    private interfaceOfClass(mangel: Mangel | MangelOfFlasche): IMangel
-    {
-        return {
-            id: mangel.id,
-            flascheId: mangel.flascheId,
-            datetime: mangel.datetime,
-            personId: mangel.personId,
-            typeBereich: mangel.typeBereich,
-            typeDescription: mangel.typeDescription,
-            note: mangel.note,
-            ereignisId: mangel.ereignisId,
-            datetimeFixed: mangel.datetimeFixed
-        };
-    }
-
-    public async saveOrCreate(mangel: Mangel | MangelOfFlasche)
+    public async saveOrCreate(mangel: IMangel)
     {
         console.log('[DB] [Mangel] Save Or Create', mangel);
 
         return this.database.transaction('rw', this.database.maengel, async () =>
         {
-            mangel.id = await this.database.maengel.put(this.interfaceOfClass(mangel));
+            mangel.id = await this.database.maengel.put(mangel);
         });
     }
 

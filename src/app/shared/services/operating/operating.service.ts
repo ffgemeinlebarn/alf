@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { IEreignis } from '../../interfaces/i-ereignis';
 import { IFlasche } from '../../interfaces/i-flasche';
 import { IFuellung } from '../../interfaces/i-fuellung';
-import { Ereignis } from '../../models/ereignis/ereignis';
 import { DatabaseService } from '../database/database.service';
 import { EreignisseService } from '../ereignisse/ereignisse.service';
 import { StammdatenService } from '../stammdaten/stammdaten.service';

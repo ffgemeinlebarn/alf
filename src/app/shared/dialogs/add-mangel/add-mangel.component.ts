@@ -1,10 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Ereignis } from '../../models/ereignis/ereignis';
-import { Feuerwehr } from '../../models/feuerwehr/feuerwehr';
+import { IEreignis } from '../../interfaces/i-ereignis';
+import { IFeuerwehr } from '../../interfaces/i-feuerwehr';
+import { IFlasche } from '../../interfaces/i-flasche';
+import { IPerson } from '../../interfaces/i-person';
 import { MangelType } from '../../models/mangel-type/mangel-type';
-import { Mangel } from '../../models/mangel/mangel';
-import { Person } from '../../models/person/person';
 import { MaengelService } from '../../services/maengel/maengel.service';
 import { PersonenService } from '../../services/personen/personen.service';
 import { StammdatenService } from '../../services/stammdaten/stammdaten.service';
@@ -16,22 +16,20 @@ import { StammdatenService } from '../../services/stammdaten/stammdaten.service'
 })
 export class AddMangelComponent implements OnInit
 {
-    public feuerwehren: Array<Feuerwehr> = [];
-    public personen: Array<Person> = [];
     public mangelTypes: Array<MangelType> = [];
 
-    public selectedFeuerwehr: Feuerwehr;
-    public selectedflascheId: number;
+    public selectedFeuerwehr: IFeuerwehr;
+    public selectedFlasche: IFlasche;
+    public selectedPerson: IPerson;
     public selectedMangelType: MangelType;
     public selectedMangelNote = '';
-    public selectedPerson: Person;
 
     constructor(
         public dialog: MatDialogRef<AddMangelComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: Ereignis,
+        @Inject(MAT_DIALOG_DATA) public data: IEreignis,
         public stammdaten: StammdatenService,
         private maengelService: MaengelService,
-        private personenService: PersonenService
+        public personen: PersonenService
     ) { }
 
     public ngOnInit(): void
@@ -41,7 +39,7 @@ export class AddMangelComponent implements OnInit
 
     public feuerwehrChanged()
     {
-        this.selectedflascheId = this.selectedFeuerwehr?.flaschen[0]?.id;
+        this.selectedFlasche = this.selectedFeuerwehr?.flaschen[0];
     }
 
     public close(): void
@@ -51,8 +49,8 @@ export class AddMangelComponent implements OnInit
 
     public async add(): Promise<void>
     {
-        const mangel = new Mangel(this.selectedflascheId, new Date(), this.selectedPerson.id, this.selectedMangelType.bereich, this.selectedMangelType.title, this.selectedMangelNote, this.data.id);
-        this.maengelService.saveOrCreate(mangel);
+        // const mangel = new Mangel(this.selectedflascheId, new Date(), this.selectedPerson.id, this.selectedMangelType.bereich, this.selectedMangelType.title, this.selectedMangelNote, this.data.id);
+        // this.maengelService.saveOrCreate(mangel);
         this.dialog.close();
     }
 }

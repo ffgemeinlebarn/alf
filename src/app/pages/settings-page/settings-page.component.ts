@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EditPersonComponent } from 'src/app/shared/dialogs/edit-person/edit-person.component';
-import { Person } from 'src/app/shared/models/person/person';
+import { IPerson } from 'src/app/shared/interfaces/i-person';
 import { PersonenService } from 'src/app/shared/services/personen/personen.service';
 import { SettingsService } from 'src/app/shared/services/settings/settings.service';
 
@@ -12,7 +12,7 @@ import { SettingsService } from 'src/app/shared/services/settings/settings.servi
 })
 export class SettingsPageComponent implements OnInit
 {
-    public personen: Array<Person> = [];
+    public personen: Array<IPerson> = [];
 
     constructor(public settings: SettingsService, private personenServerice: PersonenService, public dialog: MatDialog) { }
 
@@ -23,11 +23,11 @@ export class SettingsPageComponent implements OnInit
 
     public addPerson()
     {
-        const dialog = this.dialog.open(EditPersonComponent, { width: '500px', data: new Person('', '') });
+        const dialog = this.dialog.open(EditPersonComponent, { width: '500px', data: {} });
         dialog.afterClosed().subscribe(result => this.ngOnInit());
     }
 
-    public editPerson(person: Person)
+    public editPerson(person: IPerson)
     {
         const dialog = this.dialog.open(EditPersonComponent, { width: '500px', data: person });
         dialog.afterClosed().subscribe(result => this.ngOnInit());
