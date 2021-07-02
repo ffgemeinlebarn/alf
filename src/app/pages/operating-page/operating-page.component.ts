@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AddMangelComponent } from 'src/app/shared/dialogs/add-mangel/add-mangel.component';
+import { ConfirmEreignisAbschlussComponent } from 'src/app/shared/dialogs/confirm-ereignis-abschluss/confirm-ereignis-abschluss.component';
+import { ConfirmFuellungComponent } from 'src/app/shared/dialogs/confirm-fuellung/confirm-fuellung.component';
 import { EditEreignisComponent } from 'src/app/shared/dialogs/edit-ereignis/edit-ereignis.component';
 import { PrintReportsComponent } from 'src/app/shared/dialogs/print-reports/print-reports.component';
 import { SearchFlascheComponent } from 'src/app/shared/dialogs/search-flasche/search-flasche.component';
@@ -69,5 +71,15 @@ export class OperatingPageComponent implements OnInit
     public async openPrintReportings()
     {
         this.dialog.open(PrintReportsComponent, { width: '500px', data: this.operating.ereignis });
+    }
+
+    public async confirmCloseEreignis()
+    {
+        const dialog = this.dialog.open(ConfirmEreignisAbschlussComponent, { width: '500px', data: this.operating.ereignis });
+
+        dialog.afterClosed().subscribe(confirmation =>
+        {
+            if (confirmation) this.operating.closeEreignis();
+        });
     }
 }
