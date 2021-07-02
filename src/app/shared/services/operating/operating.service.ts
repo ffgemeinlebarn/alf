@@ -120,7 +120,16 @@ export class OperatingService
 
         if (this.confirmFuellungActive)
         {
-            this.dialog.open(ConfirmFuellungComponent, { width: '500px', data: fuellung });
+            const dialog = this.dialog.open(ConfirmFuellungComponent, { width: '500px', data: fuellung });
+
+            dialog.afterClosed().subscribe(confirmation =>
+            {
+                if (confirmation)
+                {
+                    this.ereignis.fuellungen.unshift(fuellung);
+                    this.saveEreignis();
+                }
+            });
         }
         else
         {

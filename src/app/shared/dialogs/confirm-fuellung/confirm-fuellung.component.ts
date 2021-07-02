@@ -12,21 +12,18 @@ export class ConfirmFuellungComponent implements OnInit
 {
     constructor(
         public dialog: MatDialogRef<ConfirmFuellungComponent>,
-        @Inject(MAT_DIALOG_DATA) public fuellungToConfirm: IFuellung,
-        private operating: OperatingService
+        @Inject(MAT_DIALOG_DATA) public fuellungToConfirm: IFuellung
     ) { }
 
     public ngOnInit(): void { }
 
     public close(): void
     {
-        this.dialog.close();
+        this.dialog.close(false);
     }
 
     public async confirm(): Promise<void>
     {
-        this.operating.ereignis.fuellungen.unshift(this.fuellungToConfirm);
-        this.operating.saveEreignis();
-        this.dialog.close();
+        this.dialog.close(true);
     }
 }
