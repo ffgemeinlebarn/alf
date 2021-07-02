@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ConfirmFuellungComponent } from '../../dialogs/confirm-fuellung/confirm-fuellung.component';
 import { IEreignis } from '../../interfaces/i-ereignis';
 import { IFlasche } from '../../interfaces/i-flasche';
 import { IFuellung } from '../../interfaces/i-fuellung';
@@ -17,6 +18,7 @@ export class OperatingService
     private minBarcodeZeichen = 5;
     public barcodeInputBuffer = '';
     public barcodeInputActive = true;
+    public confirmFuellungActive = true;
 
     public ereignis: IEreignis = null;
     public ereignisAnzahlFeuerwehren = 0;
@@ -116,8 +118,15 @@ export class OperatingService
             flasche
         };
 
-        this.ereignis.fuellungen.unshift(fuellung);
-        this.saveEreignis();
+        if (this.confirmFuellungActive)
+        {
+            this.dialog.open(ConfirmFuellungComponent, { width: '500px', data: fuellung });
+        }
+        else
+        {
+            this.ereignis.fuellungen.unshift(fuellung);
+            this.saveEreignis();
+        }
     }
 
 

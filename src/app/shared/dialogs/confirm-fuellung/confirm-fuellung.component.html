@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>
+    <span>Flasche Nr. {{ fuellungToConfirm?.flasche?.karteiNr }}</span><br />
+    <span>Barcode: {{ fuellungToConfirm?.flasche?.barcode }}</span>
+</h1>
+<h2 mat-dialog-title>Feuerwehr {{ fuellungToConfirm?.flasche?.feuerwehr?.name }}</h2>
+<div class="content" mat-dialog-content>
+    <p>Type: {{ fuellungToConfirm?.flasche?.typenBezeichnung }} ({{ fuellungToConfirm?.flasche?.typenInfo1 }} {{ fuellungToConfirm?.flasche?.typenInfo2 }} {{ fuellungToConfirm?.flasche?.typenInfo3 }})</p>
+
+    <button mat-button class="confirm" (click)="confirm()">
+        <mat-icon>check_circle</mat-icon>
+        Füllung bestätigen
+    </button>
+    <button mat-button class="close" (click)="close()">nicht hinzufügen</button>
+</div>

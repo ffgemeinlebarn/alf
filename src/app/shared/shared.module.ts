@@ -28,6 +28,8 @@ import { EditEreignisComponent } from './dialogs/edit-ereignis/edit-ereignis.com
 import { AddMangelComponent } from './dialogs/add-mangel/add-mangel.component';
 import { EditPersonComponent } from './dialogs/edit-person/edit-person.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ConfirmFuellungComponent } from './dialogs/confirm-fuellung/confirm-fuellung.component';
+import { ConfirmEreignisAbschlussComponent } from './dialogs/confirm-ereignis-abschluss/confirm-ereignis-abschluss.component';
 
 @NgModule({
     imports: [
@@ -86,7 +88,9 @@ import { HttpClientModule } from '@angular/common/http';
         PrintReportsComponent,
         EditEreignisComponent,
         AddMangelComponent,
-        EditPersonComponent
+        EditPersonComponent,
+        ConfirmFuellungComponent,
+        ConfirmEreignisAbschlussComponent
     ]
 })
 export class SharedModule { }

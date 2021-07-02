@@ -11,6 +11,7 @@ export class EreignisseService
 
     public async saveOrCreate(ereignis: IEreignis): Promise<number>
     {
+        if (ereignis.fuellungen == null) ereignis.fuellungen = [];
         return await this.database.ereignisse.put(ereignis);
     }
 

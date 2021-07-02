@@ -1,0 +1,21 @@
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
+.confirm,
+.close {
+    color: #fff;
+    padding: 1em;
+}
+
+.confirm {
+    background-color: green;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+}
+
+.close {
+    background-color: #d2232a;
+    font-size: 1.35em;
+}

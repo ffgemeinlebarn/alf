@@ -36,6 +36,11 @@ export class OperatingPageComponent implements OnInit
         this.operating.barcodeInputActive = !this.operating.barcodeInputActive;
     }
 
+    public toggleConfirmFuellung()
+    {
+        this.operating.confirmFuellungActive = !this.operating.confirmFuellungActive;
+    }
+
     public async openSearchFlasche()
     {
         this.dialog.open(SearchFlascheComponent, { width: '500px' });
