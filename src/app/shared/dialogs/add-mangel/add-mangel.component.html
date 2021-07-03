@@ -27,7 +27,7 @@
     <h2>Festgestellt von</h2>
     <mat-form-field appearance="fill">
         <mat-label>Person</mat-label>
-        <mat-select [(ngModel)]="selectedPerson" [compareWith]="personen.comparePersonen">
+        <mat-select [(ngModel)]="selectedPerson" [compareWith]="stammdaten.compareById">
             <mat-option *ngFor="let person of stammdaten.personen" [value]="person">{{ person.vorname}} {{ person.nachname }}</mat-option>
         </mat-select>
     </mat-form-field>

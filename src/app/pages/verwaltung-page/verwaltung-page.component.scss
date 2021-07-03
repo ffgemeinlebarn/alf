@@ -10,7 +10,7 @@
     height: 100%;
 }
 
-.maengel,
+.fuellpersonal,
 .feuerwehren {
     position: relative;
     display: block;
@@ -20,21 +20,52 @@
     overflow: auto;
 }
 
-.maengel {
-    width: 30%;
+.fuellpersonal {
+    width: 35%;
+
+    .personToAdd {
+        display: block;
+
+        .textfields {
+            display: flex;
+            flex: row;
+            justify-content: space-between;
+
+            mat-form-field {
+                width: 48%;
+            }
+        }
+    }
+
+    .person {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        span {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .buttons {
+            button {
+                margin-left: 20px;
+            }
+        }
+    }
 }
 
 .feuerwehren {
-    width: 70%;
-
-    .feuerwehrAddToSync,
-    mat-expansion-panel {
-        margin-bottom: 20px;
-    }
+    width: 65%;
 
     .buttons {
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
     }
+}
+
+mat-card,
+mat-expansion-panel {
+    margin-bottom: 20px;
 }

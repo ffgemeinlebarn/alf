@@ -1,6 +1,30 @@
-<div class="maengel">
-    <h1 class="page-title">Offene Mängel</h1>
-    <p>Implementierung ausständig</p>
+<div class="fuellpersonal">
+    <h1 class="page-title">Füllpersonal</h1>
+    <mat-card class="personToAdd">
+        <h3>Füllpersonal hinzufügen</h3>
+        <div class="textfields">
+            <mat-form-field appearance="fill">
+                <mat-label>Vorname</mat-label>
+                <input type="text" matInput [(ngModel)]="personToAdd.vorname">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Nachname</mat-label>
+                <input type="text" matInput [(ngModel)]="personToAdd.nachname">
+            </mat-form-field>
+        </div>
+        <button mat-raised-button (click)="addPerson()" color="primary">Person hinzufügen</button>
+    </mat-card>
+    <mat-card class="person" *ngFor="let person of stammdaten.personen">
+        <span>{{ person.vorname }} {{ person.nachname }}</span>
+        <div class="buttons">
+            <button mat-raised-button color="light" (click)="editPerson(person)">
+                Person bearbeiten
+            </button>
+            <button mat-raised-button color="warn" (click)="removePerson(person)">
+                Löschen
+            </button>
+        </div>
+    </mat-card>
 </div>
 <div class="feuerwehren">
     <h1 class="page-title">Synchronisierte Feuerwehren & Flaschen</h1>
@@ -12,7 +36,7 @@
             <input matInput placeholder="Feuerwehrnummer" [(ngModel)]="feuerwehrNummerToSync">
         </mat-form-field>
         <div>
-            <button mat-raised-button color="primary" (click)="addToSync(feuerwehrNummerToSync)">Zur Synchroniserung hinzufügen</button>
+            <button mat-raised-button color="primary" (click)="addFeuerwehrToSync(feuerwehrNummerToSync)">Zur Synchroniserung hinzufügen</button>
         </div>
     </mat-card>
 
@@ -25,7 +49,7 @@
         </mat-expansion-panel-header>
 
         <div class="buttons">
-            <button mat-raised-button color="light" (click)="openRemoveFeuerwehr(feuerwehr)">
+            <button mat-raised-button color="warn" (click)="openRemoveFeuerwehr(feuerwehr)">
                 <mat-icon>delete</mat-icon>
                 Feuerwehr entfernen
             </button>

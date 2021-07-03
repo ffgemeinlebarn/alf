@@ -31,7 +31,7 @@
     </mat-grid-tile>
     <mat-grid-tile colspan="2" rowspan="1">
         <div class="tile-wrapper">
-            <mat-card>
+            <mat-card disabled>
                 <div class="card-wrapper card-wrapper--center">
                     <h1>{{ operating.ereignisAnzahlMaengel }}</h1>
                     <p>ausgestellte Mängel</p>
@@ -71,7 +71,8 @@
     </mat-grid-tile>
     <mat-grid-tile colspan="2" rowspan="1">
         <div class="tile-wrapper">
-            <mat-card matRipple (click)="openAddMangel()">
+            <!-- <mat-card matRipple (click)="openAddMangel()"> -->
+            <mat-card disabled>
                 <div class="card-wrapper card-wrapper--center input-method">
                     <mat-icon>report</mat-icon>
                     <h1>Mangel erfassen</h1>
@@ -85,7 +86,7 @@
                 <div class="card-wrapper">
                     <mat-card-title>Zuletzt gefüllte Flaschen</mat-card-title>
                     <mat-list class="fuellungen">
-                        <ffg-fuellung-item *ngFor="let fuellung of operating.ereignis?.fuellungen" [fuellung]="fuellung" (press)="openFuellungContext(fuellung)"></ffg-fuellung-item>
+                        <ffg-fuellung-item mat-ripple *ngFor="let fuellung of operating.ereignis?.fuellungen" [fuellung]="fuellung" (press)="openFuellungContext(fuellung)"></ffg-fuellung-item>
                     </mat-list>
                 </div>
             </mat-card>

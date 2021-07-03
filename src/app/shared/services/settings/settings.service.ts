@@ -11,38 +11,34 @@ export class SettingsService
     }
 
     public testMode = false;
-    public barcodeScannerStartSequenz = '';
     public syncUrl = '';
-    public syncFeuerwehrNummern: Array<any> = [];
+    public syncLastEdit = '';
 
     public loadAll()
     {
         this.testMode = this.readBoolean('testMode');
-        this.barcodeScannerStartSequenz = this.readString('barcodeScannerStartSequenz');
         this.syncUrl = this.readString('syncUrl');
-        this.syncFeuerwehrNummern = this.readObject('syncFeuerwehrNummern') || [];
+        this.syncLastEdit = this.readString('syncLastEdit');
     }
 
     public saveAll()
     {
         this.writeTestMode();
-        this.writeBarcodeScannerStartSequenz();
         this.writeSyncURL();
-        this.writeSyncFeuerwehrNummern();
     }
 
     public writeTestMode = () => this.write('testMode', this.testMode);
-    public writeBarcodeScannerStartSequenz = () => this.write('barcodeScannerStartSequenz', this.barcodeScannerStartSequenz);
     public writeSyncURL = () => this.write('syncUrl', this.syncUrl);
-    public writeSyncFeuerwehrNummern = () => this.writeObject('syncFeuerwehrNummern', this.syncFeuerwehrNummern);
+
+    public writeSyncLastEdit = (lastEdit: string) =>
+    {
+        this.syncLastEdit = lastEdit;
+        this.write('syncLastEdit', this.syncLastEdit);
+    }
 
     private write(key: string, value: any)
     {
         localStorage.setItem(key, value);
-    }
-    private writeObject(key: string, value: any)
-    {
-        localStorage.setItem(key, JSON.stringify(value));
     }
 
     private readBoolean(key: string): boolean
@@ -55,11 +51,6 @@ export class SettingsService
 
     private readString(key: string): string
     {
-        return localStorage.getItem(key);
-    }
-
-    private readObject(key: string): any
-    {
-        return JSON.parse(localStorage.getItem(key));
+        return localStorage.getItem(key).toString();
     }
 }

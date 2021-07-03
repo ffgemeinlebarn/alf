@@ -6,7 +6,6 @@ import { IFlasche } from '../../interfaces/i-flasche';
 import { IPerson } from '../../interfaces/i-person';
 import { MangelType } from '../../models/mangel-type/mangel-type';
 import { MaengelService } from '../../services/maengel/maengel.service';
-import { PersonenService } from '../../services/personen/personen.service';
 import { StammdatenService } from '../../services/stammdaten/stammdaten.service';
 
 @Component({
@@ -28,8 +27,7 @@ export class AddMangelComponent implements OnInit
         public dialog: MatDialogRef<AddMangelComponent>,
         @Inject(MAT_DIALOG_DATA) public data: IEreignis,
         public stammdaten: StammdatenService,
-        private maengelService: MaengelService,
-        public personen: PersonenService
+        private maengelService: MaengelService
     ) { }
 
     public ngOnInit(): void

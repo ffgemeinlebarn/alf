@@ -3,7 +3,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EreignisType } from '../../enums/ereignis-type';
 import { IEreignis } from '../../interfaces/i-ereignis';
 import { EreignisseService } from '../../services/ereignisse/ereignisse.service';
-import { PersonenService } from '../../services/personen/personen.service';
 import { StammdatenService } from '../../services/stammdaten/stammdaten.service';
 
 @Component({
@@ -19,7 +18,6 @@ export class EditEreignisComponent
         private dialog: MatDialogRef<EditEreignisComponent>,
         @Inject(MAT_DIALOG_DATA) public ereignis: IEreignis,
         private ereignisseService: EreignisseService,
-        public personenService: PersonenService,
         public stammdaten: StammdatenService
     )
     { }

@@ -6,6 +6,4 @@ export interface IFeuerwehr
     eigentuemerId?: number;
     name?: string;
     flaschen?: Array<IFlasche>;
-
-    id?: number;
 }

@@ -20,22 +20,35 @@ export class StammdatenService
 
     public async reload()
     {
-        this.loadFeuerwehren()
-            .then(_ => this.snackBar.open('Stammdaten geladen', null, { duration: 3000 }))
-            .then(_ => console.log('Stammdaten geladen'));
-
-        this.loadPersonen();
+        await this.loadFeuerwehren();
+        await this.loadPersonen();
     }
 
     public async loadFeuerwehren(): Promise<void>
     {
         this.feuerwehren = await (await this.database.feuerwehren?.toArray())
-            .sort((a, b) => a.feuerwehrNummer - b.feuerwehrNummer);
+            .sort((a, b) => Number(a.feuerwehrNummer) - Number(b.feuerwehrNummer));
     }
 
     public async loadPersonen(): Promise<void>
     {
-        this.personen = await this.database.personen?.toArray();
+        const personen = await this.database.personen?.toArray();
+
+        personen
+            .sort((a, b) =>
+            {
+                if (a.vorname < b.vorname) { return -1; }
+                if (a.vorname > b.vorname) { return 1; }
+                return 0;
+            })
+            .sort((a, b) =>
+            {
+                if (a.nachname < b.nachname) { return -1; }
+                if (a.nachname > b.nachname) { return 1; }
+                return 0;
+            });
+
+        this.personen = personen;
     }
 
     public getFlascheByBarcode(barcode: string): IFlasche
@@ -56,5 +69,25 @@ export class StammdatenService
     {
         await this.database.feuerwehren.delete(feuerwehr.feuerwehrNummer);
         await this.loadFeuerwehren();
+    }
+
+    public async saveOrCreatePerson(person: IPerson): Promise<void>
+    {
+        await this.database.transaction('rw', this.database.personen, async () =>
+        {
+            person.id = await this.database.personen.put(person);
+        });
+        await this.loadPersonen();
+    }
+
+    public async removePerson(person: IPerson): Promise<void>
+    {
+        await this.database.personen.delete(person.id);
+        await this.loadPersonen();
+    }
+
+    public compareById(a, b)
+    {
+        return a && b ? a.id === b.id : a === b;
     }
 }

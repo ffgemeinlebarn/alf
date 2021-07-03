@@ -36,8 +36,8 @@
             <mat-card-content>
                 <mat-form-field>
                     <mat-label>Personen</mat-label>
-                    <mat-select [(ngModel)]="newEreignis.personen" [compareWith]="personen.comparePersonen" multiple>
-                        <mat-option *ngFor="let person of allPersonen" [value]="person">{{ person.vorname }} {{ person.nachname }}</mat-option>
+                    <mat-select [(ngModel)]="newEreignis.personen" [compareWith]="stammdaten.compareById" multiple>
+                        <mat-option *ngFor="let person of stammdaten.personen" [value]="person">{{ person.vorname }} {{ person.nachname }}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </mat-card-content>

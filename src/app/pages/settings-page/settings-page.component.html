@@ -19,9 +19,5 @@
             <input matInput placeholder="URL zum Sync-Service" [(ngModel)]="settings.syncUrl">
         </mat-form-field>
     </div>
-</mat-card>
-
-<mat-card>
-    <h2>Füllpersonal <button mat-raised-button (click)="addPerson()" color="primary">hinzufügen</button></h2>
-    <mat-card *ngFor="let person of personen" (click)="editPerson(person)" matRipple>{{ person.vorname }} {{ person.nachname }}</mat-card>
+    <p>Stand des MAT Sync Datensatzes: {{ settings.syncLastEdit }}</p>
 </mat-card>

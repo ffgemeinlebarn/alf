@@ -5,7 +5,7 @@ import { IEreignis } from 'src/app/shared/interfaces/i-ereignis';
 import { IPerson } from 'src/app/shared/interfaces/i-person';
 import { EreignisseService } from 'src/app/shared/services/ereignisse/ereignisse.service';
 import { OperatingService } from 'src/app/shared/services/operating/operating.service';
-import { PersonenService } from 'src/app/shared/services/personen/personen.service';
+import { StammdatenService } from 'src/app/shared/services/stammdaten/stammdaten.service';
 
 @Component({
     selector: 'ffg-start-page',
@@ -19,7 +19,7 @@ export class StartPageComponent implements OnInit
     public allEreignisse: Array<IEreignis> = [];
     public allPersonen: Array<IPerson> = [];
 
-    constructor(private router: Router, private ereignisse: EreignisseService, public operating: OperatingService, public personen: PersonenService) { }
+    constructor(private router: Router, private ereignisse: EreignisseService, public operating: OperatingService, public stammdaten: StammdatenService) { }
 
     public async ngOnInit(): Promise<void>
     {
@@ -28,7 +28,6 @@ export class StartPageComponent implements OnInit
             datetimeStart: new Date()
         };
         this.allEreignisse = await (await this.ereignisse.getAll()).reverse();
-        this.allPersonen = await this.personen.getAll();
         this.selectedEreignisId = this.allEreignisse[0]?.id ?? null;
 
         if (await this.operating.checkIfOpenEreignisExist())

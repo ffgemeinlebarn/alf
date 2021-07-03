@@ -32,7 +32,7 @@ export class OperatingService
         public dialog: MatDialog,
         private router: Router,
         private ereignisse: EreignisseService,
-        private snackbar: MatSnackBar
+        private snackBar: MatSnackBar
     )
     {
         document.body.addEventListener('keydown', event => this.onScannerInputEnter(event));
@@ -51,7 +51,7 @@ export class OperatingService
             // Enter
             if (event.key === 'Enter' && this.barcodeInputBuffer.length >= this.minBarcodeZeichen)
             {
-                this.snackbar.open(`Barcodeeingabe erkannt: ${this.barcodeInputBuffer}`, null, { duration: 1000 });
+                this.snackBar.open(`Barcodeeingabe erkannt: ${this.barcodeInputBuffer}`, null, { duration: 1000 });
 
                 this.addFuellungByBarcode(this.barcodeInputBuffer);
                 this.barcodeInputBuffer = '';
@@ -110,8 +110,15 @@ export class OperatingService
 
     public async addFuellungByBarcode(barcode: string)
     {
-        const flasche = this.stammdaten.getFlascheByBarcode(barcode);
-        await this.addFuellung(flasche);
+        try
+        {
+            const flasche = this.stammdaten.getFlascheByBarcode(barcode);
+            await this.addFuellung(flasche);
+        }
+        catch (error)
+        {
+            this.snackBar.open(error, null, { duration: 3000 });
+        }
     }
 
     public async addFuellung(flasche: IFlasche)
@@ -149,18 +156,18 @@ export class OperatingService
         {
             this.ereignis.fuellungen.splice(index, 1);
             this.saveEreignis();
-            this.snackbar.open(`Füllung entfernt!`, null, { duration: 3000 });
+            this.snackBar.open(`Füllung entfernt!`, null, { duration: 3000 });
         }
         else
         {
-            this.snackbar.open(`Füllung konnte nicht entfernt werden!`, null, { duration: 3000 });
+            this.snackBar.open(`Füllung konnte nicht entfernt werden!`, null, { duration: 3000 });
         }
     }
 
     public setEreignisAnzahlFeuerwehren()
     {
         const ids = [];
-        this.ereignis?.fuellungen.forEach((fuellung) => { if (ids.indexOf(fuellung?.flasche?.feuerwehr?.id) === -1) ids.push(fuellung?.flasche?.feuerwehr?.id); });
+        this.ereignis?.fuellungen.forEach((fuellung) => { if (ids.indexOf(fuellung?.flasche?.feuerwehr?.feuerwehrNummer) === -1) ids.push(fuellung?.flasche?.feuerwehr?.feuerwehrNummer); });
         this.ereignisAnzahlFeuerwehren = ids.length;
     }
 
