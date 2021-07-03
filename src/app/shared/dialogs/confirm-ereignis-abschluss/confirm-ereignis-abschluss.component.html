@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Ereignis abschließen</h1>
+<div class="content" mat-dialog-content>
+
+    <h2>Nach dem Abschließen eines Ereignisses kann nur mehr wenig bearbeitet werden!</h2>
+
+    <p>Daher sind vor allem folgende Dinge wichtig:</p>
+    <ul>
+        <li>Sind alle Flaschen gefüllt?</li>
+        <li>Sind Datum, Ort und Füllpersonal korrekt erfasst?</li>
+        <li>Sind der Gesamtbericht für die Füllstelle und alle Einzelberichte für die Feuerwehren gedruckt?</li>
+    </ul>
+
+    <button mat-button class="confirm" (click)="confirm()">
+        <mat-icon>check_circle</mat-icon>
+        Ereignis abschließen
+    </button>
+    <button mat-button class="close" (click)="close()">
+        Zurück
+    </button>
+</div>

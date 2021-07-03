@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Feuerwehr entfernen</h2>
+
+<div mat-dialog-content>
+    <p><strong>Soll die Feuerwehr {{ feuerwehr.name }} wirklich entfernt werden?</strong></p>
+    <p>Die Feuerwehr und die dazugehörigen Flaschen werden aus den Stammdaten entfernt und stehen ab diesem Zeitpunkt nicht mehr zur Füllung zur Verfügung!</p>
+</div>
+
+<div class="actions" mat-dialog-actions>
+    <button mat-button (click)="close()">Abbrechen</button>
+    <button mat-raised-button color="warn" (click)="remove()">Entfernen</button>
+</div>

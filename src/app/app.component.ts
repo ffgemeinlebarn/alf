@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { OperatingService } from './shared/services/operating/operating.service';
+import { SettingsService } from './shared/services/settings/settings.service';
+import { StammdatenService } from './shared/services/stammdaten/stammdaten.service';
+import { SyncService } from './shared/services/sync/sync.service';
 
 @Component({
     selector: 'ffg-root',
@@ -9,5 +10,8 @@ import { OperatingService } from './shared/services/operating/operating.service'
 })
 export class AppComponent
 {
-    constructor() { }
+    constructor(public settings: SettingsService, public sync: SyncService, public stammdaten: StammdatenService)
+    {
+        this.sync.syncSavedFeuerwehren();
+    }
 }

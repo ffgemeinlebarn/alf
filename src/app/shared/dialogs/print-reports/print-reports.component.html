@@ -55,24 +55,31 @@
                     <h2>Füllungen</h2>
 
                     <div class="fuellung" *ngFor="let feuerwehr of report.data">
-                        <h3>{{ feuerwehr.prefix }} {{ feuerwehr.name }}</h3>
+                        <h3>{{ feuerwehr.name }}</h3>
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Datum & Uhrzeit</th>
+                                    <th>Datum</th>
                                     <th>Feuerwehr</th>
-                                    <th>LFNR</th>
-                                    <th>Barcode</th>
-                                    <th>Druck</th>
+                                    <th>Flasche</th>
+                                    <th>Type</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let fuellung of feuerwehr.fuellungen">
-                                    <td>{{ fuellung.datetime | date: 'dd.MM.yyyy HH:mm' }} Uhr</td>
-                                    <td>{{ fuellung.flasche.feuerwehr.prefix }} {{ fuellung.flasche.feuerwehr.name }}</td>
-                                    <td>{{ fuellung.flasche.laufnummer }}</td>
-                                    <td>{{ fuellung.flasche.barcode }}</td>
-                                    <td>{{ fuellung.flasche.druck }} Bar</td>
+                                    <td>
+                                        {{ fuellung.datetime | date: 'dd.MM.yyyy' }}<br />
+                                        {{ fuellung.datetime | date: 'HH:mm' }} Uhr
+                                    </td>
+                                    <td>{{ fuellung.flasche.feuerwehr.name }}</td>
+                                    <td>
+                                        {{ fuellung.flasche.karteiNr }} (Code: {{ fuellung.flasche.barcode }})<br />
+                                        Flaschen Nr.: {{ fuellung.flasche.flaschennummer }}
+                                    </td>
+                                    <td>
+                                        {{ fuellung.flasche.typenBezeichnung }}<br />
+                                        ({{ fuellung.flasche.typenInfo1 }} {{ fuellung.flasche.typenInfo2 }} {{ fuellung.flasche.typenInfo3 }})
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

@@ -20,22 +20,26 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRippleModule } from '@angular/material/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { FeuerwehrenService } from './services/feuerwehren/feuerwehren.service';
 import { FuellungItemComponent } from './components/fuellung-item/fuellung-item.component';
-import { EditFeuerwehrComponent } from './dialogs/edit-feuerwehr/edit-feuerwehr.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { EditFlascheComponent } from './dialogs/edit-flasche/edit-flasche.component';
 import { SearchFlascheComponent } from './dialogs/search-flasche/search-flasche.component';
 import { PrintReportsComponent } from './dialogs/print-reports/print-reports.component';
 import { EditEreignisComponent } from './dialogs/edit-ereignis/edit-ereignis.component';
 import { AddMangelComponent } from './dialogs/add-mangel/add-mangel.component';
-import { ConfirmFlascheWithMangelComponent } from './dialogs/confirm-flasche-with-mangel/confirm-flasche-with-mangel.component';
 import { EditPersonComponent } from './dialogs/edit-person/edit-person.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ConfirmFuellungComponent } from './dialogs/confirm-fuellung/confirm-fuellung.component';
+import { ConfirmEreignisAbschlussComponent } from './dialogs/confirm-ereignis-abschluss/confirm-ereignis-abschluss.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { RemoveFuellungComponent } from './dialogs/remove-fuellung/remove-fuellung.component';
+import { RemoveFeuerwehrComponent } from './dialogs/remove-feuerwehr/remove-feuerwehr.component';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
+        HttpClientModule,
         ReactiveFormsModule,
         MatButtonModule,
         MatMenuModule,
@@ -56,7 +60,9 @@ import { EditPersonComponent } from './dialogs/edit-person/edit-person.component
         MatRippleModule,
         MatExpansionModule,
         MatSlideToggleModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatProgressSpinnerModule,
+        MatSnackBarModule
     ],
     exports: [
         MatButtonModule,
@@ -79,21 +85,22 @@ import { EditPersonComponent } from './dialogs/edit-person/edit-person.component
         MatExpansionModule,
         FuellungItemComponent,
         MatSlideToggleModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatProgressSpinnerModule,
+        MatSnackBarModule
     ],
-    providers: [
-        FeuerwehrenService
-    ],
+    providers: [],
     declarations: [
         FuellungItemComponent,
-        EditFeuerwehrComponent,
-        EditFlascheComponent,
         SearchFlascheComponent,
         PrintReportsComponent,
         EditEreignisComponent,
         AddMangelComponent,
-        ConfirmFlascheWithMangelComponent,
-        EditPersonComponent
+        EditPersonComponent,
+        ConfirmFuellungComponent,
+        ConfirmEreignisAbschlussComponent,
+        RemoveFuellungComponent,
+        RemoveFeuerwehrComponent
     ]
 })
 export class SharedModule { }

@@ -1,10 +1,9 @@
 import { Component, ElementRef, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EreignisType } from '../../enums/ereignis-type';
-import { Ereignis } from '../../models/ereignis/ereignis';
 import { EreignisseService } from '../../services/ereignisse/ereignisse.service';
 import { ViewChild } from '@angular/core';
-import { MatSelectionListChange } from '@angular/material/list';
+import { IEreignis } from '../../interfaces/i-ereignis';
 
 @Component({
     selector: 'ffg-print-reports',
@@ -27,7 +26,7 @@ export class PrintReportsComponent implements OnInit
     constructor(
         public window: Window,
         public dialog: MatDialogRef<PrintReportsComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: Ereignis,
+        @Inject(MAT_DIALOG_DATA) public data: IEreignis,
         public ereignisse: EreignisseService
     ) { }
 
@@ -37,13 +36,13 @@ export class PrintReportsComponent implements OnInit
 
         this.data.fuellungen.forEach((fuellung) =>
         {
-            if (!this.fuellungenPerFeuerwehr.find(ff => ff.id === fuellung.flasche.feuerwehr.id))
+            if (!this.fuellungenPerFeuerwehr.find(ff => ff.feuerwehrNummer === fuellung.flasche.feuerwehr.feuerwehrNummer))
             {
                 this.fuellungenPerFeuerwehr.push(fuellung.flasche.feuerwehr);
             }
         });
 
-        this.fuellungenPerFeuerwehr.forEach(feuerwehr => feuerwehr.fuellungen = this.data.fuellungen.filter(fuellung => fuellung.flasche.feuerwehr.id === feuerwehr.id));
+        this.fuellungenPerFeuerwehr.forEach(feuerwehr => feuerwehr.fuellungen = this.data.fuellungen.filter(fuellung => fuellung.flasche.feuerwehr.feuerwehrNummer === feuerwehr.feuerwehrNummer));
 
         this.reports = [
             {
@@ -57,7 +56,7 @@ export class PrintReportsComponent implements OnInit
         this.fuellungenPerFeuerwehr.forEach(feuerwehr =>
         {
             this.reports.push({
-                name: `Bericht für die ${feuerwehr.prefix} ${feuerwehr.name}`,
+                name: `Bericht für die Feuerwehr ${feuerwehr.name}`,
                 type: 'feuerwehr',
                 data: [feuerwehr],
                 print: true
@@ -72,8 +71,6 @@ export class PrintReportsComponent implements OnInit
 
     public print()
     {
-        console.log(this.reports);
-
         this.window.document.body.innerHTML = this.printElement.nativeElement.innerHTML;
         this.window.print();
         this.window.location.reload();

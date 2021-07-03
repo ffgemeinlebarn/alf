@@ -1,3 +1,15 @@
+<div class="progress" *ngIf="sync.progressActive">
+    <mat-spinner></mat-spinner>
+    <h2>{{ sync.progressMessage }}</h2>
+</div>
+
+<mat-toolbar color="warn" *ngIf="settings.testMode">
+    <mat-toolbar-row>
+        <h3>Der Testmodus ist aktiviert! Die Daten sind nicht produktiv, es kannn alles ausprobiert werden!</h3>
+        <span class="toolbar-spacer"></span>
+        <button mat-raised-button [routerLink]="['/settings']">Testmodus in den Einstellungen deaktivieren</button>
+    </mat-toolbar-row>
+</mat-toolbar>
 <mat-toolbar color="primary">
     <mat-toolbar-row>
         <svg class="logo" [routerLink]="['/']" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 422.39 112.71">
@@ -19,7 +31,7 @@
         </button>
         <button mat-button [routerLink]="['/verwaltung']">
             <mat-icon>list</mat-icon>
-            Feuerwehren & Flaschen verwalten
+            Feuerwehren, Flaschen & Füllpersonal verwalten
         </button>
         <!-- <button mat-button [routerLink]="['/statistics']">
             <mat-icon>show_chart</mat-icon>

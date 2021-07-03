@@ -1,12 +1,12 @@
-<h1 mat-dialog-title>{{ data.vorname }} {{ data.nachname }}</h1>
+<h1 mat-dialog-title>{{ person.vorname }} {{ person.nachname }}</h1>
 <div class="content" mat-dialog-content>
     <mat-form-field appearance="fill">
         <mat-label>Vorname</mat-label>
-        <input type="text" matInput [(ngModel)]="data.vorname">
+        <input type="text" matInput [(ngModel)]="person.vorname">
     </mat-form-field>
     <mat-form-field appearance="fill">
         <mat-label>Nachname</mat-label>
-        <input type="text" matInput [(ngModel)]="data.nachname">
+        <input type="text" matInput [(ngModel)]="person.nachname">
     </mat-form-field>
 </div>
 <div mat-dialog-actions>

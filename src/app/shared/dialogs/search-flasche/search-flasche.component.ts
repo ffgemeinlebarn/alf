@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Feuerwehr } from '../../models/feuerwehr/feuerwehr';
-import { FeuerwehrenService } from '../../services/feuerwehren/feuerwehren.service';
+import { IFeuerwehr } from '../../interfaces/i-feuerwehr';
+import { IFlasche } from '../../interfaces/i-flasche';
 import { OperatingService } from '../../services/operating/operating.service';
+import { StammdatenService } from '../../services/stammdaten/stammdaten.service';
 
 @Component({
     selector: 'ffg-search-flasche',
@@ -11,28 +12,23 @@ import { OperatingService } from '../../services/operating/operating.service';
 })
 export class SearchFlascheComponent implements OnInit
 {
-    public feuerwehren: Array<Feuerwehr> = [];
-    public selectedFeuerwehr: Feuerwehr;
-    public selectedflascheId: number;
+    public selectedFeuerwehr: IFeuerwehr;
+    public selectedFlasche: IFlasche;
 
     constructor(
         public dialog: MatDialogRef<SearchFlascheComponent>,
-        public feuerwehrenService: FeuerwehrenService,
+        public stammdaten: StammdatenService,
         private operating: OperatingService
     ) { }
     public ngOnInit(): void
     {
-        this.feuerwehrenService.getAll().then(feuerwehren =>
-        {
-            this.feuerwehren = feuerwehren;
-            this.selectedFeuerwehr = this.feuerwehren[0];
-            this.feuerwehreChanged();
-        });
+        this.selectedFeuerwehr = this.stammdaten.feuerwehren[0];
+        this.feuerwehrChanged();
     }
 
-    public feuerwehreChanged()
+    public feuerwehrChanged()
     {
-        this.selectedflascheId = this.selectedFeuerwehr?.flaschen[0]?.id;
+        this.selectedFlasche = this.selectedFeuerwehr?.flaschen[0];
     }
 
     public close(): void
@@ -42,7 +38,7 @@ export class SearchFlascheComponent implements OnInit
 
     public async add(): Promise<void>
     {
-        await this.operating.addFuellungById(this.selectedflascheId);
+        this.operating.addFuellung(this.selectedFlasche);
         this.dialog.close();
     }
 }

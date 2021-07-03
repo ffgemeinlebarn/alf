@@ -1,32 +1,42 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
     providedIn: 'root'
 })
 export class SettingsService
 {
-    constructor()
+    constructor(public snackBar: MatSnackBar)
     {
         this.loadAll();
     }
 
     public testMode = false;
-    public barcodeScannerStartSequenz = '';
+    public syncUrl = '';
+    public syncLastEdit = '';
 
     public loadAll()
     {
         this.testMode = this.readBoolean('testMode');
-        this.barcodeScannerStartSequenz = this.readString('barcodeScannerStartSequenz');
+        this.syncUrl = this.readString('syncUrl');
+        this.syncLastEdit = this.readString('syncLastEdit');
     }
 
     public saveAll()
     {
         this.writeTestMode();
-        this.writeBarcodeScannerStartSequenz();
+        this.writeSyncURL();
+        this.snackBar.open('Die Einstellungen wurden gespeichert!', null, { duration: 1000 });
     }
 
     public writeTestMode = () => this.write('testMode', this.testMode);
-    public writeBarcodeScannerStartSequenz = () => this.write('barcodeScannerStartSequenz', this.barcodeScannerStartSequenz);
+    public writeSyncURL = () => this.write('syncUrl', this.syncUrl);
+
+    public writeSyncLastEdit = (lastEdit: string) =>
+    {
+        this.syncLastEdit = lastEdit;
+        this.write('syncLastEdit', this.syncLastEdit);
+    }
 
     private write(key: string, value: any)
     {
@@ -43,6 +53,6 @@ export class SettingsService
 
     private readString(key: string): string
     {
-        return localStorage.getItem(key);
+        return localStorage.getItem(key).toString();
     }
 }

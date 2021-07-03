@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 
 import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
@@ -30,13 +30,12 @@ import { environment } from '../environments/environment';
     imports: [
         SharedModule,
         BrowserModule,
+        HammerModule,
         AppRoutingModule,
         BrowserAnimationsModule,
         FormsModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
             enabled: environment.production,
-            // Register the ServiceWorker as soon as the app is stable
-            // or after 30 seconds (whichever comes first).
             registrationStrategy: 'registerWhenStable:30000'
         })
     ],

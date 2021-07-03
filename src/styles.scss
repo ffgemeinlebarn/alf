@@ -80,7 +80,7 @@ h1.page-title {
     p,
     th,
     td {
-        font-size: 3.5mm;
+        font-size: 3.1mm;
     }
 
     table {
@@ -155,27 +155,22 @@ h1.page-title {
 
                     th:nth-child(1),
                     td:nth-child(1) {
-                        width: 50mm;
+                        width: 25mm;
                     }
 
                     th:nth-child(2),
                     td:nth-child(2) {
-                        width: 50mm;
+                        width: 32mm;
                     }
 
                     th:nth-child(3),
                     td:nth-child(3) {
-                        width: 15mm;
+                        width: 58mm;
                     }
 
                     th:nth-child(4),
                     td:nth-child(4) {
-                        width: 30mm;
-                    }
-
-                    th:nth-child(5),
-                    td:nth-child(5) {
-                        width: 25mm;
+                        width: 65mm;
                     }
                 }
             }

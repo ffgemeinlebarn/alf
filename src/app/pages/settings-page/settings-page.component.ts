@@ -1,35 +1,73 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { EditPersonComponent } from 'src/app/shared/dialogs/edit-person/edit-person.component';
-import { Person } from 'src/app/shared/models/person/person';
-import { PersonenService } from 'src/app/shared/services/personen/personen.service';
+import { IEreignis } from 'src/app/shared/interfaces/i-ereignis';
+import { IFuellung } from 'src/app/shared/interfaces/i-fuellung';
+import { DatabaseService } from 'src/app/shared/services/database/database.service';
+import { EreignisseService } from 'src/app/shared/services/ereignisse/ereignisse.service';
+import { OperatingService } from 'src/app/shared/services/operating/operating.service';
 import { SettingsService } from 'src/app/shared/services/settings/settings.service';
+import { StammdatenService } from 'src/app/shared/services/stammdaten/stammdaten.service';
 
 @Component({
     selector: 'ffg-settings-page',
     templateUrl: './settings-page.component.html',
     styleUrls: ['./settings-page.component.scss']
 })
-export class SettingsPageComponent implements OnInit
+export class SettingsPageComponent implements OnInit, OnDestroy
 {
-    public personen: Array<Person> = [];
+    public showTestmodusSetting = true;
+    public importData = '[]';
 
-    constructor(public settings: SettingsService, private personenServerice: PersonenService, public dialog: MatDialog) { }
+    constructor(public settings: SettingsService, public dialog: MatDialog, public ereignisse: EreignisseService, public operating: OperatingService, private database: DatabaseService, public stammdaten: StammdatenService) { }
 
     public async ngOnInit(): Promise<void>
     {
-        this.personen = await this.personenServerice.getAll();
+        this.showTestmodusSetting = await this.operating.checkIfOpenEreignisExist() === false;
     }
 
-    public addPerson()
+    public async ngOnDestroy(): Promise<void>
     {
-        const dialog = this.dialog.open(EditPersonComponent, { width: '500px', data: new Person('', '') });
-        dialog.afterClosed().subscribe(result => this.ngOnInit());
+        this.settings.loadAll();
     }
 
-    public editPerson(person: Person)
+    public async save()
     {
-        const dialog = this.dialog.open(EditPersonComponent, { width: '500px', data: person });
-        dialog.afterClosed().subscribe(result => this.ngOnInit());
+        this.settings.saveAll();
+        await this.database.refresh();
+        await this.stammdaten.reload();
+        await this.ereignisse.loadList();
+    }
+
+    public async import()
+    {
+        const arr = JSON.parse(this.importData);
+
+        arr.forEach(async (ereignis) =>
+        {
+            console.log('Importiere Ereignis', ereignis.type, ereignis.ort);
+
+            const newEreignis: IEreignis = {
+                ort: ereignis.ort,
+                type: ereignis.type,
+                datetimeStart: new Date(ereignis.datetimeStart),
+                datetimeEnd: new Date(ereignis.datetimeEnd)
+            };
+
+            newEreignis.id = await this.ereignisse.saveOrCreate(newEreignis);
+
+            ereignis.fuellungen.forEach((fuellung) =>
+            {
+                const flasche = this.stammdaten.getFlascheByBarcode(fuellung.flaschenBarcode);
+                const newFuellung: IFuellung = {
+                    datetime: new Date(fuellung.datetime),
+                    flasche
+                };
+
+                newEreignis.fuellungen.push(newFuellung);
+            });
+
+            await this.ereignisse.saveOrCreate(newEreignis);
+
+        });
     }
 }

@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Füllung entfernen</h1>
+<div class="content" mat-dialog-content>
+
+    <p matLine>Feuerwehr: {{ fuellung.flasche.feuerwehr.name }}</p>
+    <p matLine>
+        Flasche:
+        <span>Nr. {{ fuellung?.flasche.karteiNr }} ({{ fuellung?.flasche.typenBezeichnung }})</span>
+        <span> | </span>
+        <span>Barcode: {{ fuellung?.flasche.barcode }}</span>
+    </p>
+    <p matLine>Füllzeitpunkt: {{ fuellung.datetime | date: 'HH:mm:ss' }} Uhr</p>
+
+    <button mat-button class="confirm" (click)="remove()">
+        <mat-icon>delete</mat-icon>
+        Füllung löschen
+    </button>
+    <button mat-button class="close" (click)="close()">
+        Zurück
+    </button>
+</div>

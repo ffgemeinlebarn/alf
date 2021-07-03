@@ -1,5 +1,5 @@
 <h1 class="page-title">Ereignisse</h1>
-<mat-expansion-panel *ngFor="let ereignis of ereignisse">
+<mat-expansion-panel *ngFor="let ereignis of ereignisse.list">
 
     <mat-expansion-panel-header>
         <mat-panel-title>{{ ereignis?.type == EreignisType.Uebung ? 'Übung' : 'Einsatz' }}{{ ereignis?.ort ? ' in '+ ereignis?.ort : '' }}</mat-panel-title>
