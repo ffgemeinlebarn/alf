@@ -3,10 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AddMangelComponent } from 'src/app/shared/dialogs/add-mangel/add-mangel.component';
 import { ConfirmEreignisAbschlussComponent } from 'src/app/shared/dialogs/confirm-ereignis-abschluss/confirm-ereignis-abschluss.component';
-import { ConfirmFuellungComponent } from 'src/app/shared/dialogs/confirm-fuellung/confirm-fuellung.component';
 import { EditEreignisComponent } from 'src/app/shared/dialogs/edit-ereignis/edit-ereignis.component';
 import { PrintReportsComponent } from 'src/app/shared/dialogs/print-reports/print-reports.component';
+import { RemoveFuellungComponent } from 'src/app/shared/dialogs/remove-fuellung/remove-fuellung.component';
 import { SearchFlascheComponent } from 'src/app/shared/dialogs/search-flasche/search-flasche.component';
+import { IFuellung } from 'src/app/shared/interfaces/i-fuellung';
 import { ReportingService } from 'src/app/shared/services/reporting/reporting.service';
 import { OperatingService } from '../../shared/services/operating/operating.service';
 import { TimingService } from '../../shared/services/timing/timing.service';
@@ -66,6 +67,11 @@ export class OperatingPageComponent implements OnInit
         {
             this.operating.reloadEreignis(this.operating.ereignis.id);
         });
+    }
+
+    public async openFuellungContext(fuellung: IFuellung)
+    {
+        this.dialog.open(RemoveFuellungComponent, { width: '500px', data: fuellung });
     }
 
     public async openPrintReportings()

@@ -85,7 +85,7 @@
                 <div class="card-wrapper">
                     <mat-card-title>Zuletzt gefüllte Flaschen</mat-card-title>
                     <mat-list class="fuellungen">
-                        <ffg-fuellung-item *ngFor="let fuellung of operating.ereignis?.fuellungen" [fuellung]="fuellung"></ffg-fuellung-item>
+                        <ffg-fuellung-item *ngFor="let fuellung of operating.ereignis?.fuellungen" [fuellung]="fuellung" (press)="openFuellungContext(fuellung)"></ffg-fuellung-item>
                     </mat-list>
                 </div>
             </mat-card>

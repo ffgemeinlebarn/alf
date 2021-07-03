@@ -1,3 +1,8 @@
+<div class="progress" *ngIf="sync.progressActive">
+    <mat-spinner></mat-spinner>
+    <h2>{{ sync.progressMessage }}</h2>
+</div>
+
 <mat-toolbar color="warn" *ngIf="settings.testMode">
     <mat-toolbar-row>
         <h3>Der Testmodus ist aktiviert! Die Daten sind nicht produktiv, es kannn alles ausprobiert werden!</h3>

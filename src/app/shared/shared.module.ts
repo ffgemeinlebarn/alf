@@ -30,6 +30,10 @@ import { EditPersonComponent } from './dialogs/edit-person/edit-person.component
 import { HttpClientModule } from '@angular/common/http';
 import { ConfirmFuellungComponent } from './dialogs/confirm-fuellung/confirm-fuellung.component';
 import { ConfirmEreignisAbschlussComponent } from './dialogs/confirm-ereignis-abschluss/confirm-ereignis-abschluss.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { RemoveFuellungComponent } from './dialogs/remove-fuellung/remove-fuellung.component';
+import { RemoveFeuerwehrComponent } from './dialogs/remove-feuerwehr/remove-feuerwehr.component';
 
 @NgModule({
     imports: [
@@ -56,7 +60,9 @@ import { ConfirmEreignisAbschlussComponent } from './dialogs/confirm-ereignis-ab
         MatRippleModule,
         MatExpansionModule,
         MatSlideToggleModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatProgressSpinnerModule,
+        MatSnackBarModule
     ],
     exports: [
         MatButtonModule,
@@ -79,7 +85,9 @@ import { ConfirmEreignisAbschlussComponent } from './dialogs/confirm-ereignis-ab
         MatExpansionModule,
         FuellungItemComponent,
         MatSlideToggleModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatProgressSpinnerModule,
+        MatSnackBarModule
     ],
     providers: [],
     declarations: [
@@ -90,7 +98,9 @@ import { ConfirmEreignisAbschlussComponent } from './dialogs/confirm-ereignis-ab
         AddMangelComponent,
         EditPersonComponent,
         ConfirmFuellungComponent,
-        ConfirmEreignisAbschlussComponent
+        ConfirmEreignisAbschlussComponent,
+        RemoveFuellungComponent,
+        RemoveFeuerwehrComponent
     ]
 })
 export class SharedModule { }

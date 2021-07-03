@@ -21,12 +21,6 @@
     </div>
 </mat-card>
 
-<!-- <mat-card>
-    <mat-form-field>
-        <input matInput placeholder="Barcode Scanner Start Sequenz" [(ngModel)]="settings.barcodeScannerStartSequenz">
-    </mat-form-field>
-</mat-card> -->
-
 <mat-card>
     <h2>Füllpersonal <button mat-raised-button (click)="addPerson()" color="primary">hinzufügen</button></h2>
     <mat-card *ngFor="let person of personen" (click)="editPerson(person)" matRipple>{{ person.vorname }} {{ person.nachname }}</mat-card>

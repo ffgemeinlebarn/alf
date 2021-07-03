@@ -3,6 +3,7 @@ import { IFeuerwehr } from '../../interfaces/i-feuerwehr';
 import { IFlasche } from '../../interfaces/i-flasche';
 import { IPerson } from '../../interfaces/i-person';
 import { DatabaseService } from '../database/database.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
     providedIn: 'root'
@@ -10,10 +11,9 @@ import { DatabaseService } from '../database/database.service';
 export class StammdatenService
 {
     public feuerwehren: Array<IFeuerwehr> = [];
-    public flaschen: Array<IFlasche> = [];
     public personen: Array<IPerson> = [];
 
-    constructor(private database: DatabaseService)
+    constructor(private database: DatabaseService, private snackBar: MatSnackBar)
     {
         this.reload();
     }
@@ -21,7 +21,7 @@ export class StammdatenService
     public async reload()
     {
         this.loadFeuerwehren()
-            .then(_ => this.loadFlaschen())
+            .then(_ => this.snackBar.open('Stammdaten geladen', null, { duration: 3000 }))
             .then(_ => console.log('Stammdaten geladen'));
 
         this.loadPersonen();
@@ -33,20 +33,6 @@ export class StammdatenService
             .sort((a, b) => a.feuerwehrNummer - b.feuerwehrNummer);
     }
 
-    public loadFlaschen(): void
-    {
-        this.feuerwehren.forEach(feuerwehr =>
-        {
-            const flaschen = feuerwehr.flaschen;
-            flaschen.map((flasche) => flasche.feuerwehr = {
-                feuerwehrNummer: feuerwehr.feuerwehrNummer,
-                eigentuemerId: feuerwehr.eigentuemerId,
-                name: feuerwehr.name
-            });
-            this.flaschen = this.flaschen.concat(flaschen);
-        });
-    }
-
     public async loadPersonen(): Promise<void>
     {
         this.personen = await this.database.personen?.toArray();
@@ -54,7 +40,8 @@ export class StammdatenService
 
     public getFlascheByBarcode(barcode: string): IFlasche
     {
-        const result = this.flaschen.filter(flasche => flasche.barcode === barcode);
+        let result = [];
+        this.feuerwehren.forEach((feuerwehr) => result = result.concat(feuerwehr.flaschen.filter(flasche => flasche.barcode === barcode)));
 
         if (result.length === 0)
             throw new Error(`Keine Flasche für den Barcode ${barcode} gefunden!`);
@@ -63,5 +50,11 @@ export class StammdatenService
             throw new Error(`Der Barcode ${barcode} ist nicht eindeutig. Es wurden ${result.length} Flaschen gefunden!`);
 
         return result[0];
+    }
+
+    public async removeFeuerwehr(feuerwehr: IFeuerwehr): Promise<void>
+    {
+        await this.database.feuerwehren.delete(feuerwehr.feuerwehrNummer);
+        await this.loadFeuerwehren();
     }
 }

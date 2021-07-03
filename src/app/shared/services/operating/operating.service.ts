@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ConfirmFuellungComponent } from '../../dialogs/confirm-fuellung/confirm-fuellung.component';
 import { IEreignis } from '../../interfaces/i-ereignis';
@@ -30,7 +31,8 @@ export class OperatingService
         public timing: TimingService,
         public dialog: MatDialog,
         private router: Router,
-        private ereignisse: EreignisseService
+        private ereignisse: EreignisseService,
+        private snackbar: MatSnackBar
     )
     {
         document.body.addEventListener('keydown', event => this.onScannerInputEnter(event));
@@ -38,7 +40,7 @@ export class OperatingService
 
     private onScannerInputEnter(event)
     {
-        if (this.barcodeInputActive)
+        if (this.barcodeInputActive && this.ereignis)
         {
             // Number Input
             if (event.key !== 'Enter' && this.isDigit(event.key))
@@ -49,8 +51,9 @@ export class OperatingService
             // Enter
             if (event.key === 'Enter' && this.barcodeInputBuffer.length >= this.minBarcodeZeichen)
             {
-                this.addFuellungByBarcode(this.barcodeInputBuffer);
+                this.snackbar.open(`Barcodeeingabe erkannt: ${this.barcodeInputBuffer}`, null, { duration: 1000 });
 
+                this.addFuellungByBarcode(this.barcodeInputBuffer);
                 this.barcodeInputBuffer = '';
             }
 
@@ -138,6 +141,21 @@ export class OperatingService
         }
     }
 
+    public removeFuellung(fuellung: IFuellung)
+    {
+        const index = this.ereignis.fuellungen.findIndex((fl) => fl === fuellung);
+
+        if (index >= 0)
+        {
+            this.ereignis.fuellungen.splice(index, 1);
+            this.saveEreignis();
+            this.snackbar.open(`Füllung entfernt!`, null, { duration: 3000 });
+        }
+        else
+        {
+            this.snackbar.open(`Füllung konnte nicht entfernt werden!`, null, { duration: 3000 });
+        }
+    }
 
     public setEreignisAnzahlFeuerwehren()
     {

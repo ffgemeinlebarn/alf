@@ -1,5 +1,4 @@
 import { IFeuerwehr } from './i-feuerwehr';
-import { IMangel } from './i-mangel';
 
 export interface IFlasche
 {
@@ -14,6 +13,7 @@ export interface IFlasche
     typenInfo1?: string;
     typenInfo2?: string;
     typenInfo3?: string;
+    lastEdit?: Date | string;
 
     feuerwehr?: IFeuerwehr;
 }
