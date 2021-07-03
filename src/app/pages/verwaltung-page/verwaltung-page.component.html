@@ -1,18 +1,37 @@
 <div class="maengel">
     <h1 class="page-title">Offene Mängel</h1>
+    <p>Implementierung ausständig</p>
 </div>
 <div class="feuerwehren">
     <h1 class="page-title">Synchronisierte Feuerwehren & Flaschen</h1>
 
-    <input type="number" [(ngModel)]="feuerwehrNummerToSync">
-    <button mat-raised-button (click)="sync.syncFlaschenOfFeuerwehr(feuerwehrNummerToSync)">Synchroniserung</button>
+    <mat-card class="feuerwehrAddToSync">
+        <h3>Feuerwehr zur Synchronisierung hinzufügen</h3>
+        <mat-form-field appearance="fill">
+            <mat-label>Feuerwehrnummer</mat-label>
+            <input matInput placeholder="Feuerwehrnummer" [(ngModel)]="feuerwehrNummerToSync">
+        </mat-form-field>
+        <div>
+            <button mat-raised-button color="primary" (click)="addToSync(feuerwehrNummerToSync)">Zur Synchroniserung hinzufügen</button>
+        </div>
+    </mat-card>
 
     <mat-expansion-panel *ngFor="let feuerwehr of stammdaten.feuerwehren">
         <mat-expansion-panel-header>
             <mat-panel-title>{{feuerwehr.feuerwehrNummer}} - {{feuerwehr.name}}</mat-panel-title>
-            <mat-panel-description>{{ feuerwehr.flaschen.length }} Flaschen</mat-panel-description>
+            <mat-panel-description>
+                <span>{{ feuerwehr.flaschen.length }} Flaschen</span>
+            </mat-panel-description>
         </mat-expansion-panel-header>
 
+        <div class="buttons">
+            <button mat-raised-button color="light" (click)="openRemoveFeuerwehr(feuerwehr)">
+                <mat-icon>delete</mat-icon>
+                Feuerwehr entfernen
+            </button>
+        </div>
+
+        <h2>Flaschen</h2>
         <table mat-table [dataSource]="feuerwehr?.flaschen">s
             <ng-container matColumnDef="karteiNr">
                 <th mat-header-cell *matHeaderCellDef>Nr.</th>
@@ -37,6 +56,10 @@
             <ng-container matColumnDef="typenInformation">
                 <th mat-header-cell *matHeaderCellDef>Typen Information</th>
                 <td mat-cell *matCellDef="let flasche">{{ flasche.typenInfo1 }} {{ flasche.typenInfo2 }} {{ flasche.typenInfo3 }}</td>
+            </ng-container>
+            <ng-container matColumnDef="lastEdit">
+                <th mat-header-cell *matHeaderCellDef>Letzte Änderung</th>
+                <td mat-cell *matCellDef="let flasche">{{ flasche.lastEdit | date: 'dd.MM.yyy HH:mm:ss' }}</td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

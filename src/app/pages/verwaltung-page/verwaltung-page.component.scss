@@ -27,7 +27,14 @@
 .feuerwehren {
     width: 70%;
 
+    .feuerwehrAddToSync,
     mat-expansion-panel {
         margin-bottom: 20px;
+    }
+
+    .buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
     }
 }
