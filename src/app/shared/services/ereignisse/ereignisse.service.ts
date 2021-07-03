@@ -7,21 +7,30 @@ import { DatabaseService } from '../database/database.service';
 })
 export class EreignisseService
 {
-    constructor(public database: DatabaseService) { }
+    public list: Array<IEreignis> = [];
+    constructor(public database: DatabaseService)
+    {
+        this.loadList();
+    }
+
+    public async loadList()
+    {
+        this.list = await (await this.getAll()).reverse();
+    }
 
     public async saveOrCreate(ereignis: IEreignis): Promise<number>
     {
         if (ereignis.fuellungen == null) ereignis.fuellungen = [];
-        return await this.database.ereignisse.put(ereignis);
+        return await this.database.db.ereignisse.put(ereignis);
     }
 
     public async getSingle(id: number): Promise<IEreignis>
     {
-        return await this.database.ereignisse?.get(id);
+        return await this.database.db.ereignisse?.get(id);
     }
 
     public async getAll(): Promise<Array<IEreignis>>
     {
-        return await this.database.ereignisse?.toArray();
+        return await this.database.db.ereignisse?.toArray();
     }
 }

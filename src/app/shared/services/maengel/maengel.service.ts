@@ -22,31 +22,31 @@ export class MaengelService
     {
         console.log('[DB] [Mangel] Save Or Create', mangel);
 
-        return this.database.transaction('rw', this.database.maengel, async () =>
+        return this.database.db.transaction('rw', this.database.db.maengel, async () =>
         {
-            mangel.id = await this.database.maengel.put(mangel);
+            mangel.id = await this.database.db.maengel.put(mangel);
         });
     }
 
     public async getSingle(id: number): Promise<IMangel>
     {
         console.log('[DB] [Mangel] Get Single', id);
-        return await this.database.maengel?.get(id);
+        return await this.database.db.maengel?.get(id);
     }
 
     public async getAll(): Promise<Array<IMangel>>
     {
         console.log('[DB] [Mangel] Get All');
-        return await this.database.maengel?.toArray();
+        return await this.database.db.maengel?.toArray();
     }
 
     public async getAllByFlascheId(flascheId: number): Promise<Array<IMangel>>
     {
-        return await this.database.maengel?.where('flascheId').equals(flascheId).toArray();
+        return await this.database.db.maengel?.where('flascheId').equals(flascheId).toArray();
     }
 
     public async getAllByEreignisId(ereignisId: number): Promise<Array<IMangel>>
     {
-        return await this.database.maengel?.where('ereignisId').equals(ereignisId).toArray();
+        return await this.database.db.maengel?.where('ereignisId').equals(ereignisId).toArray();
     }
 }

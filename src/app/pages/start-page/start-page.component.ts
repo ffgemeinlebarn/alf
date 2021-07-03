@@ -25,7 +25,8 @@ export class StartPageComponent implements OnInit
     {
         this.newEreignis = {
             type: EreignisType.Uebung,
-            datetimeStart: new Date()
+            datetimeStart: new Date(),
+            datetimeEnd: null
         };
         this.allEreignisse = await (await this.ereignisse.getAll()).reverse();
         this.selectedEreignisId = this.allEreignisse[0]?.id ?? null;

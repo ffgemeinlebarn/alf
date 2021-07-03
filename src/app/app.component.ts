@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SettingsService } from './shared/services/settings/settings.service';
+import { StammdatenService } from './shared/services/stammdaten/stammdaten.service';
 import { SyncService } from './shared/services/sync/sync.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { SyncService } from './shared/services/sync/sync.service';
 })
 export class AppComponent
 {
-    constructor(public settings: SettingsService, public sync: SyncService)
+    constructor(public settings: SettingsService, public sync: SyncService, public stammdaten: StammdatenService)
     {
         this.sync.syncSavedFeuerwehren();
     }

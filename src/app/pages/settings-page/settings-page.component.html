@@ -1,9 +1,9 @@
 <h1 class="page-title">
     <span>Einstellungen</span>
-    <button mat-raised-button (click)="settings.saveAll()">Speichern</button>
+    <button mat-raised-button (click)="save()">Speichern</button>
 </h1>
 
-<mat-card>
+<mat-card *ngIf="showTestmodusSetting">
     <h2>Test Modus</h2>
     <p>Um in Schulungen nicht mit den originalen Daten zu arbeiten und den Datenbestand nicht zu verunreinigen, kann hier der Testmodus aktiviert werden. Wurde dieser Modus aktiviert kann man sich gefahrlos "spielen"!</p>
     <mat-slide-toggle [(ngModel)]="settings.testMode">
@@ -20,4 +20,10 @@
         </mat-form-field>
     </div>
     <p>Stand des MAT Sync Datensatzes: {{ settings.syncLastEdit }}</p>
+</mat-card>
+
+<mat-card>
+    <h2>Import</h2>
+    <textarea [(ngModel)]="importData"></textarea>
+    <button mat-raised-button (click)="import()">Speichern</button>
 </mat-card>

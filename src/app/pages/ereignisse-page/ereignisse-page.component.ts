@@ -14,14 +14,9 @@ import { EreignisseService } from 'src/app/shared/services/ereignisse/ereignisse
 export class EreignissePageComponent implements OnInit
 {
     public EreignisType = EreignisType;
-    public ereignisse: Array<IEreignis> = [];
 
-    constructor(private ereignisseService: EreignisseService, public dialog: MatDialog) { }
-
-    public async ngOnInit(): Promise<void>
-    {
-        this.ereignisse = await (await this.ereignisseService.getAll()).reverse();
-    }
+    constructor(public ereignisse: EreignisseService, public dialog: MatDialog) { }
+    public async ngOnInit(): Promise<void> { }
 
     public async openPrintReportings(ereignis: IEreignis)
     {

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
     providedIn: 'root'
 })
 export class SettingsService
 {
-    constructor()
+    constructor(public snackBar: MatSnackBar)
     {
         this.loadAll();
     }
@@ -25,6 +26,7 @@ export class SettingsService
     {
         this.writeTestMode();
         this.writeSyncURL();
+        this.snackBar.open('Die Einstellungen wurden gespeichert!', null, { duration: 1000 });
     }
 
     public writeTestMode = () => this.write('testMode', this.testMode);

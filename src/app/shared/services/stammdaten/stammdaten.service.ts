@@ -26,13 +26,14 @@ export class StammdatenService
 
     public async loadFeuerwehren(): Promise<void>
     {
-        this.feuerwehren = await (await this.database.feuerwehren?.toArray())
+        this.feuerwehren = await (await this.database.db.feuerwehren?.toArray())
             .sort((a, b) => Number(a.feuerwehrNummer) - Number(b.feuerwehrNummer));
+        console.log('this.feuerwehren', this.feuerwehren);
     }
 
     public async loadPersonen(): Promise<void>
     {
-        const personen = await this.database.personen?.toArray();
+        const personen = await this.database.db.personen?.toArray();
 
         personen
             .sort((a, b) =>
@@ -49,6 +50,7 @@ export class StammdatenService
             });
 
         this.personen = personen;
+        console.log('this.personen', this.personen);
     }
 
     public getFlascheByBarcode(barcode: string): IFlasche
@@ -67,22 +69,22 @@ export class StammdatenService
 
     public async removeFeuerwehr(feuerwehr: IFeuerwehr): Promise<void>
     {
-        await this.database.feuerwehren.delete(feuerwehr.feuerwehrNummer);
+        await this.database.db.feuerwehren.delete(feuerwehr.feuerwehrNummer);
         await this.loadFeuerwehren();
     }
 
     public async saveOrCreatePerson(person: IPerson): Promise<void>
     {
-        await this.database.transaction('rw', this.database.personen, async () =>
+        await this.database.db.transaction('rw', this.database.db.personen, async () =>
         {
-            person.id = await this.database.personen.put(person);
+            person.id = await this.database.db.personen.put(person);
         });
         await this.loadPersonen();
     }
 
     public async removePerson(person: IPerson): Promise<void>
     {
-        await this.database.personen.delete(person.id);
+        await this.database.db.personen.delete(person.id);
         await this.loadPersonen();
     }
 
