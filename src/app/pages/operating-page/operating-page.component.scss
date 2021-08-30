@@ -59,8 +59,7 @@ input.barcode-hidden {
 }
 
 .fuellungen {
-    display: flex;
-    flex-direction: column;
+    display: block;
     flex: 1;
     overflow: auto;
 }
