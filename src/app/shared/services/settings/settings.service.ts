@@ -53,6 +53,6 @@ export class SettingsService
 
     private readString(key: string): string
     {
-        return localStorage.getItem(key).toString();
+        return localStorage.getItem(key);
     }
 }
