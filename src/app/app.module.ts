@@ -16,6 +16,7 @@ import { CdkColumnDef } from '@angular/cdk/table';
 import { FormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
     declarations: [
@@ -34,6 +35,7 @@ import { environment } from '../environments/environment';
         AppRoutingModule,
         BrowserAnimationsModule,
         FormsModule,
+        MatDialogModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
             enabled: environment.production,
             registrationStrategy: 'registerWhenStable:30000'
