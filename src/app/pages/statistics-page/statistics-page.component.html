@@ -1,1 +1,21 @@
 <h1 class="page-title">Statistiken</h1>
+<mat-expansion-panel *ngFor="let stat of stats">
+
+    <mat-expansion-panel-header>
+        <mat-panel-title>{{ stat?.year }}</mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div class="content">
+        <table>
+            <tr>
+                <th>Einsätze:</th>
+                <td>{{ stat?.einsaetze }}</td>
+            </tr>
+            <tr>
+                <th>Füllungen:</th>
+                <td>{{ stat?.fuellungen }}</td>
+            </tr>
+        </table>
+    </div>
+
+</mat-expansion-panel>
