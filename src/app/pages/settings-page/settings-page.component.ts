@@ -7,6 +7,7 @@ import { EreignisseService } from 'src/app/shared/services/ereignisse/ereignisse
 import { OperatingService } from 'src/app/shared/services/operating/operating.service';
 import { SettingsService } from 'src/app/shared/services/settings/settings.service';
 import { StammdatenService } from 'src/app/shared/services/stammdaten/stammdaten.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'ffg-settings-page',
@@ -17,6 +18,7 @@ export class SettingsPageComponent implements OnInit, OnDestroy
 {
     public showTestmodusSetting = true;
     public importData = '[]';
+    public version = environment.version;
 
     constructor(public settings: SettingsService, public dialog: MatDialog, public ereignisse: EreignisseService, public operating: OperatingService, private database: DatabaseService, public stammdaten: StammdatenService) { }
 
