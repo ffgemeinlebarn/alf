@@ -18,6 +18,7 @@ export class SettingsPageComponent implements OnInit, OnDestroy
 {
     public showTestmodusSetting = true;
     public importData = '[]';
+    public exportedData = null;
     public version = environment.version;
 
     constructor(public settings: SettingsService, public dialog: MatDialog, public ereignisse: EreignisseService, public operating: OperatingService, private database: DatabaseService, public stammdaten: StammdatenService) { }
@@ -71,5 +72,18 @@ export class SettingsPageComponent implements OnInit, OnDestroy
             await this.ereignisse.saveOrCreate(newEreignis);
 
         });
+    }
+
+    public async export()
+    {
+        const feuerwehren = await this.stammdaten.feuerwehren;
+        const personen = await this.stammdaten.personen;
+        const ereignisse = await this.ereignisse.getAll();
+
+        this.exportedData = {
+            feuerwehren,
+            personen,
+            ereignisse
+        };
     }
 }

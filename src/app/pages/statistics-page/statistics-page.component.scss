@@ -26,21 +26,31 @@ mat-expansion-panel {
 
     .content {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+
+        h3 {
+            margin-top: 1.5em;
+            margin-bottom: 0.3em;
+        }
 
         table {
             border-collapse: collapse;
+            width: 100%;
 
             tr {
+                border: 2px #fff solid;
+
                 th {
-                    text-align: left;
-                    padding: 10px 0px;
-                    padding-right: 20px;
+                    border-right: 2px #fff solid;
                 }
 
+                th,
                 td {
+                    line-height: 1;
+                    width: 50%;
                     text-align: left;
-                    padding: 10px 0px;
+                    padding: 1.2em 1.4em;
+                    background-color: #f4f4f4;
                 }
             }
         }

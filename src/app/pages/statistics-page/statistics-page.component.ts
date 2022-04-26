@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EreignisType } from 'src/app/shared/enums/ereignis-type';
 import { EreignisseService } from 'src/app/shared/services/ereignisse/ereignisse.service';
 import { OperatingService } from 'src/app/shared/services/operating/operating.service';
 
@@ -25,14 +26,43 @@ export class StatisticsPageComponent implements OnInit
                 this.stats.push({
                     year,
                     einsaetze: 0,
+                    uebungen: 0,
                     fuellungen: 0
                 });
 
                 index = this.stats.length - 1;
             }
 
-            this.stats[index].einsaetze++;
+            if (ereigniss.type === EreignisType.Einsatz)
+                this.stats[index].einsaetze++;
+
+            if (ereigniss.type === EreignisType.Uebung)
+                this.stats[index].uebungen++;
+
             this.stats[index].fuellungen += ereigniss.fuellungen.length;
+            this.stats[index].feuerwehren = [];
+
+            ereigniss.fuellungen.forEach(f =>
+            {
+                const feuerwehrNummer = f.flasche.feuerwehr.feuerwehrNummer;
+                const name = f.flasche.feuerwehr.name;
+                let indexFw = this.stats[index].feuerwehren.findIndex(fw => fw.feuerwehrNummer === feuerwehrNummer);
+
+                if (indexFw === -1)
+                {
+                    this.stats[index].feuerwehren.push({
+                        feuerwehrNummer,
+                        name,
+                        fuellungen: 0
+                    });
+
+                    indexFw = this.stats[index].feuerwehren.length - 1;
+                }
+
+                this.stats[index].feuerwehren[indexFw].fuellungen++;
+            });
+
+            this.stats[index].feuerwehren.sort((a: any, b: any) => b.fuellungen - a.fuellungen);
         });
 
         this.stats.sort((a: any, b: any) => b.year - a.year);
