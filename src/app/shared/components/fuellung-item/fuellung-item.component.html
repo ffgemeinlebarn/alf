@@ -5,8 +5,8 @@
         <span> | </span>
         <span>Barcode: {{ fuellung?.flasche.barcode }}</span>
     </p>
-    <mat-chip-list>
+    <mat-chip-listbox>
         <mat-chip color="primary">{{ fuellung.datetime | date: 'HH:mm:ss' }} Uhr</mat-chip>
-    </mat-chip-list>
+    </mat-chip-listbox>
     <mat-divider></mat-divider>
 </mat-list-item>

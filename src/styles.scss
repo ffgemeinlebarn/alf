@@ -1,10 +1,12 @@
-@import '~@angular/material/theming';
+@use 'sass:map';
+@use '@angular/material' as mat;
 
-$app-primary: mat-palette($mat-indigo);
-$app-accent: mat-palette($mat-pink);
+// $color-config:    mat.get-color-config('indigo-pink');
+// $primary-palette: map.get($color-config, 'indigo');
+// $accent-palette:  map.get($color-config, 'pink');
 
-$primary: mat-color($app-primary);
-$accent: mat-color($app-accent);
+$primary: mat.get-color-from-palette(mat.$indigo-palette, 500);
+$accent: mat.get-color-from-palette(mat.$pink-palette, 500);
 
 html,
 body {
