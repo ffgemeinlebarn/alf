@@ -58,6 +58,7 @@ mat-toolbar {
     display: flex;
     flex: 1;
     padding: 1em;
-    background-color: #3949AB;
+    // background-color: #3949AB;
+    background-color: var(--ffgfuea-primary-darker);
     overflow: auto;
 }
