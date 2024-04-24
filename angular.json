@@ -79,10 +79,10 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "configurations": {
                         "production": {
-                            "browserTarget": "ffgfuea:build:production"
+                          "buildTarget": "ffgfuea:build:production"
                         },
                         "development": {
-                            "browserTarget": "ffgfuea:build:development"
+                          "buildTarget": "ffgfuea:build:development"
                         }
                     },
                     "defaultConfiguration": "development"
@@ -90,7 +90,7 @@
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "ffgfuea:build"
+                      "buildTarget": "ffgfuea:build"
                     }
                 },
                 "test": {
