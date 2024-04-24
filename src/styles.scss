@@ -22,6 +22,16 @@ body {
     flex: 1 1 auto;
 }
 
+mat-card {
+    padding: 1.5em;
+}
+
+button[mat-button],
+button[mat-raised-button]{
+    height: auto !important;
+    min-height: 36px;
+}
+
 table[mat-table] {
     width: 100%;
 }
