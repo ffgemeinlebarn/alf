@@ -15,7 +15,7 @@ import { SharedModule } from './shared/shared.module';
 import { CdkColumnDef } from '@angular/cdk/table';
 import { FormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
+import { environment } from '../environments/environment.development';
 import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
