@@ -7,14 +7,14 @@ import { StammdatenService } from '../../services/stammdaten/stammdaten.service'
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatSelect, MatOption } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
-import { NgFor } from '@angular/common';
+
 import { MatButton } from '@angular/material/button';
 
 @Component({
     selector: 'ffg-search-flasche',
     templateUrl: './search-flasche.component.html',
     styleUrls: ['./search-flasche.component.scss'],
-    imports: [MatFormField, MatLabel, MatSelect, FormsModule, NgFor, MatOption, MatButton]
+    imports: [MatFormField, MatLabel, MatSelect, FormsModule, MatOption, MatButton]
 })
 export class SearchFlascheComponent implements OnInit
 {

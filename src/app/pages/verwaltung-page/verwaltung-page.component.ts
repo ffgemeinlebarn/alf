@@ -13,7 +13,7 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
-import { NgFor, DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, MatExpansionPanelDescription } from '@angular/material/expansion';
 import { MatIcon } from '@angular/material/icon';
 import { MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
@@ -22,7 +22,7 @@ import { MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, Ma
     selector: 'ffg-verwaltung-page',
     templateUrl: './verwaltung-page.component.html',
     styleUrls: ['./verwaltung-page.component.scss'],
-    imports: [MatCard, MatFormField, MatLabel, MatInput, FormsModule, MatButton, NgFor, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, MatExpansionPanelDescription, MatIcon, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, DatePipe]
+    imports: [MatCard, MatFormField, MatLabel, MatInput, FormsModule, MatButton, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, MatExpansionPanelDescription, MatIcon, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, DatePipe]
 })
 export class VerwaltungPageComponent implements OnInit
 {

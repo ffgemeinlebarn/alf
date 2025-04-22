@@ -1,33 +1,34 @@
 <h1 class="page-title">Statistiken</h1>
-<mat-expansion-panel *ngFor="let stat of stats">
-
+@for (stat of stats; track stat) {
+  <mat-expansion-panel>
     <mat-expansion-panel-header>
-        <mat-panel-title>{{ stat?.year }}</mat-panel-title>
+      <mat-panel-title>{{ stat?.year }}</mat-panel-title>
     </mat-expansion-panel-header>
-
     <div class="content">
-        <h3>Gesamt für das Jahr</h3>
-        <table>
-            <tr>
-                <th>Einsätze</th>
-                <td>{{ stat?.einsaetze }}</td>
-            </tr>
-            <tr>
-                <th>Übungen</th>
-                <td>{{ stat?.uebungen }}</td>
-            </tr>
-            <tr>
-                <th>Füllungen</th>
-                <td>{{ stat?.fuellungen }}</td>
-            </tr>
-        </table>
-        <h3>Füllungen per Feuerwehr</h3>
-        <table>
-            <tr *ngFor="let fw of stat?.feuerwehren">
-                <th>{{ fw?.name }}</th>
-                <td>{{ fw?.fuellungen }}</td>
-            </tr>
-        </table>
+      <h3>Gesamt für das Jahr</h3>
+      <table>
+        <tr>
+          <th>Einsätze</th>
+          <td>{{ stat?.einsaetze }}</td>
+        </tr>
+        <tr>
+          <th>Übungen</th>
+          <td>{{ stat?.uebungen }}</td>
+        </tr>
+        <tr>
+          <th>Füllungen</th>
+          <td>{{ stat?.fuellungen }}</td>
+        </tr>
+      </table>
+      <h3>Füllungen per Feuerwehr</h3>
+      <table>
+        @for (fw of stat?.feuerwehren; track fw) {
+          <tr>
+            <th>{{ fw?.name }}</th>
+            <td>{{ fw?.fuellungen }}</td>
+          </tr>
+        }
+      </table>
     </div>
-
-</mat-expansion-panel>
+  </mat-expansion-panel>
+}

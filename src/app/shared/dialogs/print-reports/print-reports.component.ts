@@ -5,7 +5,7 @@ import { EreignisseService } from '../../services/ereignisse/ereignisse.service'
 import { ViewChild } from '@angular/core';
 import { IEreignis } from '../../interfaces/i-ereignis';
 import { MatList, MatListItem } from '@angular/material/list';
-import { NgFor, NgIf, DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { MatRipple } from '@angular/material/core';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
@@ -18,7 +18,7 @@ import { MatButton } from '@angular/material/button';
     providers: [
         { provide: Window, useValue: window }
     ],
-    imports: [MatList, NgFor, MatListItem, MatRipple, MatCheckbox, FormsModule, MatButton, NgIf, DatePipe]
+    imports: [MatList, MatListItem, MatRipple, MatCheckbox, FormsModule, MatButton, DatePipe]
 })
 export class PrintReportsComponent implements OnInit
 {

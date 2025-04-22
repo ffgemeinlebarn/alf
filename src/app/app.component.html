@@ -1,48 +1,52 @@
-<div class="progress" *ngIf="sync.progressActive">
+@if (sync.progressActive) {
+  <div class="progress">
     <mat-spinner></mat-spinner>
     <h2>{{ sync.progressMessage }}</h2>
-</div>
+  </div>
+}
 
-<mat-toolbar color="warn" *ngIf="settings.testMode">
+@if (settings.testMode) {
+  <mat-toolbar color="warn">
     <mat-toolbar-row>
-        <h3>Der Testmodus ist aktiviert! Die Daten sind nicht produktiv, es kannn alles ausprobiert werden!</h3>
-        <span class="toolbar-spacer"></span>
-        <button mat-raised-button [routerLink]="['/settings']">Testmodus in den Einstellungen deaktivieren</button>
+      <h3>Der Testmodus ist aktiviert! Die Daten sind nicht produktiv, es kannn alles ausprobiert werden!</h3>
+      <span class="toolbar-spacer"></span>
+      <button mat-raised-button [routerLink]="['/settings']">Testmodus in den Einstellungen deaktivieren</button>
     </mat-toolbar-row>
-</mat-toolbar>
+  </mat-toolbar>
+}
 <mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <svg class="logo" [routerLink]="['/']" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 422.39 112.71">
-            <path d="M127,206.59l16.12-16.12,9.16,0-27.41-22.87,5.86-16.09h54.16v1.83h-52l2.2,1.82,49.77,0v1.77l-47.58.09,2.19,1.83,45.39-.09v1.76l-43.26.1,2.19,1.82,41.07-.09v1.77l-38.87.14,2.19,1.82,36.68-.13v1.77l-34.49.19,27.41,22.86-5.87,16.09-28.82-.25v38H127Zm34-8.81L158.81,196l-15.73-.17v1.8Zm4.33,3.6-2.19-1.82-20.06-.17v1.8Zm4.38,3.64-2.19-1.82L143.08,203v1.8Zm-13.09-10.88-2.19-1.82-11.35-.13V194Z" transform="translate(-124.83 -133.39)" />
-            <path d="M193,206.59l16.12-16.12,9.15,0-27.41-22.87,5.87-16.09h54.16v1.83h-52l2.19,1.82,49.78,0v1.77l-47.58.09,2.19,1.83,45.39-.09v1.76l-43.26.1,2.19,1.82,41.07-.09v1.77l-38.88.14,2.2,1.82,36.68-.13v1.77l-34.49.19,27.41,22.86-5.87,16.09-28.82-.25v38H193Zm34-8.81L224.81,196l-15.73-.17v1.8Zm4.32,3.6-2.19-1.82-20-.17v1.8Zm4.39,3.64-2.19-1.82L209.08,203v1.8Zm-13.09-10.88-2.19-1.82-11.35-.13V194Z" transform="translate(-124.83 -133.39)" />
-            <path d="M257.57,228.34V167.67l16.13-16.13h30.52l16.12,16.13v14.08H304.22V167.67H273.7v60.67h30.52V208.75H286.37v-1.81h17.85v-1.79H286.37v-1.8h17.85v-1.8H286.37v-1.73h17.85V198H286.37v-1.8h17.85v-1.8H286.37v-1.8h17.85l16.2,16.13-.08,19.59-16.12,16.2H273.7Zm46.65-73.27v-1.73H273.7v1.73Zm0,3.6v-1.8H273.7v1.8Zm0,3.6v-1.8H273.7v1.8Zm0,3.6v-1.8H273.7v1.8Zm0,66.07v-1.8H273.7v1.8Zm0,3.6v-1.8H273.7v1.8Zm0,3.6v-1.8H273.7v1.8Zm0,3.6v-1.8H273.7v1.8Z" transform="translate(-124.83 -133.39)" />
-            <path d="M332.31,206.59l16.12-16.12,9.15,0-27.41-22.87L336,151.54H390.2v1.83h-52l2.19,1.82,49.78,0v1.77l-47.58.09,2.19,1.83,45.39-.09v1.76l-43.26.1,2.19,1.82,41.07-.09v1.77l-38.88.14,2.2,1.82,36.68-.13v1.77l-34.49.19,27.41,22.86-5.87,16.09-28.82-.25v38H332.31Zm34-8.81L364.16,196l-15.73-.17v1.8Zm4.32,3.6-2.19-1.82-20.05-.17v1.8Zm4.39,3.64-2.19-1.82L348.43,203v1.8ZM362,194.14l-2.19-1.82-11.35-.13V194Z" transform="translate(-124.83 -133.39)" />
-            <path d="M461.19,228.34l-16.12,16.2H414.55l-16.13-16.2v-76.8h16.13v76.8h30.52v-76.8h16.12Zm-55.7-95h16.12v16.47H405.49Zm9.06,96.75v1.8h30.52v-1.8Zm0,3.6v1.8h30.52v-1.8Zm0,3.6v1.8h30.52v-1.8Zm0,3.6v1.8h30.52v-1.8Zm23.28-107.55H454v16.47H437.83Z" transform="translate(-124.83 -133.39)" />
-            <path d="M497.94,151.54l17.1-.07,32.17,88.27-15.15,5.47-7.25-19.85L480.55,246.1,467.2,234.39Zm1,2.63-29.39,79.35,2.29-1.05,28-75.53Zm1.88,5.4-26.64,71.82,2.23-1,25.31-68.09Zm1.8,5.4-24,64.38,2.35-1.09,22.56-60.67Zm1.87,5.32L483.24,227.2l2.25-1L505.36,173Zm2.05,5-18.69,49.81,31.45-14.89Z" transform="translate(-124.83 -133.39)" />
-        </svg>
-        <span class="toolbar-spacer"></span>
-        <button mat-raised-button [routerLink]="['/operating']">
-            <mat-icon>mode_edit</mat-icon>
-            Füllen
-        </button>
-        <button mat-button [routerLink]="['/ereignisse']">
-            <mat-icon>calendar_today</mat-icon>
-            Einsätze & Übungen
-        </button>
-        <button mat-button [routerLink]="['/verwaltung']">
-            <mat-icon>list</mat-icon>
-            Feuerwehren, Flaschen & Füllpersonal verwalten
-        </button>
-        <button mat-button [routerLink]="['/statistics']">
-            <mat-icon>show_chart</mat-icon>
-            Statistik
-        </button>
-        <button mat-button [routerLink]="['/settings']">
-            <mat-icon>settings</mat-icon>
-            Einstellungen
-        </button>
-    </mat-toolbar-row>
+  <mat-toolbar-row>
+    <svg class="logo" [routerLink]="['/']" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 422.39 112.71">
+      <path d="M127,206.59l16.12-16.12,9.16,0-27.41-22.87,5.86-16.09h54.16v1.83h-52l2.2,1.82,49.77,0v1.77l-47.58.09,2.19,1.83,45.39-.09v1.76l-43.26.1,2.19,1.82,41.07-.09v1.77l-38.87.14,2.19,1.82,36.68-.13v1.77l-34.49.19,27.41,22.86-5.87,16.09-28.82-.25v38H127Zm34-8.81L158.81,196l-15.73-.17v1.8Zm4.33,3.6-2.19-1.82-20.06-.17v1.8Zm4.38,3.64-2.19-1.82L143.08,203v1.8Zm-13.09-10.88-2.19-1.82-11.35-.13V194Z" transform="translate(-124.83 -133.39)" />
+      <path d="M193,206.59l16.12-16.12,9.15,0-27.41-22.87,5.87-16.09h54.16v1.83h-52l2.19,1.82,49.78,0v1.77l-47.58.09,2.19,1.83,45.39-.09v1.76l-43.26.1,2.19,1.82,41.07-.09v1.77l-38.88.14,2.2,1.82,36.68-.13v1.77l-34.49.19,27.41,22.86-5.87,16.09-28.82-.25v38H193Zm34-8.81L224.81,196l-15.73-.17v1.8Zm4.32,3.6-2.19-1.82-20-.17v1.8Zm4.39,3.64-2.19-1.82L209.08,203v1.8Zm-13.09-10.88-2.19-1.82-11.35-.13V194Z" transform="translate(-124.83 -133.39)" />
+      <path d="M257.57,228.34V167.67l16.13-16.13h30.52l16.12,16.13v14.08H304.22V167.67H273.7v60.67h30.52V208.75H286.37v-1.81h17.85v-1.79H286.37v-1.8h17.85v-1.8H286.37v-1.73h17.85V198H286.37v-1.8h17.85v-1.8H286.37v-1.8h17.85l16.2,16.13-.08,19.59-16.12,16.2H273.7Zm46.65-73.27v-1.73H273.7v1.73Zm0,3.6v-1.8H273.7v1.8Zm0,3.6v-1.8H273.7v1.8Zm0,3.6v-1.8H273.7v1.8Zm0,66.07v-1.8H273.7v1.8Zm0,3.6v-1.8H273.7v1.8Zm0,3.6v-1.8H273.7v1.8Zm0,3.6v-1.8H273.7v1.8Z" transform="translate(-124.83 -133.39)" />
+      <path d="M332.31,206.59l16.12-16.12,9.15,0-27.41-22.87L336,151.54H390.2v1.83h-52l2.19,1.82,49.78,0v1.77l-47.58.09,2.19,1.83,45.39-.09v1.76l-43.26.1,2.19,1.82,41.07-.09v1.77l-38.88.14,2.2,1.82,36.68-.13v1.77l-34.49.19,27.41,22.86-5.87,16.09-28.82-.25v38H332.31Zm34-8.81L364.16,196l-15.73-.17v1.8Zm4.32,3.6-2.19-1.82-20.05-.17v1.8Zm4.39,3.64-2.19-1.82L348.43,203v1.8ZM362,194.14l-2.19-1.82-11.35-.13V194Z" transform="translate(-124.83 -133.39)" />
+      <path d="M461.19,228.34l-16.12,16.2H414.55l-16.13-16.2v-76.8h16.13v76.8h30.52v-76.8h16.12Zm-55.7-95h16.12v16.47H405.49Zm9.06,96.75v1.8h30.52v-1.8Zm0,3.6v1.8h30.52v-1.8Zm0,3.6v1.8h30.52v-1.8Zm0,3.6v1.8h30.52v-1.8Zm23.28-107.55H454v16.47H437.83Z" transform="translate(-124.83 -133.39)" />
+      <path d="M497.94,151.54l17.1-.07,32.17,88.27-15.15,5.47-7.25-19.85L480.55,246.1,467.2,234.39Zm1,2.63-29.39,79.35,2.29-1.05,28-75.53Zm1.88,5.4-26.64,71.82,2.23-1,25.31-68.09Zm1.8,5.4-24,64.38,2.35-1.09,22.56-60.67Zm1.87,5.32L483.24,227.2l2.25-1L505.36,173Zm2.05,5-18.69,49.81,31.45-14.89Z" transform="translate(-124.83 -133.39)" />
+    </svg>
+    <span class="toolbar-spacer"></span>
+    <button mat-raised-button [routerLink]="['/operating']">
+      <mat-icon>mode_edit</mat-icon>
+      Füllen
+    </button>
+    <button mat-button [routerLink]="['/ereignisse']">
+      <mat-icon>calendar_today</mat-icon>
+      Einsätze & Übungen
+    </button>
+    <button mat-button [routerLink]="['/verwaltung']">
+      <mat-icon>list</mat-icon>
+      Feuerwehren, Flaschen & Füllpersonal verwalten
+    </button>
+    <button mat-button [routerLink]="['/statistics']">
+      <mat-icon>show_chart</mat-icon>
+      Statistik
+    </button>
+    <button mat-button [routerLink]="['/settings']">
+      <mat-icon>settings</mat-icon>
+      Einstellungen
+    </button>
+  </mat-toolbar-row>
 </mat-toolbar>
 <div id="content">
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>

@@ -11,7 +11,7 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatSelect, MatOption } from '@angular/material/select';
 import { MatInput } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-import { NgFor, DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 
@@ -19,7 +19,7 @@ import { MatIcon } from '@angular/material/icon';
     selector: 'ffg-start-page',
     templateUrl: './start-page.component.html',
     styleUrls: ['./start-page.component.scss'],
-    imports: [MatCard, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardContent, MatFormField, MatSelect, MatOption, MatInput, FormsModule, MatLabel, NgFor, MatButton, MatIcon, DatePipe]
+    imports: [MatCard, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardContent, MatFormField, MatSelect, MatOption, MatInput, FormsModule, MatLabel, MatButton, MatIcon, DatePipe]
 })
 export class StartPageComponent implements OnInit
 {

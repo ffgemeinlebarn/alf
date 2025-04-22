@@ -11,7 +11,7 @@ import { IFuellung } from 'src/app/shared/interfaces/i-fuellung';
 import { ReportingService } from 'src/app/shared/services/reporting/reporting.service';
 import { OperatingService } from '../../shared/services/operating/operating.service';
 import { TimingService } from '../../shared/services/timing/timing.service';
-import { NgIf, NgFor, NgClass, DatePipe } from '@angular/common';
+import { NgClass, DatePipe } from '@angular/common';
 import { MatGridList, MatGridTile } from '@angular/material/grid-list';
 import { MatCard, MatCardTitle, MatCardActions } from '@angular/material/card';
 import { MatRipple } from '@angular/material/core';
@@ -26,7 +26,7 @@ export type InputType = 'scanner' | 'manual';
     selector: 'ffg-operating-page',
     templateUrl: './operating-page.component.html',
     styleUrls: ['./operating-page.component.scss'],
-    imports: [NgIf, MatGridList, MatGridTile, MatCard, MatRipple, MatIcon, MatCardTitle, MatList, NgFor, FuellungItemComponent, MatCardActions, MatFabButton, NgClass, DatePipe]
+    imports: [MatGridList, MatGridTile, MatCard, MatRipple, MatIcon, MatCardTitle, MatList, FuellungItemComponent, MatCardActions, MatFabButton, NgClass, DatePipe]
 })
 export class OperatingPageComponent implements OnInit
 {

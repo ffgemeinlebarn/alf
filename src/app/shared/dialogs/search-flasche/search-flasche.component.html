@@ -1,19 +1,23 @@
 <h1 mat-dialog-title>Flasche manuell hinzufügen</h1>
 <div class="content" mat-dialog-content>
-    <mat-form-field appearance="fill">
-        <mat-label>Feuerwehr</mat-label>
-        <mat-select [(ngModel)]="selectedFeuerwehr" (ngModelChange)="feuerwehrChanged()">
-            <mat-option *ngFor="let feuerwehr of stammdaten.feuerwehren" [value]="feuerwehr">{{ feuerwehr.name }} ({{ feuerwehr.feuerwehrNummer }})</mat-option>
-        </mat-select>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>Flasche</mat-label>
-        <mat-select [(ngModel)]="selectedFlasche">
-            <mat-option *ngFor="let flasche of selectedFeuerwehr?.flaschen" [value]="flasche">Nr. {{ flasche.karteiNr }} ({{ flasche.typenBezeichnung }}, Barcode: {{ flasche.barcode }})</mat-option>
-        </mat-select>
-    </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Feuerwehr</mat-label>
+    <mat-select [(ngModel)]="selectedFeuerwehr" (ngModelChange)="feuerwehrChanged()">
+      @for (feuerwehr of stammdaten.feuerwehren; track feuerwehr) {
+        <mat-option [value]="feuerwehr">{{ feuerwehr.name }} ({{ feuerwehr.feuerwehrNummer }})</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Flasche</mat-label>
+    <mat-select [(ngModel)]="selectedFlasche">
+      @for (flasche of selectedFeuerwehr?.flaschen; track flasche) {
+        <mat-option [value]="flasche">Nr. {{ flasche.karteiNr }} ({{ flasche.typenBezeichnung }}, Barcode: {{ flasche.barcode }})</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
 </div>
 <div mat-dialog-actions>
-    <button mat-button (click)="close()">Abbrechen</button>
-    <button mat-button (click)="add()" cdkFocusInitial>Hinzufügen</button>
+  <button mat-button (click)="close()">Abbrechen</button>
+  <button mat-button (click)="add()" cdkFocusInitial>Hinzufügen</button>
 </div>
