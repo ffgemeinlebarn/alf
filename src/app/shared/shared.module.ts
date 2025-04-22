@@ -27,7 +27,7 @@ import { PrintReportsComponent } from './dialogs/print-reports/print-reports.com
 import { EditEreignisComponent } from './dialogs/edit-ereignis/edit-ereignis.component';
 import { AddMangelComponent } from './dialogs/add-mangel/add-mangel.component';
 import { EditPersonComponent } from './dialogs/edit-person/edit-person.component';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ConfirmFuellungComponent } from './dialogs/confirm-fuellung/confirm-fuellung.component';
 import { ConfirmEreignisAbschlussComponent } from './dialogs/confirm-ereignis-abschluss/confirm-ereignis-abschluss.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -35,11 +35,44 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RemoveFuellungComponent } from './dialogs/remove-fuellung/remove-fuellung.component';
 import { RemoveFeuerwehrComponent } from './dialogs/remove-feuerwehr/remove-feuerwehr.component';
 
-@NgModule({
-    imports: [
-        CommonModule,
+@NgModule({ exports: [
+        MatButtonModule,
+        MatMenuModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatCardModule,
+        MatSidenavModule,
+        MatGridListModule,
+        MatTableModule,
+        MatSortModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatInputModule,
+        MatListModule,
+        MatChipsModule,
+        MatRippleModule,
+        MatExpansionModule,
+        FuellungItemComponent,
+        MatSlideToggleModule,
+        MatCheckboxModule,
+        MatProgressSpinnerModule,
+        MatSnackBarModule
+    ],
+    declarations: [
+        FuellungItemComponent,
+        SearchFlascheComponent,
+        PrintReportsComponent,
+        EditEreignisComponent,
+        AddMangelComponent,
+        EditPersonComponent,
+        ConfirmFuellungComponent,
+        ConfirmEreignisAbschlussComponent,
+        RemoveFuellungComponent,
+        RemoveFeuerwehrComponent
+    ], imports: [CommonModule,
         FormsModule,
-        HttpClientModule,
         ReactiveFormsModule,
         MatButtonModule,
         MatMenuModule,
@@ -62,45 +95,5 @@ import { RemoveFeuerwehrComponent } from './dialogs/remove-feuerwehr/remove-feue
         MatSlideToggleModule,
         MatCheckboxModule,
         MatProgressSpinnerModule,
-        MatSnackBarModule
-    ],
-    exports: [
-        MatButtonModule,
-        MatMenuModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatCardModule,
-        MatSidenavModule,
-        MatGridListModule,
-        MatTableModule,
-        MatSortModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatInputModule,
-        MatListModule,
-        MatChipsModule,
-        MatRippleModule,
-        MatExpansionModule,
-        FuellungItemComponent,
-        MatSlideToggleModule,
-        MatCheckboxModule,
-        MatProgressSpinnerModule,
-        MatSnackBarModule
-    ],
-    providers: [],
-    declarations: [
-        FuellungItemComponent,
-        SearchFlascheComponent,
-        PrintReportsComponent,
-        EditEreignisComponent,
-        AddMangelComponent,
-        EditPersonComponent,
-        ConfirmFuellungComponent,
-        ConfirmEreignisAbschlussComponent,
-        RemoveFuellungComponent,
-        RemoveFeuerwehrComponent
-    ]
-})
+        MatSnackBarModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class SharedModule { }

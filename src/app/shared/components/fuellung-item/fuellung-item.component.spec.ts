@@ -1,7 +1,8 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SharedModule } from '../../shared.module';
 import { FuellungItemComponent } from './fuellung-item.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('FuellungItemComponent', () =>
 {
@@ -11,9 +12,10 @@ describe('FuellungItemComponent', () =>
     beforeEach(async () =>
     {
         await TestBed.configureTestingModule({
-            imports: [SharedModule, HttpClientTestingModule],
-            declarations: [FuellungItemComponent]
-        })
+    declarations: [FuellungItemComponent],
+    imports: [SharedModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+})
             .compileComponents();
     });
 

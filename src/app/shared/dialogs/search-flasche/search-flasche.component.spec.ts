@@ -1,7 +1,8 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SharedModule } from '../../shared.module';
 import { SearchFlascheComponent } from './search-flasche.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('SearchFlascheComponent', () =>
 {
@@ -11,9 +12,10 @@ describe('SearchFlascheComponent', () =>
     beforeEach(async () =>
     {
         await TestBed.configureTestingModule({
-            imports: [SharedModule, HttpClientTestingModule],
-            declarations: [SearchFlascheComponent]
-        })
+    declarations: [SearchFlascheComponent],
+    imports: [SharedModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+})
             .compileComponents();
     });
 

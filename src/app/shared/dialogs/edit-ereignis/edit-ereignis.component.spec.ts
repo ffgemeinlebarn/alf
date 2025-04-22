@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { EditEreignisComponent } from './edit-ereignis.component';
 import { SharedModule } from '../../shared.module';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('EditEreignisComponent', () =>
 {
@@ -11,9 +12,10 @@ describe('EditEreignisComponent', () =>
     beforeEach(async () =>
     {
         await TestBed.configureTestingModule({
-            imports: [SharedModule, HttpClientTestingModule],
-            declarations: [EditEreignisComponent]
-        })
+    declarations: [EditEreignisComponent],
+    imports: [SharedModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+})
             .compileComponents();
     });
 
