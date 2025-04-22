@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { IEreignis } from 'src/app/shared/interfaces/i-ereignis';
 import { IFuellung } from 'src/app/shared/interfaces/i-fuellung';
@@ -7,21 +7,34 @@ import { EreignisseService } from 'src/app/shared/services/ereignisse/ereignisse
 import { OperatingService } from 'src/app/shared/services/operating/operating.service';
 import { SettingsService } from 'src/app/shared/services/settings/settings.service';
 import { StammdatenService } from 'src/app/shared/services/stammdaten/stammdaten.service';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.development';
+import { MatButton } from '@angular/material/button';
+import { JsonPipe } from '@angular/common';
+import { MatCard } from '@angular/material/card';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { FormsModule } from '@angular/forms';
+import { MatFormField } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
 
 @Component({
     selector: 'ffg-settings-page',
     templateUrl: './settings-page.component.html',
-    styleUrls: ['./settings-page.component.scss']
+    styleUrls: ['./settings-page.component.scss'],
+    imports: [MatButton, MatCard, MatSlideToggle, FormsModule, MatFormField, MatInput, JsonPipe]
 })
 export class SettingsPageComponent implements OnInit, OnDestroy
 {
+    settings = inject(SettingsService);
+    dialog = inject(MatDialog);
+    ereignisse = inject(EreignisseService);
+    operating = inject(OperatingService);
+    private database = inject(DatabaseService);
+    stammdaten = inject(StammdatenService);
+
     public showTestmodusSetting = true;
     public importData = '[]';
     public exportedData = null;
     public version = environment.version;
-
-    constructor(public settings: SettingsService, public dialog: MatDialog, public ereignisse: EreignisseService, public operating: OperatingService, private database: DatabaseService, public stammdaten: StammdatenService) { }
 
     public async ngOnInit(): Promise<void>
     {

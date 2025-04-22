@@ -1,20 +1,24 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IFuellung } from '../../interfaces/i-fuellung';
 import { OperatingService } from '../../services/operating/operating.service';
+import { MatLine } from '@angular/material/grid-list';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'ffg-remove-fuellung',
     templateUrl: './remove-fuellung.component.html',
-    styleUrls: ['./remove-fuellung.component.scss']
+    styleUrls: ['./remove-fuellung.component.scss'],
+    imports: [MatLine, MatButton, MatIcon, DatePipe]
 })
 export class RemoveFuellungComponent implements OnInit
 {
-    constructor(
-        public dialog: MatDialogRef<RemoveFuellungComponent>,
-        @Inject(MAT_DIALOG_DATA) public fuellung: IFuellung,
-        private operating: OperatingService
-    ) { }
+    dialog = inject<MatDialogRef<RemoveFuellungComponent>>(MatDialogRef);
+    fuellung = inject<IFuellung>(MAT_DIALOG_DATA);
+    private operating = inject(OperatingService);
+
     public ngOnInit(): void { }
 
     public remove()

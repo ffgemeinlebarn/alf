@@ -1,21 +1,22 @@
 
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IFeuerwehr } from '../../interfaces/i-feuerwehr';
 import { StammdatenService } from '../../services/stammdaten/stammdaten.service';
+import { MatButton } from '@angular/material/button';
 
 @Component({
     selector: 'ffg-remove-feuerwehr',
     templateUrl: './remove-feuerwehr.component.html',
-    styleUrls: ['./remove-feuerwehr.component.scss']
+    styleUrls: ['./remove-feuerwehr.component.scss'],
+    imports: [MatButton]
 })
 export class RemoveFeuerwehrComponent implements OnInit
 {
-    constructor(
-        public dialog: MatDialogRef<RemoveFeuerwehrComponent>,
-        @Inject(MAT_DIALOG_DATA) public feuerwehr: IFeuerwehr,
-        private stammdaten: StammdatenService
-    ) { }
+    dialog = inject<MatDialogRef<RemoveFeuerwehrComponent>>(MatDialogRef);
+    feuerwehr = inject<IFeuerwehr>(MAT_DIALOG_DATA);
+    private stammdaten = inject(StammdatenService);
+
     public ngOnInit(): void { }
 
     public remove()

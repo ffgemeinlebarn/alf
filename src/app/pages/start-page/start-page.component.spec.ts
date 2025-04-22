@@ -11,9 +11,8 @@ describe('StartPageComponent', () =>
     beforeEach(async () =>
     {
         await TestBed.configureTestingModule({
-            imports: [RouterTestingModule, SharedModule],
-            declarations: [StartPageComponent]
-        })
+    imports: [RouterTestingModule, SharedModule, StartPageComponent]
+})
             .compileComponents();
     });
 

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { IFeuerwehr } from '../../interfaces/i-feuerwehr';
 import { IFlasche } from '../../interfaces/i-flasche';
 import { IPerson } from '../../interfaces/i-person';
@@ -10,10 +10,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class StammdatenService
 {
+    private database = inject(DatabaseService);
+    private snackBar = inject(MatSnackBar);
+
     public feuerwehren: Array<IFeuerwehr> = [];
     public personen: Array<IPerson> = [];
 
-    constructor(private database: DatabaseService, private snackBar: MatSnackBar)
+    constructor()
     {
         this.reload();
     }

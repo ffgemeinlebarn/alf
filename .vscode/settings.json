@@ -1,11 +1,8 @@
 {
-    "tslint.configFile": "./tslint.json",
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "HookyQR.beautify",
     "editor.detectIndentation": false,
     "editor.tabSize": 4,
     "editor.codeActionsOnSave": {
-        "source.fixAll.tslint": true
+        "source.fixAll.tslint": "explicit"
     },
     "[typescript]": {
         "editor.defaultFormatter": null

@@ -1,24 +1,26 @@
 <h1 mat-dialog-title>{{ ereignis?.type == EreignisType.Uebung ? 'Übung' : 'Einsatz' }}{{ ereignis?.ort ? ' in '+ ereignis?.ort : '' }}</h1>
 <div class="content" mat-dialog-content>
-    <mat-form-field appearance="fill">
-        <mat-label>Typ</mat-label>
-        <mat-select [(ngModel)]="ereignis.type">
-            <mat-option value="einsatz">Einsatz</mat-option>
-            <mat-option value="uebung">Übung</mat-option>
-        </mat-select>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>Ort</mat-label>
-        <input type="text" matInput placeholder="Ort des Ereignisses" [(ngModel)]="ereignis.ort">
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <mat-label>Personen</mat-label>
-        <mat-select [(ngModel)]="ereignis.personen" [compareWith]="stammdaten.compareById" multiple>
-            <mat-option *ngFor="let person of stammdaten.personen" [value]="person">{{ person.vorname }} {{ person.nachname }}</mat-option>
-        </mat-select>
-    </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Typ</mat-label>
+    <mat-select [(ngModel)]="ereignis.type">
+      <mat-option value="einsatz">Einsatz</mat-option>
+      <mat-option value="uebung">Übung</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Ort</mat-label>
+    <input type="text" matInput placeholder="Ort des Ereignisses" [(ngModel)]="ereignis.ort">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Personen</mat-label>
+    <mat-select [(ngModel)]="ereignis.personen" [compareWith]="stammdaten.compareById" multiple>
+      @for (person of stammdaten.personen; track person) {
+        <mat-option [value]="person">{{ person.vorname }} {{ person.nachname }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
 </div>
 <div mat-dialog-actions>
-    <button mat-button (click)="close()">Abbrechen</button>
-    <button mat-button (click)="save()" cdkFocusInitial>Speichern</button>
+  <button mat-button (click)="close()">Abbrechen</button>
+  <button mat-button (click)="save()" cdkFocusInitial>Speichern</button>
 </div>

@@ -1,7 +1,8 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SharedModule } from '../../shared.module';
 import { PrintReportsComponent } from './print-reports.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('PrintReportsComponent', () =>
 {
@@ -11,9 +12,9 @@ describe('PrintReportsComponent', () =>
     beforeEach(async () =>
     {
         await TestBed.configureTestingModule({
-            imports: [SharedModule, HttpClientTestingModule],
-            declarations: [PrintReportsComponent]
-        })
+    imports: [SharedModule, PrintReportsComponent],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+})
             .compileComponents();
     });
 

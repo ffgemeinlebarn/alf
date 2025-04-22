@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { IFeuerwehr } from '../../interfaces/i-feuerwehr';
 import { DatabaseService } from '../database/database.service';
@@ -11,16 +11,14 @@ import { StammdatenService } from '../stammdaten/stammdaten.service';
 })
 export class SyncService
 {
+    http = inject(HttpClient);
+    settings = inject(SettingsService);
+    private database = inject(DatabaseService);
+    stammdaten = inject(StammdatenService);
+    private snackBar = inject(MatSnackBar);
+
     public progressActive = false;
     public progressMessage = 'Lade Daten aus MAT Datenbank';
-
-    constructor(
-        public http: HttpClient,
-        public settings: SettingsService,
-        private database: DatabaseService,
-        public stammdaten: StammdatenService,
-        private snackBar: MatSnackBar
-    ) { }
 
     public checkStatus(): Promise<boolean>
     {
@@ -110,9 +108,9 @@ export class SyncService
             name: feuerwehr.name
         });
 
-        return this.database.db.transaction('rw', this.database.db.feuerwehren, async () =>
-        {
-            await this.database.db.feuerwehren.put(feuerwehr);
-        });
+        // return this.database.db.transaction('rw', this.database.db.feuerwehren, async () =>
+        // {
+        //     await this.database.db.feuerwehren.put(feuerwehr);
+        // });
     }
 }

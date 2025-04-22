@@ -8,8 +8,8 @@ describe('AddMangelComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddMangelComponent ]
-    })
+    imports: [AddMangelComponent]
+})
     .compileComponents();
   });
 

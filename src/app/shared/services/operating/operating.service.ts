@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -16,6 +16,14 @@ import { TimingService } from '../timing/timing.service';
 })
 export class OperatingService
 {
+    stammdaten = inject(StammdatenService);
+    database = inject(DatabaseService);
+    timing = inject(TimingService);
+    dialog = inject(MatDialog);
+    private router = inject(Router);
+    private ereignisse = inject(EreignisseService);
+    private snackBar = inject(MatSnackBar);
+
     private minBarcodeZeichen = 5;
     public barcodeInputBuffer = '';
     public barcodeInputActive = true;
@@ -25,15 +33,7 @@ export class OperatingService
     public ereignisAnzahlFeuerwehren = 0;
     public ereignisAnzahlMaengel = 0;
 
-    public constructor(
-        public stammdaten: StammdatenService,
-        public database: DatabaseService,
-        public timing: TimingService,
-        public dialog: MatDialog,
-        private router: Router,
-        private ereignisse: EreignisseService,
-        private snackBar: MatSnackBar
-    )
+    public constructor()
     {
         document.body.addEventListener('keydown', event => this.onScannerInputEnter(event));
     }

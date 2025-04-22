@@ -11,9 +11,8 @@ describe('StatisticsPageComponent', () =>
     beforeEach(async () =>
     {
         await TestBed.configureTestingModule({
-            imports: [SharedModule],
-            declarations: [StatisticsPageComponent]
-        })
+    imports: [SharedModule, StatisticsPageComponent]
+})
             .compileComponents();
     });
 

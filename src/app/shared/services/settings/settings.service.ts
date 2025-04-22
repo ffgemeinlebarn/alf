@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
@@ -6,7 +6,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class SettingsService
 {
-    constructor(public snackBar: MatSnackBar)
+    snackBar = inject(MatSnackBar);
+
+    constructor()
     {
         this.loadAll();
     }

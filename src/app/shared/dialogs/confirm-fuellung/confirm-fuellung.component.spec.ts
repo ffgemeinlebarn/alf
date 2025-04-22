@@ -10,8 +10,8 @@ describe('ConfirmFuellungComponent', () =>
     beforeEach(async () =>
     {
         await TestBed.configureTestingModule({
-            declarations: [ConfirmFuellungComponent]
-        })
+    imports: [ConfirmFuellungComponent]
+})
             .compileComponents();
     });
 

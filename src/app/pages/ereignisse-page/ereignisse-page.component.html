@@ -1,15 +1,16 @@
 <h1 class="page-title">Ereignisse</h1>
-<mat-expansion-panel *ngFor="let ereignis of ereignisse.list">
-
+@for (ereignis of ereignisse.list; track ereignis) {
+<mat-expansion-panel>
     <mat-expansion-panel-header>
-        <mat-panel-title>{{ ereignis?.type == EreignisType.Uebung ? 'Übung' : 'Einsatz' }}{{ ereignis?.ort ? ' in '+ ereignis?.ort : '' }}</mat-panel-title>
+        <mat-panel-title>{{ ereignis?.type == EreignisType.Uebung ? 'Übung' : 'Einsatz' }}{{ ereignis?.ort ? ' in '+
+            ereignis?.ort : '' }}</mat-panel-title>
         <mat-panel-description>{{ ereignis.datetimeStart | date: 'dd.MM.yyyy' }}</mat-panel-description>
     </mat-expansion-panel-header>
-
     <div class="content">
         <div class="stammdaten">
             <div class="actions">
-                <button mat-raised-button color="primary" (click)="openPrintReportings(ereignis)">Berichte drucken</button>
+                <button mat-raised-button color="primary" (click)="openPrintReportings(ereignis)">Berichte
+                    drucken</button>
                 <button mat-raised-button (click)="openEditEreignis(ereignis)">Ereignis bearbeiten</button>
             </div>
             <table>
@@ -28,12 +29,15 @@
                     </tr>
                     <tr>
                         <th>Ende:</th>
-                        <td>{{ ereignis.datetimeEnd | date: 'dd.MM.yyyy HH:mm' }}{{ ereignis.datetimeEnd ? ' Uhr' : 'noch nicht beendet' }}</td>
+                        <td>{{ ereignis.datetimeEnd | date: 'dd.MM.yyyy HH:mm' }}{{ ereignis.datetimeEnd ? ' Uhr' :
+                            'noch nicht beendet' }}</td>
                     </tr>
                     <tr>
                         <th>Füllersonal:</th>
                         <td>
-                            <span *ngFor="let person of ereignis.personen; let last = last;">{{ person.vorname }} {{ person.nachname }}{{ last ? '' : ', ' }}</span>
+                            @for (person of ereignis.personen; track person; let last = $last) {
+                            <span>{{ person.vorname }} {{ person.nachname }}{{ last ? '' : ', ' }}</span>
+                            }
                         </td>
                     </tr>
                     <tr>
@@ -43,13 +47,14 @@
                 </tbody>
             </table>
         </div>
-
         <div class="fuellungen">
             <h2>Füllungen</h2>
             <mat-list>
-                <ffg-fuellung-item *ngFor="let fuellung of ereignis?.fuellungen" [fuellung]="fuellung"></ffg-fuellung-item>
+                @for (fuellung of ereignis?.fuellungen; track fuellung) {
+                <ffg-fuellung-item [fuellung]="fuellung"></ffg-fuellung-item>
+                }
             </mat-list>
         </div>
     </div>
-
 </mat-expansion-panel>
+}

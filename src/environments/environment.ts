@@ -1,7 +1,7 @@
 export const environment = {
-    production: false,
+    production: true,
     database: {
         name: 'ffgfuea'
     },
-    version: 'Development'
+    version: '1.3.0'
 };

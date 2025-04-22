@@ -10,8 +10,8 @@ describe('OperatingPageComponent', () =>
     beforeEach(async () =>
     {
         await TestBed.configureTestingModule({
-            declarations: [OperatingPageComponent]
-        })
+    imports: [OperatingPageComponent]
+})
             .compileComponents();
     });
 

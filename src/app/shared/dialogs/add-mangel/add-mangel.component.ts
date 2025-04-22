@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IEreignis } from '../../interfaces/i-ereignis';
 import { IFeuerwehr } from '../../interfaces/i-feuerwehr';
@@ -7,14 +7,26 @@ import { IPerson } from '../../interfaces/i-person';
 import { MangelType } from '../../models/mangel-type/mangel-type';
 import { MaengelService } from '../../services/maengel/maengel.service';
 import { StammdatenService } from '../../services/stammdaten/stammdaten.service';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatSelect, MatOption } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+
+import { MatInput } from '@angular/material/input';
+import { MatButton } from '@angular/material/button';
 
 @Component({
     selector: 'ffg-add-mangel',
     templateUrl: './add-mangel.component.html',
-    styleUrls: ['./add-mangel.component.scss']
+    styleUrls: ['./add-mangel.component.scss'],
+    imports: [MatFormField, MatLabel, MatSelect, FormsModule, MatOption, MatInput, MatButton]
 })
 export class AddMangelComponent implements OnInit
 {
+    dialog = inject<MatDialogRef<AddMangelComponent>>(MatDialogRef);
+    data = inject<IEreignis>(MAT_DIALOG_DATA);
+    stammdaten = inject(StammdatenService);
+    private maengelService = inject(MaengelService);
+
     public mangelTypes: Array<MangelType> = [];
 
     public selectedFeuerwehr: IFeuerwehr;
@@ -22,13 +34,6 @@ export class AddMangelComponent implements OnInit
     public selectedPerson: IPerson;
     public selectedMangelType: MangelType;
     public selectedMangelNote = '';
-
-    constructor(
-        public dialog: MatDialogRef<AddMangelComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: IEreignis,
-        public stammdaten: StammdatenService,
-        private maengelService: MaengelService
-    ) { }
 
     public ngOnInit(): void
     {

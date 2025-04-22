@@ -1,9 +1,15 @@
-import { Component, ElementRef, Inject, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EreignisType } from '../../enums/ereignis-type';
 import { EreignisseService } from '../../services/ereignisse/ereignisse.service';
 import { ViewChild } from '@angular/core';
 import { IEreignis } from '../../interfaces/i-ereignis';
+import { MatList, MatListItem } from '@angular/material/list';
+import { DatePipe } from '@angular/common';
+import { MatRipple } from '@angular/material/core';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
 
 @Component({
     selector: 'ffg-print-reports',
@@ -11,10 +17,16 @@ import { IEreignis } from '../../interfaces/i-ereignis';
     styleUrls: ['./print-reports.component.scss'],
     providers: [
         { provide: Window, useValue: window }
-    ]
+    ],
+    imports: [MatList, MatListItem, MatRipple, MatCheckbox, FormsModule, MatButton, DatePipe]
 })
 export class PrintReportsComponent implements OnInit
 {
+    window = inject(Window);
+    dialog = inject<MatDialogRef<PrintReportsComponent>>(MatDialogRef);
+    data = inject<IEreignis>(MAT_DIALOG_DATA);
+    ereignisse = inject(EreignisseService);
+
     @ViewChild('printContent') public printElement: ElementRef;
 
     public EreignisType = EreignisType;
@@ -22,13 +34,6 @@ export class PrintReportsComponent implements OnInit
 
     public fuellungenPerFeuerwehr = [];
     public reports = [];
-
-    constructor(
-        public window: Window,
-        public dialog: MatDialogRef<PrintReportsComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: IEreignis,
-        public ereignisse: EreignisseService
-    ) { }
 
     public async ngOnInit(): Promise<void>
     {

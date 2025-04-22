@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SyncService } from 'src/app/shared/services/sync/sync.service';
 import { StammdatenService } from 'src/app/shared/services/stammdaten/stammdaten.service';
@@ -8,14 +8,29 @@ import { SettingsService } from 'src/app/shared/services/settings/settings.servi
 import { RemoveFeuerwehrComponent } from 'src/app/shared/dialogs/remove-feuerwehr/remove-feuerwehr.component';
 import { IPerson } from 'src/app/shared/interfaces/i-person';
 import { EditPersonComponent } from 'src/app/shared/dialogs/edit-person/edit-person.component';
+import { MatCard } from '@angular/material/card';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { DatePipe } from '@angular/common';
+import { MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, MatExpansionPanelDescription } from '@angular/material/expansion';
+import { MatIcon } from '@angular/material/icon';
+import { MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
 
 @Component({
     selector: 'ffg-verwaltung-page',
     templateUrl: './verwaltung-page.component.html',
-    styleUrls: ['./verwaltung-page.component.scss']
+    styleUrls: ['./verwaltung-page.component.scss'],
+    imports: [MatCard, MatFormField, MatLabel, MatInput, FormsModule, MatButton, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, MatExpansionPanelDescription, MatIcon, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, DatePipe]
 })
 export class VerwaltungPageComponent implements OnInit
 {
+    dialog = inject(MatDialog);
+    sync = inject(SyncService);
+    stammdaten = inject(StammdatenService);
+    settings = inject(SettingsService);
+
     public displayedColumns: string[] = ['karteiNr', 'geraeteNr', 'flaschennummer', 'barcode', 'typenBezeichnung', 'typenInformation', 'lastEdit'];
     public feuerwehrNummerToSync = null;
 
@@ -26,12 +41,6 @@ export class VerwaltungPageComponent implements OnInit
         vorname: '',
         nachname: ''
     };
-
-    constructor(
-        public dialog: MatDialog,
-        public sync: SyncService,
-        public stammdaten: StammdatenService,
-        public settings: SettingsService) { }
     public async ngOnInit(): Promise<void> { }
 
     public addFeuerwehrToSync(feuerwehrNummer: number)
