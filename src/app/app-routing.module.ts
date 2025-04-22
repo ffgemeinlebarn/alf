@@ -1,36 +1,36 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EreignissePageComponent } from './pages/ereignisse-page/ereignisse-page.component';
-import { OperatingPageComponent } from './pages/operating-page/operating-page.component';
-import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
-import { StartPageComponent } from './pages/start-page/start-page.component';
-import { StatisticsPageComponent } from './pages/statistics-page/statistics-page.component';
-import { VerwaltungPageComponent } from './pages/verwaltung-page/verwaltung-page.component';
+
+
+
+
+
+
 
 const routes: Routes = [
     {
         path: '',
-        component: StartPageComponent
+        loadComponent: () => import('./pages/start-page/start-page.component').then(m => m.StartPageComponent)
     },
     {
         path: 'operating',
-        component: OperatingPageComponent
+        loadComponent: () => import('./pages/operating-page/operating-page.component').then(m => m.OperatingPageComponent)
     },
     {
         path: 'ereignisse',
-        component: EreignissePageComponent
+        loadComponent: () => import('./pages/ereignisse-page/ereignisse-page.component').then(m => m.EreignissePageComponent)
     },
     {
         path: 'verwaltung',
-        component: VerwaltungPageComponent
+        loadComponent: () => import('./pages/verwaltung-page/verwaltung-page.component').then(m => m.VerwaltungPageComponent)
     },
     {
         path: 'statistics',
-        component: StatisticsPageComponent
+        loadComponent: () => import('./pages/statistics-page/statistics-page.component').then(m => m.StatisticsPageComponent)
     },
     {
         path: 'settings',
-        component: SettingsPageComponent
+        loadComponent: () => import('./pages/settings-page/settings-page.component').then(m => m.SettingsPageComponent)
     }
 ];
 
