@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { IFuellung } from '../../interfaces/i-fuellung';
 import { MatListItem, MatDivider } from '@angular/material/list';
 import { MatLine } from '@angular/material/grid-list';
@@ -13,7 +13,7 @@ import { DatePipe } from '@angular/common';
 })
 export class FuellungItemComponent implements OnInit
 {
-    @Input() public fuellung: IFuellung;
+    public readonly fuellung = input<IFuellung>(undefined);
     constructor() { }
     public ngOnInit(): void { }
 }
