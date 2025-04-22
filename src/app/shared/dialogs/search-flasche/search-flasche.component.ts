@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { IFeuerwehr } from '../../interfaces/i-feuerwehr';
 import { IFlasche } from '../../interfaces/i-flasche';
@@ -18,14 +18,12 @@ import { MatButton } from '@angular/material/button';
 })
 export class SearchFlascheComponent implements OnInit
 {
+    dialog = inject<MatDialogRef<SearchFlascheComponent>>(MatDialogRef);
+    stammdaten = inject(StammdatenService);
+    private operating = inject(OperatingService);
+
     public selectedFeuerwehr: IFeuerwehr;
     public selectedFlasche: IFlasche;
-
-    constructor(
-        public dialog: MatDialogRef<SearchFlascheComponent>,
-        public stammdaten: StammdatenService,
-        private operating: OperatingService
-    ) { }
     public ngOnInit(): void
     {
         this.selectedFeuerwehr = this.stammdaten.feuerwehren[0];

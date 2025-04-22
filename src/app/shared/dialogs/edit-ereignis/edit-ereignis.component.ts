@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EreignisType } from '../../enums/ereignis-type';
 import { IEreignis } from '../../interfaces/i-ereignis';
@@ -19,15 +19,12 @@ import { MatButton } from '@angular/material/button';
 })
 export class EditEreignisComponent
 {
-    public EreignisType = EreignisType;
+    private dialog = inject<MatDialogRef<EditEreignisComponent>>(MatDialogRef);
+    ereignis = inject<IEreignis>(MAT_DIALOG_DATA);
+    private ereignisseService = inject(EreignisseService);
+    stammdaten = inject(StammdatenService);
 
-    constructor(
-        private dialog: MatDialogRef<EditEreignisComponent>,
-        @Inject(MAT_DIALOG_DATA) public ereignis: IEreignis,
-        private ereignisseService: EreignisseService,
-        public stammdaten: StammdatenService
-    )
-    { }
+    public EreignisType = EreignisType;
 
     public close(): void
     {

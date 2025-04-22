@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { IEreignis } from 'src/app/shared/interfaces/i-ereignis';
 import { IFuellung } from 'src/app/shared/interfaces/i-fuellung';
@@ -24,12 +24,17 @@ import { MatInput } from '@angular/material/input';
 })
 export class SettingsPageComponent implements OnInit, OnDestroy
 {
+    settings = inject(SettingsService);
+    dialog = inject(MatDialog);
+    ereignisse = inject(EreignisseService);
+    operating = inject(OperatingService);
+    private database = inject(DatabaseService);
+    stammdaten = inject(StammdatenService);
+
     public showTestmodusSetting = true;
     public importData = '[]';
     public exportedData = null;
     public version = environment.version;
-
-    constructor(public settings: SettingsService, public dialog: MatDialog, public ereignisse: EreignisseService, public operating: OperatingService, private database: DatabaseService, public stammdaten: StammdatenService) { }
 
     public async ngOnInit(): Promise<void>
     {

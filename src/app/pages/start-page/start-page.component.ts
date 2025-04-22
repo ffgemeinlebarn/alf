@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { EreignisType } from 'src/app/shared/enums/ereignis-type';
 import { IEreignis } from 'src/app/shared/interfaces/i-ereignis';
@@ -23,12 +23,15 @@ import { MatIcon } from '@angular/material/icon';
 })
 export class StartPageComponent implements OnInit
 {
+    private router = inject(Router);
+    private ereignisse = inject(EreignisseService);
+    operating = inject(OperatingService);
+    stammdaten = inject(StammdatenService);
+
     public newEreignis: IEreignis = null;
     public selectedEreignisId: number = null;
     public allEreignisse: Array<IEreignis> = [];
     public allPersonen: Array<IPerson> = [];
-
-    constructor(private router: Router, private ereignisse: EreignisseService, public operating: OperatingService, public stammdaten: StammdatenService) { }
 
     public async ngOnInit(): Promise<void>
     {

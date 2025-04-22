@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import Dexie from 'dexie';
 import { environment } from 'src/environments/environment.development';
 import { IEreignis } from '../../interfaces/i-ereignis';
@@ -12,9 +12,11 @@ import { SettingsService } from '../settings/settings.service';
 })
 export class DatabaseService
 {
+    private settings = inject(SettingsService);
+
     public db: Database = null;
 
-    constructor(private settings: SettingsService)
+    constructor()
     {
         this.refresh();
     }

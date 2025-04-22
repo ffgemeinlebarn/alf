@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AddMangelComponent } from 'src/app/shared/dialogs/add-mangel/add-mangel.component';
@@ -30,7 +30,12 @@ export type InputType = 'scanner' | 'manual';
 })
 export class OperatingPageComponent implements OnInit
 {
-    constructor(private router: Router, public timing: TimingService, public operating: OperatingService, public reporting: ReportingService, public dialog: MatDialog) { }
+    private router = inject(Router);
+    timing = inject(TimingService);
+    operating = inject(OperatingService);
+    reporting = inject(ReportingService);
+    dialog = inject(MatDialog);
+
 
     public async ngOnInit(): Promise<void>
     {

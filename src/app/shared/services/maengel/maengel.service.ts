@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { IMangel } from '../../interfaces/i-mangel';
 import { MangelType } from '../../models/mangel-type/mangel-type';
 import { DatabaseService } from '../database/database.service';
@@ -8,6 +8,8 @@ import { DatabaseService } from '../database/database.service';
 })
 export class MaengelService
 {
+    database = inject(DatabaseService);
+
     public mangelTyps: Array<MangelType> = [
         new MangelType('Flasche', 'Abgelaufene Druckprüfung'),
         new MangelType('Flasche', 'Äußere Beschädigung (Kerben, Verformungen)'),
@@ -15,8 +17,6 @@ export class MaengelService
         new MangelType('Ventil', 'Äußere Beschädigung'),
         new MangelType('Ventil', 'Kennzeichnung')
     ];
-
-    constructor(public database: DatabaseService) { }
 
     public async saveOrCreate(mangel: IMangel)
     {

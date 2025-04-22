@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SettingsService } from './shared/services/settings/settings.service';
 import { StammdatenService } from './shared/services/stammdaten/stammdaten.service';
 import { SyncService } from './shared/services/sync/sync.service';
@@ -17,7 +17,11 @@ import { MatIcon } from '@angular/material/icon';
 })
 export class AppComponent
 {
-    constructor(public settings: SettingsService, public sync: SyncService, public stammdaten: StammdatenService)
+    settings = inject(SettingsService);
+    sync = inject(SyncService);
+    stammdaten = inject(StammdatenService);
+
+    constructor()
     {
         this.sync.syncSavedFeuerwehren();
     }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SyncService } from 'src/app/shared/services/sync/sync.service';
 import { StammdatenService } from 'src/app/shared/services/stammdaten/stammdaten.service';
@@ -26,6 +26,11 @@ import { MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, Ma
 })
 export class VerwaltungPageComponent implements OnInit
 {
+    dialog = inject(MatDialog);
+    sync = inject(SyncService);
+    stammdaten = inject(StammdatenService);
+    settings = inject(SettingsService);
+
     public displayedColumns: string[] = ['karteiNr', 'geraeteNr', 'flaschennummer', 'barcode', 'typenBezeichnung', 'typenInformation', 'lastEdit'];
     public feuerwehrNummerToSync = null;
 
@@ -36,12 +41,6 @@ export class VerwaltungPageComponent implements OnInit
         vorname: '',
         nachname: ''
     };
-
-    constructor(
-        public dialog: MatDialog,
-        public sync: SyncService,
-        public stammdaten: StammdatenService,
-        public settings: SettingsService) { }
     public async ngOnInit(): Promise<void> { }
 
     public addFeuerwehrToSync(feuerwehrNummer: number)

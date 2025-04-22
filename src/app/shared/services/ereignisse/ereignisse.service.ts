@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { IEreignis } from '../../interfaces/i-ereignis';
 import { DatabaseService } from '../database/database.service';
 
@@ -7,8 +7,10 @@ import { DatabaseService } from '../database/database.service';
 })
 export class EreignisseService
 {
+    database = inject(DatabaseService);
+
     public list: Array<IEreignis> = [];
-    constructor(public database: DatabaseService)
+    constructor()
     {
         this.loadList();
     }

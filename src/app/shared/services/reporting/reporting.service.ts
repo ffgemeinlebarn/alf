@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PrintReportsComponent } from '../../dialogs/print-reports/print-reports.component';
 
@@ -7,7 +7,8 @@ import { PrintReportsComponent } from '../../dialogs/print-reports/print-reports
 })
 export class ReportingService
 {
-    constructor(private dialog: MatDialog) { }
+    private dialog = inject(MatDialog);
+
 
     public openPrintDialog()
     {

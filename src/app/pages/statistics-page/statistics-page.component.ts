@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { EreignisType } from 'src/app/shared/enums/ereignis-type';
 import { EreignisseService } from 'src/app/shared/services/ereignisse/ereignisse.service';
 import { OperatingService } from 'src/app/shared/services/operating/operating.service';
@@ -13,9 +13,9 @@ import { MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle } fr
 })
 export class StatisticsPageComponent implements OnInit
 {
-    public stats: Array<any> = [];
+    ereignisse = inject(EreignisseService);
 
-    constructor(public ereignisse: EreignisseService) { }
+    public stats: Array<any> = [];
     public async ngOnInit(): Promise<void>
     {
         const ereignisse = await this.ereignisse.getAll();

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IEreignis } from '../../interfaces/i-ereignis';
 import { IFeuerwehr } from '../../interfaces/i-feuerwehr';
@@ -22,6 +22,11 @@ import { MatButton } from '@angular/material/button';
 })
 export class AddMangelComponent implements OnInit
 {
+    dialog = inject<MatDialogRef<AddMangelComponent>>(MatDialogRef);
+    data = inject<IEreignis>(MAT_DIALOG_DATA);
+    stammdaten = inject(StammdatenService);
+    private maengelService = inject(MaengelService);
+
     public mangelTypes: Array<MangelType> = [];
 
     public selectedFeuerwehr: IFeuerwehr;
@@ -29,13 +34,6 @@ export class AddMangelComponent implements OnInit
     public selectedPerson: IPerson;
     public selectedMangelType: MangelType;
     public selectedMangelNote = '';
-
-    constructor(
-        public dialog: MatDialogRef<AddMangelComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: IEreignis,
-        public stammdaten: StammdatenService,
-        private maengelService: MaengelService
-    ) { }
 
     public ngOnInit(): void
     {

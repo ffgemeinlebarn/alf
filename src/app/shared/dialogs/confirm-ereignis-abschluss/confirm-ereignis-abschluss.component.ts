@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { OperatingService } from '../../services/operating/operating.service';
 import { ConfirmFuellungComponent } from '../confirm-fuellung/confirm-fuellung.component';
@@ -13,10 +13,9 @@ import { MatIcon } from '@angular/material/icon';
 })
 export class ConfirmEreignisAbschlussComponent implements OnInit
 {
-    constructor(
-        public dialog: MatDialogRef<ConfirmFuellungComponent>,
-        private operating: OperatingService
-    ) { }
+    dialog = inject<MatDialogRef<ConfirmFuellungComponent>>(MatDialogRef);
+    private operating = inject(OperatingService);
+
 
     public ngOnInit(): void { }
 

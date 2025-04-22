@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IPerson } from '../../interfaces/i-person';
 import { StammdatenService } from '../../services/stammdaten/stammdaten.service';
@@ -15,11 +15,10 @@ import { MatButton } from '@angular/material/button';
 })
 export class EditPersonComponent
 {
-    constructor(
-        public dialog: MatDialogRef<EditPersonComponent>,
-        @Inject(MAT_DIALOG_DATA) public person: IPerson,
-        private stammdaten: StammdatenService
-    ) { }
+    dialog = inject<MatDialogRef<EditPersonComponent>>(MatDialogRef);
+    person = inject<IPerson>(MAT_DIALOG_DATA);
+    private stammdaten = inject(StammdatenService);
+
 
     public close(): void
     {

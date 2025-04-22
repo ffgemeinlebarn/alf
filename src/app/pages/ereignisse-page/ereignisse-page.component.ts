@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EditEreignisComponent } from 'src/app/shared/dialogs/edit-ereignis/edit-ereignis.component';
 import { PrintReportsComponent } from 'src/app/shared/dialogs/print-reports/print-reports.component';
@@ -19,9 +19,10 @@ import { FuellungItemComponent } from '../../shared/components/fuellung-item/fue
 })
 export class EreignissePageComponent implements OnInit
 {
-    public EreignisType = EreignisType;
+    ereignisse = inject(EreignisseService);
+    dialog = inject(MatDialog);
 
-    constructor(public ereignisse: EreignisseService, public dialog: MatDialog) { }
+    public EreignisType = EreignisType;
     public async ngOnInit(): Promise<void> { }
 
     public async openPrintReportings(ereignis: IEreignis)
