@@ -6,7 +6,8 @@ import { ConfirmFuellungComponent } from '../confirm-fuellung/confirm-fuellung.c
 @Component({
     selector: 'ffg-confirm-ereignis-abschluss',
     templateUrl: './confirm-ereignis-abschluss.component.html',
-    styleUrls: ['./confirm-ereignis-abschluss.component.scss']
+    styleUrls: ['./confirm-ereignis-abschluss.component.scss'],
+    standalone: false
 })
 export class ConfirmEreignisAbschlussComponent implements OnInit
 {

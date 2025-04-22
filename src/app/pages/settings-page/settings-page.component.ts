@@ -12,7 +12,8 @@ import { environment } from 'src/environments/environment.development';
 @Component({
     selector: 'ffg-settings-page',
     templateUrl: './settings-page.component.html',
-    styleUrls: ['./settings-page.component.scss']
+    styleUrls: ['./settings-page.component.scss'],
+    standalone: false
 })
 export class SettingsPageComponent implements OnInit, OnDestroy
 {

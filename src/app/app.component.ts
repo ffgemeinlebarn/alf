@@ -6,7 +6,8 @@ import { SyncService } from './shared/services/sync/sync.service';
 @Component({
     selector: 'ffg-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+    styleUrls: ['./app.component.scss'],
+    standalone: false
 })
 export class AppComponent
 {

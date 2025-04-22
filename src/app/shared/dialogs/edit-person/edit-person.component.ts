@@ -6,7 +6,8 @@ import { StammdatenService } from '../../services/stammdaten/stammdaten.service'
 @Component({
     selector: 'ffg-edit-person',
     templateUrl: './edit-person.component.html',
-    styleUrls: ['./edit-person.component.scss']
+    styleUrls: ['./edit-person.component.scss'],
+    standalone: false
 })
 export class EditPersonComponent
 {

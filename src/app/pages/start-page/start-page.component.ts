@@ -10,7 +10,8 @@ import { StammdatenService } from 'src/app/shared/services/stammdaten/stammdaten
 @Component({
     selector: 'ffg-start-page',
     templateUrl: './start-page.component.html',
-    styleUrls: ['./start-page.component.scss']
+    styleUrls: ['./start-page.component.scss'],
+    standalone: false
 })
 export class StartPageComponent implements OnInit
 {

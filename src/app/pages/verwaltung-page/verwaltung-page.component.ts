@@ -12,7 +12,8 @@ import { EditPersonComponent } from 'src/app/shared/dialogs/edit-person/edit-per
 @Component({
     selector: 'ffg-verwaltung-page',
     templateUrl: './verwaltung-page.component.html',
-    styleUrls: ['./verwaltung-page.component.scss']
+    styleUrls: ['./verwaltung-page.component.scss'],
+    standalone: false
 })
 export class VerwaltungPageComponent implements OnInit
 {

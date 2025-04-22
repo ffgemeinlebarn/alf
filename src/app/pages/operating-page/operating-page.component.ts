@@ -17,7 +17,8 @@ export type InputType = 'scanner' | 'manual';
 @Component({
     selector: 'ffg-operating-page',
     templateUrl: './operating-page.component.html',
-    styleUrls: ['./operating-page.component.scss']
+    styleUrls: ['./operating-page.component.scss'],
+    standalone: false
 })
 export class OperatingPageComponent implements OnInit
 {

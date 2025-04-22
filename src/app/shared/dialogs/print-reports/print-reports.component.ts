@@ -11,7 +11,8 @@ import { IEreignis } from '../../interfaces/i-ereignis';
     styleUrls: ['./print-reports.component.scss'],
     providers: [
         { provide: Window, useValue: window }
-    ]
+    ],
+    standalone: false
 })
 export class PrintReportsComponent implements OnInit
 {

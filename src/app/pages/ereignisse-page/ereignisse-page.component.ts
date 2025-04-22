@@ -9,7 +9,8 @@ import { EreignisseService } from 'src/app/shared/services/ereignisse/ereignisse
 @Component({
     selector: 'ffg-ereignisse-page',
     templateUrl: './ereignisse-page.component.html',
-    styleUrls: ['./ereignisse-page.component.scss']
+    styleUrls: ['./ereignisse-page.component.scss'],
+    standalone: false
 })
 export class EreignissePageComponent implements OnInit
 {

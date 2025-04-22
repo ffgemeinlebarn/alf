@@ -8,7 +8,8 @@ import { StammdatenService } from '../../services/stammdaten/stammdaten.service'
 @Component({
     selector: 'ffg-search-flasche',
     templateUrl: './search-flasche.component.html',
-    styleUrls: ['./search-flasche.component.scss']
+    styleUrls: ['./search-flasche.component.scss'],
+    standalone: false
 })
 export class SearchFlascheComponent implements OnInit
 {

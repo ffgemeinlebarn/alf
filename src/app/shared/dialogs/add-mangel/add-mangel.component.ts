@@ -11,7 +11,8 @@ import { StammdatenService } from '../../services/stammdaten/stammdaten.service'
 @Component({
     selector: 'ffg-add-mangel',
     templateUrl: './add-mangel.component.html',
-    styleUrls: ['./add-mangel.component.scss']
+    styleUrls: ['./add-mangel.component.scss'],
+    standalone: false
 })
 export class AddMangelComponent implements OnInit
 {

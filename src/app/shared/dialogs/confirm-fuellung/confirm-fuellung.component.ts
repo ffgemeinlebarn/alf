@@ -6,7 +6,8 @@ import { OperatingService } from '../../services/operating/operating.service';
 @Component({
     selector: 'ffg-confirm-fuellung',
     templateUrl: './confirm-fuellung.component.html',
-    styleUrls: ['./confirm-fuellung.component.scss']
+    styleUrls: ['./confirm-fuellung.component.scss'],
+    standalone: false
 })
 export class ConfirmFuellungComponent implements OnInit
 {

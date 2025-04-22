@@ -6,7 +6,8 @@ import { OperatingService } from 'src/app/shared/services/operating/operating.se
 @Component({
     selector: 'ffg-statistics-page',
     templateUrl: './statistics-page.component.html',
-    styleUrls: ['./statistics-page.component.scss']
+    styleUrls: ['./statistics-page.component.scss'],
+    standalone: false
 })
 export class StatisticsPageComponent implements OnInit
 {

@@ -8,7 +8,8 @@ import { StammdatenService } from '../../services/stammdaten/stammdaten.service'
 @Component({
     selector: 'ffg-edit-ereignis',
     templateUrl: './edit-ereignis.component.html',
-    styleUrls: ['./edit-ereignis.component.scss']
+    styleUrls: ['./edit-ereignis.component.scss'],
+    standalone: false
 })
 export class EditEreignisComponent
 {

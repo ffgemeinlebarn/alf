@@ -7,7 +7,8 @@ import { StammdatenService } from '../../services/stammdaten/stammdaten.service'
 @Component({
     selector: 'ffg-remove-feuerwehr',
     templateUrl: './remove-feuerwehr.component.html',
-    styleUrls: ['./remove-feuerwehr.component.scss']
+    styleUrls: ['./remove-feuerwehr.component.scss'],
+    standalone: false
 })
 export class RemoveFeuerwehrComponent implements OnInit
 {

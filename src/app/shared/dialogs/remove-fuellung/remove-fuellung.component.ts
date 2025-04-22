@@ -6,7 +6,8 @@ import { OperatingService } from '../../services/operating/operating.service';
 @Component({
     selector: 'ffg-remove-fuellung',
     templateUrl: './remove-fuellung.component.html',
-    styleUrls: ['./remove-fuellung.component.scss']
+    styleUrls: ['./remove-fuellung.component.scss'],
+    standalone: false
 })
 export class RemoveFuellungComponent implements OnInit
 {
