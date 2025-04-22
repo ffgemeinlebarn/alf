@@ -10,9 +10,8 @@ describe('VerwaltungPageComponent', () =>
     beforeEach(async () =>
     {
         await TestBed.configureTestingModule({
-            imports: [SharedModule],
-            declarations: [VerwaltungPageComponent]
-        })
+    imports: [SharedModule, VerwaltungPageComponent]
+})
             .compileComponents();
     });
 

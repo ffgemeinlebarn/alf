@@ -12,8 +12,7 @@ describe('SearchFlascheComponent', () =>
     beforeEach(async () =>
     {
         await TestBed.configureTestingModule({
-    declarations: [SearchFlascheComponent],
-    imports: [SharedModule],
+    imports: [SharedModule, SearchFlascheComponent],
     providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
 })
             .compileComponents();

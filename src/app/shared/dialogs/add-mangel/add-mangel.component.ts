@@ -7,12 +7,18 @@ import { IPerson } from '../../interfaces/i-person';
 import { MangelType } from '../../models/mangel-type/mangel-type';
 import { MaengelService } from '../../services/maengel/maengel.service';
 import { StammdatenService } from '../../services/stammdaten/stammdaten.service';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatSelect, MatOption } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { NgFor } from '@angular/common';
+import { MatInput } from '@angular/material/input';
+import { MatButton } from '@angular/material/button';
 
 @Component({
     selector: 'ffg-add-mangel',
     templateUrl: './add-mangel.component.html',
     styleUrls: ['./add-mangel.component.scss'],
-    standalone: false
+    imports: [MatFormField, MatLabel, MatSelect, FormsModule, NgFor, MatOption, MatInput, MatButton]
 })
 export class AddMangelComponent implements OnInit
 {

@@ -19,15 +19,7 @@ import { environment } from '../environments/environment.development';
 import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        StartPageComponent,
-        StatisticsPageComponent,
-        SettingsPageComponent,
-        OperatingPageComponent,
-        VerwaltungPageComponent,
-        EreignissePageComponent
-    ],
+    declarations: [AppComponent],
     imports: [
         SharedModule,
         BrowserModule,
@@ -39,7 +31,13 @@ import { MatDialogModule } from '@angular/material/dialog';
         ServiceWorkerModule.register('ngsw-worker.js', {
             enabled: environment.production,
             registrationStrategy: 'registerWhenStable:30000'
-        })
+        }),
+        StartPageComponent,
+        StatisticsPageComponent,
+        SettingsPageComponent,
+        OperatingPageComponent,
+        VerwaltungPageComponent,
+        EreignissePageComponent
     ],
     providers: [CdkColumnDef],
     bootstrap: [AppComponent]

@@ -2,12 +2,16 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IPerson } from '../../interfaces/i-person';
 import { StammdatenService } from '../../services/stammdaten/stammdaten.service';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
 
 @Component({
     selector: 'ffg-edit-person',
     templateUrl: './edit-person.component.html',
     styleUrls: ['./edit-person.component.scss'],
-    standalone: false
+    imports: [MatFormField, MatLabel, MatInput, FormsModule, MatButton]
 })
 export class EditPersonComponent
 {

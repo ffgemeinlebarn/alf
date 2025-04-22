@@ -6,12 +6,20 @@ import { IPerson } from 'src/app/shared/interfaces/i-person';
 import { EreignisseService } from 'src/app/shared/services/ereignisse/ereignisse.service';
 import { OperatingService } from 'src/app/shared/services/operating/operating.service';
 import { StammdatenService } from 'src/app/shared/services/stammdaten/stammdaten.service';
+import { MatCard, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardContent } from '@angular/material/card';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatSelect, MatOption } from '@angular/material/select';
+import { MatInput } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { NgFor, DatePipe } from '@angular/common';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
     selector: 'ffg-start-page',
     templateUrl: './start-page.component.html',
     styleUrls: ['./start-page.component.scss'],
-    standalone: false
+    imports: [MatCard, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardContent, MatFormField, MatSelect, MatOption, MatInput, FormsModule, MatLabel, NgFor, MatButton, MatIcon, DatePipe]
 })
 export class StartPageComponent implements OnInit
 {

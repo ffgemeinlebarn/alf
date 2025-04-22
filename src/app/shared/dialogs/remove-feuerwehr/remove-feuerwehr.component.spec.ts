@@ -8,8 +8,8 @@ describe('RemoveFeuerwehrComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RemoveFeuerwehrComponent ]
-    })
+    imports: [RemoveFeuerwehrComponent]
+})
     .compileComponents();
   });
 

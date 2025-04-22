@@ -10,8 +10,8 @@ describe('EreignissePageComponent', () =>
     beforeEach(async () =>
     {
         await TestBed.configureTestingModule({
-            declarations: [EreignissePageComponent]
-        })
+    imports: [EreignissePageComponent]
+})
             .compileComponents();
     });
 

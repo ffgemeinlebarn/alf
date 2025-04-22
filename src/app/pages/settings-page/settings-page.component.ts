@@ -8,12 +8,19 @@ import { OperatingService } from 'src/app/shared/services/operating/operating.se
 import { SettingsService } from 'src/app/shared/services/settings/settings.service';
 import { StammdatenService } from 'src/app/shared/services/stammdaten/stammdaten.service';
 import { environment } from 'src/environments/environment.development';
+import { MatButton } from '@angular/material/button';
+import { NgIf, JsonPipe } from '@angular/common';
+import { MatCard } from '@angular/material/card';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { FormsModule } from '@angular/forms';
+import { MatFormField } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
 
 @Component({
     selector: 'ffg-settings-page',
     templateUrl: './settings-page.component.html',
     styleUrls: ['./settings-page.component.scss'],
-    standalone: false
+    imports: [MatButton, NgIf, MatCard, MatSlideToggle, FormsModule, MatFormField, MatInput, JsonPipe]
 })
 export class SettingsPageComponent implements OnInit, OnDestroy
 {

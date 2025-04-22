@@ -3,12 +3,13 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IFeuerwehr } from '../../interfaces/i-feuerwehr';
 import { StammdatenService } from '../../services/stammdaten/stammdaten.service';
+import { MatButton } from '@angular/material/button';
 
 @Component({
     selector: 'ffg-remove-feuerwehr',
     templateUrl: './remove-feuerwehr.component.html',
     styleUrls: ['./remove-feuerwehr.component.scss'],
-    standalone: false
+    imports: [MatButton]
 })
 export class RemoveFeuerwehrComponent implements OnInit
 {

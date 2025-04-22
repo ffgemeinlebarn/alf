@@ -12,8 +12,7 @@ describe('PrintReportsComponent', () =>
     beforeEach(async () =>
     {
         await TestBed.configureTestingModule({
-    declarations: [PrintReportsComponent],
-    imports: [SharedModule],
+    imports: [SharedModule, PrintReportsComponent],
     providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
 })
             .compileComponents();

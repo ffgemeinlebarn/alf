@@ -8,12 +8,21 @@ import { SettingsService } from 'src/app/shared/services/settings/settings.servi
 import { RemoveFeuerwehrComponent } from 'src/app/shared/dialogs/remove-feuerwehr/remove-feuerwehr.component';
 import { IPerson } from 'src/app/shared/interfaces/i-person';
 import { EditPersonComponent } from 'src/app/shared/dialogs/edit-person/edit-person.component';
+import { MatCard } from '@angular/material/card';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { NgFor, DatePipe } from '@angular/common';
+import { MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, MatExpansionPanelDescription } from '@angular/material/expansion';
+import { MatIcon } from '@angular/material/icon';
+import { MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
 
 @Component({
     selector: 'ffg-verwaltung-page',
     templateUrl: './verwaltung-page.component.html',
     styleUrls: ['./verwaltung-page.component.scss'],
-    standalone: false
+    imports: [MatCard, MatFormField, MatLabel, MatInput, FormsModule, MatButton, NgFor, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, MatExpansionPanelDescription, MatIcon, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, DatePipe]
 })
 export class VerwaltungPageComponent implements OnInit
 {

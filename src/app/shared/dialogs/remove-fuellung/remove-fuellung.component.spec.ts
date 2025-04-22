@@ -10,8 +10,8 @@ describe('RemoveFuellungComponent', () =>
     beforeEach(async () =>
     {
         await TestBed.configureTestingModule({
-            declarations: [RemoveFuellungComponent]
-        })
+    imports: [RemoveFuellungComponent]
+})
             .compileComponents();
     });
 

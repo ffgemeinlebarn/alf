@@ -4,12 +4,18 @@ import { EreignisType } from '../../enums/ereignis-type';
 import { IEreignis } from '../../interfaces/i-ereignis';
 import { EreignisseService } from '../../services/ereignisse/ereignisse.service';
 import { StammdatenService } from '../../services/stammdaten/stammdaten.service';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatSelect, MatOption } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { MatInput } from '@angular/material/input';
+import { NgFor } from '@angular/common';
+import { MatButton } from '@angular/material/button';
 
 @Component({
     selector: 'ffg-edit-ereignis',
     templateUrl: './edit-ereignis.component.html',
     styleUrls: ['./edit-ereignis.component.scss'],
-    standalone: false
+    imports: [MatFormField, MatLabel, MatSelect, FormsModule, MatOption, MatInput, NgFor, MatButton]
 })
 export class EditEreignisComponent
 {

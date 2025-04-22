@@ -10,8 +10,8 @@ describe('ConfirmEreignisAbschlussComponent', () =>
     beforeEach(async () =>
     {
         await TestBed.configureTestingModule({
-            declarations: [ConfirmEreignisAbschlussComponent]
-        })
+    imports: [ConfirmEreignisAbschlussComponent]
+})
             .compileComponents();
     });
 

@@ -12,8 +12,7 @@ describe('FuellungItemComponent', () =>
     beforeEach(async () =>
     {
         await TestBed.configureTestingModule({
-    declarations: [FuellungItemComponent],
-    imports: [SharedModule],
+    imports: [SharedModule, FuellungItemComponent],
     providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
 })
             .compileComponents();

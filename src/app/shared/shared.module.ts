@@ -60,18 +60,7 @@ import { RemoveFeuerwehrComponent } from './dialogs/remove-feuerwehr/remove-feue
         MatProgressSpinnerModule,
         MatSnackBarModule
     ],
-    declarations: [
-        FuellungItemComponent,
-        SearchFlascheComponent,
-        PrintReportsComponent,
-        EditEreignisComponent,
-        AddMangelComponent,
-        EditPersonComponent,
-        ConfirmFuellungComponent,
-        ConfirmEreignisAbschlussComponent,
-        RemoveFuellungComponent,
-        RemoveFeuerwehrComponent
-    ], imports: [CommonModule,
+    imports: [CommonModule,
         FormsModule,
         ReactiveFormsModule,
         MatButtonModule,
@@ -95,5 +84,14 @@ import { RemoveFeuerwehrComponent } from './dialogs/remove-feuerwehr/remove-feue
         MatSlideToggleModule,
         MatCheckboxModule,
         MatProgressSpinnerModule,
-        MatSnackBarModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
+        MatSnackBarModule, FuellungItemComponent,
+        SearchFlascheComponent,
+        PrintReportsComponent,
+        EditEreignisComponent,
+        AddMangelComponent,
+        EditPersonComponent,
+        ConfirmFuellungComponent,
+        ConfirmEreignisAbschlussComponent,
+        RemoveFuellungComponent,
+        RemoveFeuerwehrComponent], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class SharedModule { }

@@ -4,6 +4,12 @@ import { EreignisType } from '../../enums/ereignis-type';
 import { EreignisseService } from '../../services/ereignisse/ereignisse.service';
 import { ViewChild } from '@angular/core';
 import { IEreignis } from '../../interfaces/i-ereignis';
+import { MatList, MatListItem } from '@angular/material/list';
+import { NgFor, NgIf, DatePipe } from '@angular/common';
+import { MatRipple } from '@angular/material/core';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
 
 @Component({
     selector: 'ffg-print-reports',
@@ -12,7 +18,7 @@ import { IEreignis } from '../../interfaces/i-ereignis';
     providers: [
         { provide: Window, useValue: window }
     ],
-    standalone: false
+    imports: [MatList, NgFor, MatListItem, MatRipple, MatCheckbox, FormsModule, MatButton, NgIf, DatePipe]
 })
 export class PrintReportsComponent implements OnInit
 {

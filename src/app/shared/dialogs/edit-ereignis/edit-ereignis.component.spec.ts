@@ -12,8 +12,7 @@ describe('EditEreignisComponent', () =>
     beforeEach(async () =>
     {
         await TestBed.configureTestingModule({
-    declarations: [EditEreignisComponent],
-    imports: [SharedModule],
+    imports: [SharedModule, EditEreignisComponent],
     providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
 })
             .compileComponents();
