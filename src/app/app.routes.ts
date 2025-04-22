@@ -1,13 +1,6 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 
-
-
-
-
-
-
-const routes: Routes = [
+export const routes: Routes = [
     {
         path: '',
         loadComponent: () => import('./pages/start-page/start-page.component').then(m => m.StartPageComponent)
@@ -33,9 +26,3 @@ const routes: Routes = [
         loadComponent: () => import('./pages/settings-page/settings-page.component').then(m => m.SettingsPageComponent)
     }
 ];
-
-@NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
-})
-export class AppRoutingModule { }

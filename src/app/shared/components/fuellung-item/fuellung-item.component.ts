@@ -1,9 +1,9 @@
-import { Component, OnInit, input } from '@angular/core';
-import { IFuellung } from '../../interfaces/i-fuellung';
-import { MatListItem, MatDivider } from '@angular/material/list';
-import { MatLine } from '@angular/material/grid-list';
-import { MatChipListbox, MatChip } from '@angular/material/chips';
 import { DatePipe } from '@angular/common';
+import { Component, OnInit, input } from '@angular/core';
+import { MatChip, MatChipListbox } from '@angular/material/chips';
+import { MatLine } from '@angular/material/grid-list';
+import { MatDivider, MatListItem } from '@angular/material/list';
+import { IFuellung } from '../../interfaces/i-fuellung';
 
 @Component({
     selector: 'ffg-fuellung-item',
@@ -14,6 +14,5 @@ import { DatePipe } from '@angular/common';
 export class FuellungItemComponent implements OnInit
 {
     public readonly fuellung = input<IFuellung>(undefined);
-    constructor() { }
     public ngOnInit(): void { }
 }
